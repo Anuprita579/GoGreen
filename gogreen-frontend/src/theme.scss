@@ -1,0 +1,47 @@
+// Font Families
+$font-family-primary: 'Helvetica Neue', Arial, sans-serif;
+$font-family-secondary: 'Georgia', serif;
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-base: 1.5;
+$line-height-heading: 1.2;
+
+// Colors
+$text-color-primary: #333;
+$text-color-secondary: #777;
+$text-color-white: #FFF;
+$text-color-dark: #000;
+
+//BackGround Colors
+$background-color-primary: #228B22;
+$background-color-secondary: #87CEEB;
+$background-color-dark: #000;
+$background-color-light: #FFF;
+
+// Mixins for Typography
+@mixin font-primary($size, $weight: $font-weight-normal, $line-height: $line-height-base) {
+  font-family: $font-family-primary;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  color: $text-color-primary;
+}
+
+@mixin font-secondary($size, $weight: $font-weight-normal, $line-height: $line-height-base) {
+  font-family: $font-family-secondary;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  color: $text-color-secondary;
+}
+
+@font-face {
+  font-family: "MyFont";  
+  src: url("./fonts/OpenSauceSans-Regular.ttf") format("truetype");
+}

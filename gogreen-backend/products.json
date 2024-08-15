@@ -1,0 +1,96 @@
+[
+    {
+        "name": "Kurti",
+        "logo": "",
+        "category": "clothes",
+        "price": 290,
+        "color": "blue",
+        "size": "S",
+        "apparelType": "women"
+    },
+    {
+        "name": "Jeans",
+        "logo": "",
+        "category": "clothes",
+        "price": 350,
+        "color": "black",
+        "size": "M",
+        "apparelType": "men"
+    },
+    {
+        "name": "T-Shirt",
+        "logo": "",
+        "category": "clothes",
+        "price": 200,
+        "color": "red",
+        "size": "L",
+        "apparelType": "men"
+    },
+    {
+        "name": "Sofa",
+        "logo": "",
+        "category": "homeDecor",
+        "price": 2900,
+        "color": "indigo"
+    },
+    {
+        "name": "Flower Vase",
+        "logo": "",
+        "category": "homeDecor",
+        "price": 1590,
+        "color": "white"
+    },
+    {
+        "name": "Hand Bag",
+        "logo": "",
+        "category": "luggage",
+        "price": 200,
+        "color": "red"
+    },
+    {
+        "name": "Purse",
+        "logo": "",
+        "category": "luggage",
+        "price": 2900,
+        "color": "blue"
+    },
+    {
+        "name": "Book",
+        "logo": "",
+        "category": "stationary",
+        "price": 290
+    },
+    {
+        "name": "Pencil",
+        "logo": "",
+        "category": "stationary",
+        "price": 15
+    },
+    {
+        "name": "Pencil Stand",
+        "logo": "",
+        "category": "stationary",
+        "price": 220,
+        "color": "black"
+    },
+    {
+        "name": "Tulsi",
+        "logo": "",
+        "category": "plants",
+        "price": 120
+    },
+    {
+        "name": "Cactus",
+        "logo": "",
+        "category": "plants",
+        "price": 100
+    },
+    {
+        "name": "Sunflower",
+        "logo": "",
+        "category": "plants",
+        "price": 150
+    }
+    
+    
+]

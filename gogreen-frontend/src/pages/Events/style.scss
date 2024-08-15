@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import "../../theme.scss";
+$screen-ratio : 1vw;
+html * {
+    margin: 0;
+    padding: 0;
+    font-family: 'MyFont' !important;
+    font-weight: 400;
+}
+.events-overview{
+    .event-overview-card{
+        display: flex;
+        padding: calc(($screen-ratio)*3.5);
+        align-items: center;
+        justify-content: center;
+        gap: calc(($screen-ratio)*2);
+        .left-section{
+            img{
+                border-radius: calc(($screen-ratio)*1);
+                width: calc(($screen-ratio)*45);
+            }
+        }
+        .right-section{
+            padding: calc(($screen-ratio)*3);
+            padding-right: calc(($screen-ratio)*10);
+            display: flex;
+            flex-direction: column;
+            gap: calc(($screen-ratio)*0.75);
+            h1{
+                font-weight: $font-weight-semibold;
+                line-height: $line-height-heading;
+                font-size: calc(($screen-ratio)*2.3);
+            }
+            h3{
+                font-weight: $font-weight-normal;
+                line-height: $line-height-base;
+                font-size: medium;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            h4{
+                font-weight: $font-weight-semibold;
+                line-height: $line-height-base;
+                color: #2C5FF8;
+                font-size: medium;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 640px) {
+    .events-overview{
+        .event-overview-card{
+            flex-direction: column !important;
+            padding: calc(($screen-ratio)*3.5);
+            gap: calc(($screen-ratio)*2);
+            .left-section{
+                img{
+                    border-radius: calc(($screen-ratio)*1);
+                    width: 100%;
+                }
+            }
+            .right-section{
+                padding: calc(($screen-ratio)*3);
+                padding-right: calc(($screen-ratio)*10);
+                display: flex;
+                flex-direction: column;
+                gap: calc(($screen-ratio)*0.75);
+                h1{
+                    font-weight: $font-weight-semibold;
+                    line-height: $line-height-heading;
+                    font-size: calc(($screen-ratio)*4.3);
+                }
+                h3{
+                    font-size: calc(($screen-ratio)*3); 
+                }
+                h4{
+                    font-size: calc(($screen-ratio)*3);
+                }
+            }
+        }
+    }
+}

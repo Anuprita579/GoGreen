@@ -1,0 +1,46 @@
+import React from 'react';
+//Common Components
+import ButtonComponent from './Button';
+//MUI Components
+import Tooltip from '@mui/material/Tooltip';
+import PropTypes from 'prop-types';
+
+const TooltipComponent = ({ title, onClick, children, className, style, backgroundColor, color, disabled, placement }) => {
+  return (
+    <Tooltip title={title} placement={placement} 
+    slotProps={{
+      tooltip: {
+        sx:{
+            backgroundColor: {backgroundColor},
+            color: {color}
+        }
+      }
+    }}>
+      <span>
+        <ButtonComponent onClick={onClick} className={className} style={style} disabled={disabled}>
+          {children}
+        </ButtonComponent>
+      </span>
+    </Tooltip>
+  );
+};
+
+TooltipComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  disabled: PropTypes.bool,
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+};
+
+TooltipComponent.defaultProps = {
+  onClick: () => {},
+  className: '',
+  style: {},
+  disabled: false,
+  placement: 'bottom',
+};
+
+export default TooltipComponent;
