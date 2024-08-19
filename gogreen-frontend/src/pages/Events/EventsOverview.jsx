@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { events } from '../Home/Events';
 
 
-const EventOverviewCard = ({ img_src, title, content, direction }) => {
+const EventOverviewCard = ({ key, img_src, title, content, direction }) => {
   const formatTitleForURL = (title) => {
     return title.toLowerCase().replace(/ /g, '-');
   };
   return (
     <>
-      <div className='event-overview-card' style={{ flexDirection: direction }}>
+      <div className='event-overview-card' style={{ flexDirection: direction }} key={key}>
         <div className='left-section'>
           <img src={img_src} alt="event" />
         </div>
@@ -44,7 +44,7 @@ const EventsOverview = () => {
         return (
           <>
             <div style={{ backgroundColor: bgcolor }} >
-              <EventOverviewCard img_src={item.image_src} title={item.title} content={item.content} direction={bgdirection} />
+              <EventOverviewCard key={index} img_src={item.image_src} title={item.title} content={item.content} direction={bgdirection} />
             </div>
           </>
         )

@@ -4,8 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useActiveStep } from "../../utils/ActiveStepContext";
 import { useLoginState } from "../../utils/LoginStateContext";
 //API URL
-// import { GenerateOTPAPI, ValidateOTPAPI } from "../../utils/apiUrl";
-// import callAPI from "../../utils/apiAction";
+import axios from 'axios'
 //Common Components
 import ButtonComponent from "../../commonComponents/ButtonComponent";
 //MUI Components
@@ -18,9 +17,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 //Sign in with Google
 // import { GoogleOAuthProvider, GoogleOAuthButton, GoogleLogin} from "@react-oauth/google";
+import styles from "./styles.module.scss"
 
 function OTP({ separator, length, value, onChange, validatedOtp }) {
-  console.log("Validated OTP for disabled otp input box: ", validatedOtp);
   const inputRefs = useRef(new Array(length).fill(null));
 
   const focusInput = (targetIndex) => {
@@ -165,7 +164,7 @@ function OTP({ separator, length, value, onChange, validatedOtp }) {
       {new Array(length).fill(null).map((_, index) => (
         <>
           <BaseInput
-            className={validatedOtp ? "otp-inputbox-disabled" : "otp-inputbox"}
+            className={validatedOtp ? `${styles.otpInputboxDisabled}` : `${styles.otpInputbox}`}
             aria-label={`Digit ${index + 1} of OTP`}
             disabled={validatedOtp}
             slotProps={{
@@ -198,17 +197,16 @@ OTP.propTypes = {
 const Signin = ({ sourceComponent, onClose }) => {
 //   const GenerateOtp = GenerateOTPAPI;
 //   const ValidateOtp = ValidateOTPAPI;
-  const apiKey = process.env.REACT_APP_CLIENT_ID;
-  console.log("API Key for signin with google : ", apiKey);
   const [loginResponse, setLoginResponse] = useState(null);
 
   const { incrementStep, setActiveStep } = useActiveStep();
   const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
-  const [isValidPhone, setIsValidPhone] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [userId, setUserId] = useState(null);
   const [validatedOtp, setValidatedOtp] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); //checkbox
   const [isAllValid, setIsAllValid] = useState(false);
@@ -224,7 +222,6 @@ const Signin = ({ sourceComponent, onClose }) => {
   const handleLoginSuccess = (response) => {
     setLoginResponse(response);
   };
-  console.log("Login Response Agter Signin with google : ", loginResponse);
 
   const handleLoginFailure = (error) => {
     console.error("Login failed:", error);
@@ -241,11 +238,11 @@ const Signin = ({ sourceComponent, onClose }) => {
     setIsAllValid(
       isCheckboxChecked &&
         isValidName &&
-        isValidPhone &&
+        isValidEmail &&
         isOtpSent &&
         validatedOtp
     );
-  }, [isCheckboxChecked, isValidName, isValidPhone, isOtpSent, validatedOtp]);
+  }, [isCheckboxChecked, isValidName, isValidEmail, isOtpSent, validatedOtp]);
 
   useEffect(() => {
     let timer;
@@ -269,24 +266,14 @@ const Signin = ({ sourceComponent, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isAllValid) {
-      console.log("Form submited");
-      // sessionStorage.setItem('signInCompleted', 'true');
       login({
         username: sessionStorage.getItem("name"),
         mobileNo: sessionStorage.getItem("mobileNo"),
       });
-      //   console.log("Login State Context inside handleSubmit function : ", isLoggedIn, userInfo);
       setIsContinueClicked(true);
       switch (sourceComponent) {
-        case "like":
-          console.log("Login after like");
-          break;
         case "header":
-          console.log("Login after header.");
           onClose();
-          break;
-        case "aptitude-test":
-          console.log("Login after Aptitude Test.");
           break;
         default:
           console.log("Default Action");
@@ -297,7 +284,6 @@ const Signin = ({ sourceComponent, onClose }) => {
       console.log("Form not submited");
     }
   };
-  console.log("Login State Context without null : ", isLoggedIn, userInfo);
 
   const handleSignInSuccess = (response) => {
     console.log("Sign-in completed by GoogleOAuth : ", response);
@@ -309,7 +295,7 @@ const Signin = ({ sourceComponent, onClose }) => {
     // incrementStep();
   };
 
-  const mobileNo = phone;
+  const mobileNo = email;
   const [otp, setOtp] = useState("");
 
   // Validation of name and mobile number
@@ -331,25 +317,25 @@ const Signin = ({ sourceComponent, onClose }) => {
         }
       }
     }
-    if (inputType === "phone") {
-    setPhone(value);
-    let regex = /^\d{10}$/;
+    if (inputType === "email") {
+    setEmail(value);
+    let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!regex.test(value.trim())) {
-      setMobileErrorMessage("Enter a valid 10 digit mobile number");
-      setIsValidPhone(false);
+      setMobileErrorMessage("Enter a valid email");
+      setIsValidEmail(false);
     } else {
       setMobileErrorMessage("");
-      setIsValidPhone(true);
+      setIsValidEmail(true);
     }
   }
   };
 
   // otp block
   const [nameIsDisabled, setNameIsDisabled] = useState(false);
-  const [phoneIsDisabled, setPhoneIsDisabled] = useState(false);
+  const [emailIsDisabled, setEmailIsDisabled] = useState(false);
   const showOtpField = async () => {
-    if (isValidName && isValidPhone) {
-      if (phone.trim() === "") {
+    if (isValidName && isValidEmail) {
+      if (email.trim() === "") {
         setMobileErrorMessage("Mobile number is required");
       }
       if (fullName.trim() === "") {
@@ -357,41 +343,39 @@ const Signin = ({ sourceComponent, onClose }) => {
       }
       if (
         fullName.trim() !== "" &&
-        phone.trim() !== "" &&
+        email.trim() !== "" &&
         nameErrorMessage === "" &&
         mobileErrorMessage === ""
       ) {
         setMobileErrorMessage("");
         setNameErrorMessage("");
-        // trigger api to generate otp
-        // try {
-        //   const { statusCode, message, loading, error } = await callAPI(
-        //     GenerateOtp,
-        //     "POST",
-        //     { mobileNo, userName: fullName }
-        //   );
-        //   console.log("OTP data status code: ", statusCode);
-
-        //   if (statusCode === 200) {
-        //     setNameIsDisabled(true);
-        //     setPhoneIsDisabled(true);
-
-        //     console.log(statusCode);
-        //     setIsOtpSent(true);
-        //     setCountdown(120);
-        //   } else {
-        //     console.log("otp not generated");
-        //     console.log(message);
-        //     setIsOtpSent(false);
-        //   }
-        // } catch (error) {
-        //   console.log(error);
-        // }
+        try{
+          const response = await axios.post('/api/user/signup', {
+            name: fullName,
+            email: email,
+          });
+  
+          if (response.data.status === "SUCCESS") {
+            setUserId(response.data.data.userId);
+            console.log(response.data.data.userId);
+            setNameIsDisabled(true);
+            setEmailIsDisabled(true);
+            setIsOtpSent(true);
+            setCountdown(120);
+          } else {
+            // handle error messages
+            setIsOtpSent(false);
+          }
+        }
+        catch(err){
+          console.error(err);
+          setIsOtpSent(false);
+        }
       }
     }
   };
   const handleEdit = () => {
-    setPhoneIsDisabled(false);
+    setEmailIsDisabled(false);
     setIsOtpSent(false);
   };
   const minutes = String(Math.floor(countdown / 60)).padStart(2, "0");
@@ -410,43 +394,31 @@ const Signin = ({ sourceComponent, onClose }) => {
       return;
     } else {
       setOtpErrorMessage("");
-      // validate otp
-    //   try {
-    //     const { statusCode, isSuccess, message, loading, error } =
-    //       await callAPI(ValidateOtp, "POST", {
-    //         mobileNo,
-    //         userName: fullName,
-    //         otp: otp,
-    //       });
-    //     console.log("Valid Data status code:", statusCode);
-    //     console.log("isSuccess : ", isSuccess);
 
-    //     if (statusCode === 200) {
-    //       console.log(statusCode);
-          
-    //       if (isSuccess === true) {
-    //         setOtp(otpVal);
-    //         setValidatedOtp(true);
-    //         setShowTimer(false);
-    //       } else {
-    //         setOtpErrorMessage("Invalid OTP");
-    //         console.log(message);
-    //         setValidatedOtp(false);
-    //         setShowTimer(true);
-    //         setOtp(""); // Reset OTP 
-    //       }
-    //     } else {
-    //       setOtpErrorMessage("Invalid OTP");
-    //       console.error("Server responded with error:");
-    //       setValidatedOtp(false);
-    //       setOtp(""); // Reset OTP
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+    try{
+      const response = await axios.post('/api/user/verifyOTP', {
+        userId: userId && userId,
+        otp: otp,
+      });
+
+      if (response.data.status === "SUCCESS") {
+        setOtp(otpVal);
+        setValidatedOtp(true);
+        setShowTimer(false);
+      } else if (response.data.status === "FAILED"){
+        // handle error messages
+        setOtpErrorMessage("Invalid OTP");
+        setValidatedOtp(false);
+        setShowTimer(true);
+        setOtp(""); // Reset OTP 
+      }
+    }
+    catch(err){
+      console.error(err);
+    }
       // Store data using session
       sessionStorage.setItem("name", fullName);
-      sessionStorage.setItem("mobileNo", phone);
+      sessionStorage.setItem("email", email);
     }
   };
   const handleCloseMenu = () => {
@@ -456,17 +428,17 @@ const Signin = ({ sourceComponent, onClose }) => {
   const location = useLocation();
   return (
     <>
-      <div className="signin-page">
-        <div className="signin-page-container">
+      <div className={styles.signinPage}>
+        <div className={styles.signinPageContainer}>
         { !location.pathname.includes('calculate') && (
-                <div className="closeIcon">
+                <div className={styles.closeIcon}>
                     <ButtonComponent > 
                         <CloseIcon className='search-icon' onClick={handleCloseMenu} />
                     </ButtonComponent>
                 </div>
             )}
           <h1>Sign in</h1>
-          <form onSubmit={handleSubmit} className="signin-form">
+          <form onSubmit={handleSubmit} className={styles.signinForm}>
             <label htmlFor="Name">
               Name<sup>*</sup>
             </label>
@@ -475,7 +447,7 @@ const Signin = ({ sourceComponent, onClose }) => {
               value={fullName}
               onChange={(e) => check(e, "fullName")}
               placeholder="Enter full name"
-              className="form-inputbox-name"
+              className={styles.formInputboxName}
               required
               disabled={nameIsDisabled}
               onKeyDown={(event) => {
@@ -492,43 +464,25 @@ const Signin = ({ sourceComponent, onClose }) => {
                 }
               }}
             />
-            <h5 className="error-messages">
+            <h5 className={styles.errorMessages}>
               {nameErrorMessage !== "" && nameErrorMessage}
             </h5>
-            <label htmlFor="phone">
-              Mobile Number<sup>*</sup>
+            <label htmlFor="email">
+              Email<sup>*</sup>
             </label>
-            <div className="phone-row">
-              <div className="form-inputbox">
-                +91
-                <hr></hr>
-                {/* <input
-                  type="text"
-                  value={phone}
-                  onChange={(e) => check(e, "phone")}
-                  placeholder="Enter mobile number"
-                  required
-                  disabled={phoneIsDisabled}
-                  onKeyDown={(event) => {
-                    const char = event.key;
-                    if (/[0-9]/.test(char) || char === 'Backspace' || char === 'ArrowLeft' || char === 'ArrowRight') {
-                      return true;
-                    } else {
-                      event.preventDefault();
-                    }
-                  }}
-                /> */}
+            <div className={styles.phoneRow}>
+              <div className={styles.formInputbox}>
                 <input
                   type="text"
-                  value={phone}
-                  onChange={(e) => check(e, "phone")}
-                  placeholder="Enter mobile number"
+                  value={email}
+                  onChange={(e) => check(e, "email")}
+                  placeholder="Enter email"
                   required
-                  disabled={phoneIsDisabled}
+                  disabled={emailIsDisabled}
                   onKeyDown={(event) => {
                     const char = event.key;
                     if (
-                      /[0-9]/.test(char) ||
+                      /^[a-zA-Z0-9@._-]$/.test(char) ||
                       char === "Backspace" ||
                       char === "ArrowLeft" ||
                       char === "ArrowRight"
@@ -545,7 +499,7 @@ const Signin = ({ sourceComponent, onClose }) => {
               </div>
 
               {isOtpSent ? (
-                <div className="icons-inline">
+                <div className={styles.iconsInline}>
                   {" "}
                   <CheckCircleOutlineIcon sx={{ fill: "#509E82" }} />
                   OTP sent
@@ -555,24 +509,24 @@ const Signin = ({ sourceComponent, onClose }) => {
                   children="Send OTP"
                   className={
                     isOtpSent
-                      ? "disappear-button"
-                      : isValidName && isValidPhone
-                      ? "gradient-button-send-otp"
-                      : "disabled-button"
+                      ? `${styles.disappearButton}`
+                      : isValidName && isValidEmail
+                      ? `${styles.gradientButtonSendOtp}`
+                      : `${styles.disabledButton}`
                   }
                   onClick={showOtpField}
-                  disabled={!isValidName || !isValidPhone}
+                  disabled={!isValidName || !isValidEmail}
                 />
               )}
             </div>
-            <h5 className="error-messages">
+            <h5 className={styles.errorMessages}>
               {mobileErrorMessage !== "" && mobileErrorMessage}
             </h5>
 
             <label htmlFor="otp">
               OTP<sup>*</sup>
             </label>
-            <div className="otp-row">
+            <div className={styles.otpRow}>
               <OTP
                 value={otp}
                 onChange={setOtp}
@@ -582,7 +536,7 @@ const Signin = ({ sourceComponent, onClose }) => {
               {isOtpSent ? (
                 <>
                   {validatedOtp ? (
-                    <div className="icons-inline">
+                    <div className={styles.iconsInline}>
                       {" "}
                       <CheckCircleOutlineIcon sx={{ fill: "#509E82" }} />
                       Verified
@@ -600,7 +554,7 @@ const Signin = ({ sourceComponent, onClose }) => {
                   <>
                     {showTimer && (
                       <>
-                        <h6 className="error-message">{otpErrorMessage}</h6>
+                        <h6 className={styles.errorMessage}>{otpErrorMessage}</h6>
                         <h6>
                           Resend OTP in {minutes}:{seconds}
                         </h6>
@@ -626,16 +580,14 @@ const Signin = ({ sourceComponent, onClose }) => {
             )}
             <br></br>
 
-            <div className="terms-and-policy">
+            <div className={styles.termsAndPolicy}>
               <input
                 type="checkbox"
                 checked={isCheckboxChecked}
                 onChange={(e) => setIsCheckboxChecked(e.target.checked)}
               />
-              {/* <h5>I agree to the <Link to="/terms-and-conditon" style={{color: "black"}}><Link style={{textDecoration: "none", color: "black"}} to="/Terms-Policy"><span>Terms-and-Conditions</span></Link></Link> and <span>Privacy-Policy</span></h5> */}
               <h5>
                 I agree to the{" "}
-                <Link to="/terms-and-conditon" style={{ color: "black" }}>
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
                     to="/terms-policy"
@@ -653,7 +605,6 @@ const Signin = ({ sourceComponent, onClose }) => {
                   >
                     <span> Privacy-Policy </span>
                   </Link>
-                </Link>{" "}
               </h5>
             </div>
 
@@ -664,12 +615,12 @@ const Signin = ({ sourceComponent, onClose }) => {
               children="Continue"
               className={
                 isAllValid && !isContinueClicked
-                  ? "continue-gradient-button"
-                  : "continue-disabled-button"
+                  ? `${styles.continueGradientButton}`
+                  : `${styles.continueDisabledButton}`
               }
               disabled={!isAllValid || isContinueClicked}
             />
-            {/* <h4 className="or-section">OR</h4> */}
+            {/* <h4 className={styles.orSection}>OR</h4> */}
 {/* 
             <GoogleOAuthProvider clientId={apiKey}>
              

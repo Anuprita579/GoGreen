@@ -1,10 +1,11 @@
 import React from 'react'
-import PathwayStepper from './PathwayStepper'
+import CartBox from "./CartBox"
 
 const index = () => {
   return (
     <>
-        <PathwayStepper /> 
+        <CartBox />
+      
     </>
   )
 }

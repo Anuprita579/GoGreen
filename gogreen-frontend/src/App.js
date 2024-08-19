@@ -1,12 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { Provider } from "react-redux"
 import { ActiveStepProvider } from "./utils/ActiveStepContext.jsx";
 import { LoginStateProvider } from "./utils/LoginStateContext.jsx";
 import { ScrollProvider } from "./utils/ScrollContext.jsx";
+import store from "./utils/store.js";
 import HeaderLayout from "./components/Header.jsx";
 import FooterLayout from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Home from "./pages/Home/index.jsx";
+import Store from "./pages/Store/index.jsx"
+import Cart from "./pages/Cart/index.jsx"
 // import Pathways from "./pages/Pathways/index.jsx";
 import Events from "./pages/Events/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
@@ -19,6 +23,8 @@ const AppContent = () => {
       <HeaderLayout />
       <Routes>
         <Route path={process.env.REACT_APP_HOME_PAGE_ROUTE} element={<Home />} />
+        <Route path={process.env.REACT_APP_STORE_PAGE_ROUTE} element={<Store />} />
+        <Route path={process.env.REACT_APP_CART_PAGE_ROUTE} element={<Cart />} />
         {/* <Route path={process.env.REACT_APP_PATHWAYS_PAGE_ROUTE} element={<Pathways />} /> */}
         <Route path={process.env.REACT_APP_EVENTS_PAGE_ROUTE} element={<Events />} />
         {/* <Route path={process.env.REACT_APP_EVENT_SPEC_PAGE_ROUTE} element={<EventDetails/>}></Route> */}
@@ -34,6 +40,8 @@ function App() {
 
   return (
     <Router>
+      <Provider store={store}>
+
     <ScrollToTop/>
       <ActiveStepProvider>
         <LoginStateProvider>
@@ -47,6 +55,7 @@ function App() {
           </div>
         </LoginStateProvider>
       </ActiveStepProvider>
+      </Provider>
     </Router>
   );
 }

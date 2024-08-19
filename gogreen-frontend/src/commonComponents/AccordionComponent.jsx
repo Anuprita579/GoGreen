@@ -48,8 +48,4 @@ AccordionComponent.propTypes = {
     className: PropTypes.string,
 };
 
-AccordionComponent.defaultProps = {
-    className: "",
-};
-
 export default AccordionComponent;

@@ -37,12 +37,4 @@ SelectComponent.propTypes = {
   className: PropTypes.string
 };
 
-SelectComponent.defaultProps = {
-  value: '',
-  onChange: () => {},
-  label: '',
-  helperText: '',
-  className: ''
-};
-
 export default SelectComponent;

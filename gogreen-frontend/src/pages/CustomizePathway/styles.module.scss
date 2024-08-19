@@ -22,21 +22,20 @@ input[type="number"] {
 a {
     text-decoration: none !important;
 }
-.customize-pathway{
-    .top-section, .motive, .motive-container{
+.customizePathway{
+    .topSection, .motive, .motiveContainer{
         display: flex;
         align-items: center;
     }
-    .top-section{
+    .topSection{
         padding-top: calc(($screen-ratio)*6);
-        .pathway-breadcrumb-div{
+        .pathwayBreadcrumbDiv{
           padding-left: 4vw;
           display: flex;
           justify-content: center;
           align-items: center;
           gap: calc(($screen-ratio)*4);
-
-          .back-button{
+          .backButton{
             color: #000;
             height: fit-content;
             text-transform: capitalize;
@@ -46,9 +45,8 @@ a {
             // padding: 0 calc(($screen-ratio)*4) 0 0;
         }
         }
-        
     }
-    .motive-container{
+    .motiveContainer{
         justify-content: flex-end;
         .motive{
             background-color: #509E82;
@@ -64,7 +62,7 @@ a {
     }
 
 }
-.otp-inputbox{
+.otpInputbox{
     input{
         width: 40px;
         font-size: 0.875rem;
@@ -83,7 +81,7 @@ a {
         box-shadow: 0 0 0 3px #005CB5;
     }
 }
-.otp-inputbox-disabled{
+.otpInputboxDisabled{
     input{
         width: 40px;
         font-size: 0.875rem;
@@ -97,10 +95,10 @@ a {
     }
 }
 
-.signin-page{
+.signinPage{
     display: flex;
     justify-content: center;
-    .signin-page-container{
+    .signinPageContainer{
         position: relative;
         display: flex;
         flex-direction: column;
@@ -118,16 +116,13 @@ a {
             position: absolute;
             right: 0;
             top: 0;
-            .css-1w1rijm-MuiButtonBase-root-MuiButton-root{
-                padding: 15px !important;
-            }
         }
-        .signin-form{
+        .signinForm{
             padding: calc(($screen-ratio)*2);
             display: grid;
             grid-template-columns: 1fr;
             gap: calc(($screen-ratio)*0.5);
-            .form-inputbox{
+            .formInputbox{
                 font-size: 0.875rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -150,7 +145,7 @@ a {
                     outline: none;
                 }
             }
-            .form-inputbox-name{
+            .formInputboxName{
                 font-size: 0.875rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -173,12 +168,12 @@ a {
                     outline: none;
                 }
             }
-            .gradient-button{
+            .gradientButton{
                 @extend.gradient-common-button;
                 border-radius: calc(($screen-ratio) *2);
                 font-weight: $font-weight-normal !important;
             }
-            .gradient-button-send-otp{
+            .gradientButtonSendOtp{
                 padding: calc(($screen-ratio) * 0.5);
                 color: $text-color-white !important;
                 text-transform: capitalize !important;
@@ -188,52 +183,51 @@ a {
                 background-image: linear-gradient(to right, #a9416f, #7240b2, #2d4cb0)
                 // border-radius: calc(($screen-ratio) * 2);
             }
-            .continue-gradient-button{
+            .continueGradientButton{
                 @extend.gradient-common-button;
                 border-radius: calc(($screen-ratio)*0.75) !important;
                 padding: calc(($screen-ratio)*0.5);
                 margin-top: 2em;
-
             }
-            .disabled-button{
+            .disabledButton{
                 @extend.disabled-common-button;
                 border-radius: calc(($screen-ratio) *2); 
             }
-            .continue-disabled-button{
+            .continueDisabledButton{
                 @extend.disabled-common-button;
                 border-radius: calc(($screen-ratio) *0.75); 
                 margin-top: 2em;
             }
-            .phone-row{
+            .phoneRow{
                 display: grid;
                 grid-template-columns: 3fr 1fr;
                 gap: calc(($screen-ratio)*0.5);
-                .icons-inline{
+                .iconsInline{
                     display: flex;
                     align-items: center;
                     color: #509E82;
                     font-size: small;
                 }
             }
-            .otp-row{
+            .otpRow{
                 display: grid;
                 grid-template-columns: 4fr 1fr;
-                .otp-button{
+                .otpButton{
                     @extend.gradient-common-button;
                     border-radius: calc(($screen-ratio) *2);
                 }
-                .icons-inline{
+                .iconsInline{
                     display: flex;
                     align-items: center;
                     color: #509E82;
                     font-size: small;
                 }
             }
-            .error-message{
+            .errorMessage{
                 font-size: small;
                 color: red;
             }
-            .terms-and-policy{
+            .termsAndPolicy{
                 display: flex;
                 gap: calc(($screen-ratio)*0.5);
                 span{
@@ -241,10 +235,10 @@ a {
                     text-decoration: underline;
                 }
             }
-            .or-section{
+            .orSection{
                 text-align: center;
             }
-            .google-button{
+            .googleButton{
                 text-transform: capitalize;
                 gap: calc(($screen-ratio)*0.5);
                 border: 1px solid #ABABAB;
@@ -255,9 +249,11 @@ a {
     }
 
 }
+.siginCornerPopover {
+    border-radius: calc(($screen-ratio) * 1);
+}
 
-
-.degree-page{
+.degreePage{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -268,47 +264,14 @@ a {
         padding-bottom: 0;
         margin-bottom: calc(($screen-ratio)*0.5);
     }
-    .opportunity-container{
+    .opportunityContainer{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         .MuiButton-root{
             padding: 0;
         } 
-    }
-    .location-section{
-        display: flex;
-        align-items: center;
-        gap: calc(($screen-ratio)*2);
-        padding: calc(($screen-ratio)*3);
-        .location-detect{
-            border: 1px solid #A04179;
-            .location-detect-inputbox{
-                font-size: 0.875rem;
-                font-weight: 400;
-                line-height: 1.5;
-                padding: 8px 0px;
-                gap: 10px;
-                border-radius: 8px;
-                width: calc(($screen-ratio)*20);
-                text-align: center;
-                // border: 1px solid #A04179;
-                border: 1px solid transparent;
-                outline: none;
-            }
-        }
-        .location-input-box{
-            font-size: 0.875rem;
-            font-weight: 400;
-            line-height: 1.5;
-            padding: 15px 0px;
-            gap: 10px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #A04179;
-            outline: none;
-        }
-    }    
+    }   
     h2{
         font-weight: $font-weight-semibold;
         background: linear-gradient(to right, #C5276C, #6C29C2, #1C44CB);
@@ -331,7 +294,7 @@ a {
         font-weight: $font-weight-semibold;
     }
 }
-.degree-card{
+.degreeCard{
     display: flex;
     gap: calc(($screen-ratio)*1);
     padding: calc(($screen-ratio)*2.5);
@@ -340,7 +303,7 @@ a {
     .selected{
         background-image: linear-gradient(to right, #F9D6E5, #EADAFF, #D8E0FD);
     }
-    .content-button{
+    .contentButton{
         border: 1px solid #A04179;
         border-radius: calc(($screen-ratio)*0.75);
         text-transform: capitalize;
@@ -361,154 +324,17 @@ a {
                 width: 40px;
                 height: 40px;
             }
-            .degree-title{
+            .degreeTitle{
                 font-weight: $font-weight-semibold;
             }
-            .degree-fullname{
+            .degreeFullname{
                 font-size: medium;
             }
         }
     }
 }
-.popular-cities{
-    display: flex;
-    gap: calc(($screen-ratio)*1);
-    padding: calc(($screen-ratio)*2.5);
-    justify-content: center;
-    align-items: center;
-    .selected{
-        background-image: linear-gradient(to right, #F9D6E5, #EADAFF, #D8E0FD);
-    }
-    .content-button{
-        border-radius: calc(($screen-ratio)*0.75);
-        text-transform: capitalize;
-        .content{
-            padding: calc(($screen-ratio)*1.5);
-            width: calc(($screen-ratio)*3);
-            height: calc(($screen-ratio)*3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            .icon{
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 70.48%, #FFF 93.62%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(180deg, rgba(30, 54, 87, 0.00) 0%, rgba(30, 54, 87, 0.01) 100%), #FAFAFA;
-                box-shadow: 0px 1.432px 1.074px 0px rgba(255, 255, 255, 0.50) inset, 0px -2.864px 1.074px 0px rgba(22, 36, 44, 0.06) inset, 0px 5.729px 11.457px -5.729px rgba(22, 36, 44, 0.16), 0px 1.432px 2.864px 0px rgba(22, 36, 44, 0.16), 0px 0px 0px 1.432px rgba(22, 36, 44, 0.12);
-                padding-left: 3px;
-                padding-right: 3px;
-                border-radius: 50%;
-                width: fit-content;
-                height: fit-content;
-            }
-            .degree-title{
-                font-weight: $font-weight-semibold;
-            }
-        }
-    }
-}
-.opportunity-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: calc(($screen-ratio)*2);
-    .selected{
-        background-image: linear-gradient(to right, #F9D6E5, #EADAFF, #D8E0FD);
-    }
-    .content-button{
-        border-radius: calc(($screen-ratio)*0.75);
-        text-transform: capitalize;
-        border: 1px solid #A04179;
-        margin-top: calc(($screen-ratio)*2.5);
-        .content{
-            padding: calc(($screen-ratio)*1.5);
-            width: calc(($screen-ratio)*3);
-            height: calc(($screen-ratio)*3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            .icon{
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 70.48%, #FFF 93.62%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(180deg, rgba(30, 54, 87, 0.00) 0%, rgba(30, 54, 87, 0.01) 100%), #FAFAFA;
-                box-shadow: 0px 1.432px 1.074px 0px rgba(255, 255, 255, 0.50) inset, 0px -2.864px 1.074px 0px rgba(22, 36, 44, 0.06) inset, 0px 5.729px 11.457px -5.729px rgba(22, 36, 44, 0.16), 0px 1.432px 2.864px 0px rgba(22, 36, 44, 0.16), 0px 0px 0px 1.432px rgba(22, 36, 44, 0.12);
-                padding-left: 3px;
-                padding-right: 3px;
-                border-radius: 50%;
-                width: fit-content;
-                height: fit-content;
-            }
-            .degree-title{
-                font-weight: $font-weight-semibold;
-            }
-        }
-    }
-}
-.university-disclaimer{
-    font-style: italic;
-    text-align: center;
-    padding-bottom: calc(($screen-ratio)*5);
-    span{
-        color: #FF0000;
-    }
-}
 
-.opportunity-card{
-    text-align: left;
-    width: 300px;
-    border-radius: calc(($screen-ratio)*1);
-    margin: calc(($screen-ratio)*1);
-    &__top-section{
-        display: flex;
-        justify-content: space-between;
-        .actively-hiring{
-            background-color: #F5F7FF;
-            width: fit-content;
-            height: fit-content;
-            font-weight: $font-weight-medium;
-            border-radius: calc(($screen-ratio)*0.7);
-            padding: calc(($screen-ratio)*0.2);
-            font-size: x-small;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .icon{
-                color: #2C5FF8;
-                font-size: 1.1rem !important;
-            }
-        }
-        img{
-            height: 40px;
-            width: 40px;
-        }
-
-    }
-    &__mid-section{
-        display: flex;
-        flex-direction: column;
-        gap: calc(($screen-ratio) *0.5);
-        .top-mid{
-            h3{
-                font-weight: $font-weight-bold;
-                font-size: medium;
-            }
-            h4{
-                font-weight: $font-weight-normal;
-                padding-bottom: calc(($screen-ratio)*0.5);
-            }
-
-        }
-        .bottom-mid{
-            font-weight: $font-weight-normal;
-            font-size: small;
-        }
-        .bottom{
-            color: #9D9D9D;
-            text-align: end;
-        }
-    }
-    
-
-}
-
-.ohno-component{
+.ohnoComponent{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -524,15 +350,12 @@ a {
         color: #555555;
         width: calc(($screen-ratio)*20);
     }
-    .ohno-image{
-        width: calc(($screen-ratio)*15);
-    }
-    .buttons-section{
+    .buttonsSection{
         display: flex;
         align-items: center;
         margin-top: calc(($screen-ratio)*2);
         gap: calc(($screen-ratio)*1);
-        .retry-button{
+        .retryButton{
             @extend.gradient-common-button;
             width: calc(($screen-ratio)*25);
             font-size: large !important; 
@@ -541,24 +364,20 @@ a {
     }
     
 }
+.errorMessages{
+    color: red;
+}
 
-.error-messages{
-    color: red;
-}
-.error-messages-location{
-    color: red;
-    padding-bottom: calc(($screen-ratio)*1);
-}
 
 
 //Stepper 
-.next-button{
+.nextButton{
     @extend.gradient-common-button;
     width: calc(($screen-ratio)*18);
     font-size: large !important; 
     border-radius: calc(($screen-ratio)*0.5) !important;
 }
-.back-button-stepper{
+.backButtonStepper{
     width: calc(($screen-ratio)*15); 
     text-transform: capitalize !important;
     color: #666666 !important;
@@ -569,8 +388,7 @@ a {
 
 //Common Styling
 .gradient-common-button{
-    // padding: calc(($screen-ratio) * 0.7);
-    background-image: linear-gradient(to right, #a9416f, #7240b2, #2d4cb0);
+    background-image: linear-gradient(to right, #006400, #000000);
     color: $text-color-white !important;
     text-transform: capitalize !important;
     font-weight: $font-weight-semibold;
@@ -652,9 +470,9 @@ a {
             }
         }
     }
-    .signin-page{
+    .signinPage{
         width: 100%;
-        .signin-page-container{
+        .signinPageContainer{
             background-color: #FAFAFA;
             // padding-top: calc(($screen-ratio)*6);
             border-radius: calc(($screen-ratio)*2);
@@ -664,9 +482,9 @@ a {
                 font-size: calc(($screen-ratio)*7);
                 padding-left: 0;
             }
-            .signin-form{
+            .signinForm{
                 gap: calc(($screen-ratio)*1);
-                .form-inputbox{
+                .formInputbox{
                     font-size: 0.875rem;
                     font-weight: 400;
                     line-height: 1.5;
@@ -685,7 +503,7 @@ a {
                         outline: none;
                     }
                 }
-                .form-inputbox-name{
+                .formInputboxName{
                     font-size: 0.875rem;
                     font-weight: 400;
                     line-height: 1.5;
@@ -704,80 +522,78 @@ a {
                         outline: none;
                     }
                 }
-                .gradient-button{
-                    @extend.gradient-common-button;
+                .gradientButton{
+                    // @extend.gradient-common-button;
                     border-radius: calc(($screen-ratio) *2);
                     font-weight: $font-weight-normal !important;
                 }
-                .gradient-button-send-otp{
+                .gradientButtonSendOtp{
                     padding: calc(($screen-ratio) * 2);
                     border-radius: calc(($screen-ratio) *2);
                     margin-top: calc(($screen-ratio)*4);
                 }
-                .continue-gradient-button{
-                    @extend.gradient-common-button;
+                .continueGradientButton{
                     border-radius: calc(($screen-ratio)*2) !important;
                     padding: calc(($screen-ratio)*2);
     
                 }
-                .disabled-button{
-                    @extend.disabled-common-button;
+                .disabledButton{
+                    // @extend.disabled-common-button;
                     border-radius: calc(($screen-ratio) *2); 
                     padding: calc(($screen-ratio) * 2);
                     margin-top: calc(($screen-ratio)*4);
                 }
-                .continue-disabled-button{
-                    @extend.disabled-common-button;
+                .continueDisabledButton{
+                    // @extend.disabled-common-button;
                     border-radius: calc(($screen-ratio) *2); 
                     padding: calc(($screen-ratio)*2);
                 }
-                .phone-row{
+                .phoneRow{
                     display: flex;
                     flex-direction: column;
                     gap: calc(($screen-ratio)*0.5);
-                    .icons-inline{
+                    .iconsInline{
                         justify-content: end;
                     }
                 }
-                .otp-row{
+                .otpRow{
                     display: flex;
                     flex-direction: column;
-                    .otp-button{
-                        @extend.gradient-common-button;
+                    .otpButton{
+                        // @extend.gradient-common-button;
                         border-radius: calc(($screen-ratio) *2);
                     }
-                    .icons-inline{
+                    .iconsInline{
                         justify-content: end;
                     }
                 }
-                .error-message{
+                .errorMessage{
                     font-size: small;
                     color: red;
                     font-style: italic;
                 }
-                .terms-and-policy{
+                .termsAndPolicy{
                     gap: calc(($screen-ratio)*1);
                     padding-bottom: calc(($screen-ratio)*2);
                 }
-                .google-button{
+                .googleButton{
                     text-transform: capitalize;
                     gap: calc(($screen-ratio)*0.5);
                     border: 1px solid #ABABAB;
                     border-radius: calc(($screen-ratio)*0.75);
                 }
-        
             }
         }
     }
-    .error-messages{
+    .errorMessages{
         font-style: italic;
     }
-    .degree-card{
+    .degreeCard{
         flex-direction: column;
         gap: calc(($screen-ratio)*2);
         padding: calc(($screen-ratio)*2.5);
         width: 100%;
-        .content-button{
+        .contentButton{
             border-radius: calc(($screen-ratio)*2);
             width: 90%;
             .content{
@@ -787,7 +603,7 @@ a {
                 gap: calc(($screen-ratio)*2);
                 flex-direction: row;
                 justify-content: flex-start;
-                .degree-content-container{
+                .degreeContentContainer{
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-start;
@@ -806,63 +622,29 @@ a {
                     width: 50px;
                     height: 50px;
                 }
-                .degree-title{
+                .degreeTitle{
                     font-size: small;
                 }
-                .degree-fullname{
+                .degreeFullname{
                     font-size: small;
                 }
             }
         }
     }
-    .degree-page{
+    .degreePage{
         padding: calc(($screen-ratio)*3);
         .heading{
             padding-top: calc(($screen-ratio)*4);
             padding-bottom: calc(($screen-ratio)*2);
         }
-        .opportunity-container{
+        .opportunityContainer{
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             .MuiButton-root{
                 padding: 0;
             } 
-        }
-        .location-section{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: calc(($screen-ratio)*2);
-            padding: calc(($screen-ratio)*3);
-            width: 100%;
-            .location-detect{
-                border: 1px solid #A04179;
-                width: 90%;
-                .location-detect-inputbox{
-                    font-size: 0.875rem;
-                    font-weight: 400;
-                    line-height: 1.5;
-                    padding: 2px 0px;
-                    gap: 10px;
-                    border-radius: 8px;
-                    width: 100%;
-                    text-align: left;
-                    outline: none;
-                }
-            }
-            .location-input-box{
-                font-size: 0.875rem;
-                font-weight: 400;
-                line-height: 1.5;
-                padding: 8px 0px;
-                gap: 10px;
-                border-radius: 8px;
-                text-align: left;
-                width: 85%;
-                padding-left: 15px;
-            }
-        }    
+        } 
         h2{
             padding-bottom: calc(($screen-ratio)*1.5);
             display: none;
@@ -887,120 +669,7 @@ a {
             padding-top: calc(($screen-ratio)*4);
         }
     }
-    .popular-cities{
-        display: flex;
-        flex-wrap: wrap;
-        gap: calc(($screen-ratio)*4);
-        padding: calc(($screen-ratio)*2.5);
-        justify-content: center;
-        align-items: center;
-        .selected{
-            background-image: linear-gradient(to right, #F9D6E5, #EADAFF, #D8E0FD);
-        }
-        .content-button{
-            border-radius: calc(($screen-ratio)*2);
-            text-transform: capitalize;
-            padding: 0;
-            .content{
-                padding: calc(($screen-ratio)*1.5);
-                width: calc(($screen-ratio)*22);
-                height: calc(($screen-ratio)*22);
-                img{
-                    width: 100%;
-                }
-            }
-        }
-    }
-    .opportunity-container{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: calc(($screen-ratio)*2);
-        .content-button{
-            border-radius: calc(($screen-ratio)*2);
-            margin-top: calc(($screen-ratio)*2.5);
-            padding: calc(($screen-ratio)*1);
-            .content{
-                padding: calc(($screen-ratio)*1.5);
-                width: calc(($screen-ratio)*3);
-                height: calc(($screen-ratio)*3);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                .icon{
-                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 70.48%, #FFF 93.62%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(180deg, rgba(30, 54, 87, 0.00) 0%, rgba(30, 54, 87, 0.01) 100%), #FAFAFA;
-                    box-shadow: 0px 1.432px 1.074px 0px rgba(255, 255, 255, 0.50) inset, 0px -2.864px 1.074px 0px rgba(22, 36, 44, 0.06) inset, 0px 5.729px 11.457px -5.729px rgba(22, 36, 44, 0.16), 0px 1.432px 2.864px 0px rgba(22, 36, 44, 0.16), 0px 0px 0px 1.432px rgba(22, 36, 44, 0.12);
-                    padding-left: 3px;
-                    padding-right: 3px;
-                    border-radius: 50%;
-                    width: fit-content;
-                    height: fit-content;
-                }
-                .degree-title{
-                    font-weight: $font-weight-semibold;
-                }
-            }
-        }
-    }
-    .opportunity-card{
-        text-align: left;
-        width: 300px;
-        border-radius: calc(($screen-ratio)*1);
-        margin: calc(($screen-ratio)*1);
-        padding: calc(($screen-ratio)*2);
-        &__top-section{
-            display: flex;
-            justify-content: space-between;
-            .actively-hiring{
-                background-color: #F5F7FF;
-                width: fit-content;
-                height: fit-content;
-                font-weight: $font-weight-medium;
-                border-radius: calc(($screen-ratio)*0.7);
-                padding: calc(($screen-ratio)*0.2);
-                font-size: x-small;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .icon{
-                    color: #2C5FF8;
-                    font-size: 1.1rem !important;
-                }
-            }
-            img{
-                height: 40px;
-                width: 40px;
-            }
-    
-        }
-        &__mid-section{
-            display: flex;
-            flex-direction: column;
-            gap: calc(($screen-ratio) *0.5);
-            .top-mid{
-                h3{
-                    font-weight: $font-weight-bold;
-                    font-size: medium;
-                }
-                h4{
-                    font-weight: $font-weight-normal;
-                    padding-bottom: calc(($screen-ratio)*0.5);
-                }
-    
-            }
-            .bottom-mid{
-                font-weight: $font-weight-normal;
-                font-size: small;
-            }
-            .bottom{
-                color: #9D9D9D;
-                text-align: end;
-            }
-        }
-    }
-    .ohno-component{
+    .ohnoComponent{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1015,42 +684,33 @@ a {
         .content{
             width: 100%;
         }
-        .ohno-image{
-            width: calc(($screen-ratio)*15);
-        }
-        .buttons-section{
+        .buttonsSection{
             display: flex;
             flex-direction: column-reverse;
             align-items: center;
             margin-top: calc(($screen-ratio)*7);
             gap: calc(($screen-ratio)*2);
-            .retry-button{
-                @extend.gradient-common-button;
+            .retryButton{
+                // @extend.gradient-common-button;
                 width: 100%;
                 font-size: large !important; 
                 font-weight: $font-weight-normal;
                 border-radius: calc(($screen-ratio)*2) !important;
             }
-            .back-button-stepper{
+            .backButtonStepper{
                 width: 100% !important;
             }
         }
         
     }
-    .university-disclaimer{
-        display: none;
-    }
-    
-
-
     //Stepper 
-    .next-button{
-        @extend.gradient-common-button;
+    .nextButton{
+        // @extend.gradient-common-button;
         width: calc(($screen-ratio)*40);
         font-size: medium !important; 
         border-radius: calc(($screen-ratio)*2) !important;
     }
-    .back-button-stepper{
+    .backButtonStepper{
         width: calc(($screen-ratio)*40); 
         text-transform: capitalize !important;
         color: #666666 !important;

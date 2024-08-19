@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+$screen-ratio: 1vw;
+@import "../theme.scss";
+
+html * {
+    margin: 0;
+    padding: 0;
+    font-family: 'MyFont' !important;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: calc(($screen-ratio) * 1);
+    padding-bottom: calc(($screen-ratio) * 1);
+    @include font-primary($font-weight-bold);
+    .headerLeft {
+        padding-left: calc(($screen-ratio) * 4);
+        .logo {
+            height: calc(($screen-ratio) * 3);
+        }
+    }
+    .headerRight {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: calc(($screen-ratio) * 2);
+        .cartBtn,
+        .searchIcon,
+        .menuIcon {
+            color: $text-color-white;
+            padding: 4px;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        .signinButton {
+            padding: calc(($screen-ratio) * 0.3);
+            margin: 5px;
+            color: $text-color-dark;
+            background-color: $background-color-light;
+            border-radius: 10%;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        .signinButtonWithName {
+            padding: calc(($screen-ratio) * 0.3);
+            margin: 5px;
+            color: $text-color-white;
+            background-color: transparent;
+            border-radius: 10%;
+            font-weight: 500;
+            text-transform: capitalize;
+            box-shadow: none;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            font-size: small;
+        }
+    }
+}
+
+.headerScrolled {
+    background-color: $background-color-primary;
+}
+
+.headerHome {
+    background-color: $background-color-primary;
+}
+
+.menuPopover {
+    border-radius: calc(($screen-ratio) * 1);
+    [class*="MuiPopover-paper"] {
+        background-color: none !important;
+        border-radius: calc(($screen-ratio)*1) !important;
+        background: #FFFFCF;
+        backdrop-filter: blur(100px);
+    }
+}
+
+//Common Header for Other Pages
+.headerOther {
+    background-color: $background-color-secondary;
+    backdrop-filter: blur(100px);
+    top: 0;
+    position: sticky;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+//Menu
+.menu {
+    backdrop-filter: blur(100px);
+    color: $text-color-dark;
+    display: flex;
+    justify-content: space-between;
+    padding: calc(($screen-ratio) * 2);
+    border-radius: 16px;
+    z-index: 999999;
+    .leftSection {
+        ul {
+            list-style: none;
+            li {
+                padding: calc(($screen-ratio) * 1);
+                font-size: calc(($screen-ratio) * 2);
+                color: $text-color-dark;
+            }
+            .signinButton {
+                padding: 10px 5px;
+                margin: 5px;
+                color: $text-color-dark;
+                background-color: $background-color-light;
+                border-radius: 10%;
+                font-weight: bold;
+            }
+        }
+    }
+}
+//SearchBox
+.searchBox {
+    display: flex;
+    .searchWork {
+        background-color: $background-color-light;
+        border-radius: calc(($screen-ratio) * 0.5);
+        padding-left: calc(($screen-ratio) * 2);
+        .searchInputBox {
+            width: calc(($screen-ratio) * 40);
+            outline: none;
+            border: none;
+        }
+    }
+}
+
+.afterSigninProfile {
+    padding: calc(($screen-ratio) * 2);
+    .afterSigninList {
+        list-style: none;
+        h2 {
+            background: linear-gradient(90deg, #ffcf24, #ff3b47, #ff3b47);
+            background-clip: text;
+            text-transform: capitalize;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-left: calc(($screen-ratio) * 1);
+            font-weight: $font-weight-semibold;
+        }
+        li {
+            padding: calc(($screen-ratio) * 1);
+            font-weight: $font-weight-semibold;
+        }
+        .accordianTitle {
+            font-weight: $font-weight-semibold;
+        }
+        .signinProfileAccordian {
+            box-shadow: none;
+        }
+        .accordianList {
+            list-style: none;
+            color: #555555;
+            // font-size: calc(($screen-ratio)*1);
+            font-size: small;
+            font-weight: $font-weight-normal;
+        }
+    }
+}
+
+.footer {
+    background-color: #013220;
+    .footerTop {
+        background-color: #013220;
+        color: $text-color-white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: calc(($screen-ratio) * 1);
+
+        .leftSection {
+            padding: calc(($screen-ratio) * 5);
+
+            .logo {
+                height: calc(($screen-ratio) * 5);
+            }
+
+            p {
+                max-width: calc(($screen-ratio) * 25);
+                padding-top: calc(($screen-ratio) * 1);
+                font-size: calc(($screen-ratio) * 1.2);
+                line-height: 150%;
+                font-weight: 400;
+                font-style: normal;
+                font-family: "Open Sauce Sans";
+            }
+        }
+
+        .rightSection {
+            .rightTop {
+                display: flex;
+                justify-content: space-between;
+                gap: calc(($screen-ratio) * 3);
+
+                .section1 {
+                    padding: calc(($screen-ratio) * 1);
+                    font-size: 16px;
+
+                    h3 {
+                        font-weight: 600;
+                        font-style: normal;
+                        padding-left: calc(($screen-ratio) * 0.5);
+                        padding-bottom: calc(($screen-ratio) * 1.3);
+                    }
+
+                    ul {
+                        list-style: none;
+
+                        li {
+                            padding: calc(($screen-ratio) * 0.5);
+                            color: $text-color-white;
+                        }
+                    }
+
+                    .iconTextInline {
+                        display: flex;
+                        align-items: center;
+                        padding: calc(($screen-ratio) * 0.5);
+                        gap: calc(($screen-ratio) * 0.5);
+
+                        h5 {
+                            color: $text-color-white;
+                        }
+                    }
+                }
+            }
+
+            .rightBottom {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: calc(($screen-ratio) * 3);
+                padding-top: calc(($screen-ratio) * 2);
+
+                .section1:hover {
+                    cursor: pointer;
+                }
+
+                .section1 {
+                    padding: calc(($screen-ratio) * 1);
+                    font-size: 16px;
+
+                    h3 {
+                        font-weight: 600;
+                        font-style: normal;
+                        // padding-left: calc(($screen-ratio) * 0.5);
+                        padding-bottom: calc(($screen-ratio) * 1.3);
+                    }
+
+                    .connectUsIcons {
+                        list-style: none;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        grid-gap: 1em;
+                        align-items: center;
+                        justify-content: space-between;
+                        a {
+                            color: #fff;
+                        }
+                        li {
+                            padding: calc(($screen-ratio) * 0.5) 0;
+                        }
+                    }
+                    .connectUs {
+                        list-style: none;
+                        display: flex;
+                        align-items: center;
+                        li {
+                            padding: calc(($screen-ratio) * 0.5);
+                        }
+                    }
+                }
+            }
+
+            .scrollTop {
+                height: fit-content;
+                width: fit-content;
+                border-radius: 50%;
+                padding-top: calc(($screen-ratio) * 1);
+                padding-bottom: calc(($screen-ratio) * 1);
+            }
+        }
+    }
+
+    .footerBottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #013220;
+        padding: calc(($screen-ratio) * 1);
+        color: $text-color-white;
+        .content {
+            width: 90%;
+            .horizontalLine {
+                color: $text-color-dark;
+                margin-bottom: calc(($screen-ratio) * 1);
+            }
+            .copyright {
+                background-color: #013220;
+                display: flex;
+                justify-content: space-between;
+                color: #d9d9d9;
+                font-style: normal;
+                line-height: $line-height-base;
+            }
+        }
+    }
+}

@@ -118,9 +118,4 @@ ModalComponent.propTypes = {
   className: PropTypes.string
 };
 
-ModalComponent.defaultProps = {
-  children: null,
-  className: ""
-};
-
 export default ModalComponent;

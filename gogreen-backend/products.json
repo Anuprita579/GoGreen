@@ -1,96 +1,108 @@
 [
     {
-        "name": "Kurti",
-        "logo": "",
+        "name": "Saree",
+        "logo": "https://images.freeimages.com/variants/suAzK5Hq555ePUdM9T9ghdi8/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350",
         "category": "clothes",
         "price": 290,
-        "color": "blue",
-        "size": "S",
+        "color": "pink",
         "apparelType": "women"
     },
     {
         "name": "Jeans",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/728/jeans-1421398.jpg?fmt=webp&h=350",
         "category": "clothes",
         "price": 350,
-        "color": "black",
+        "color": "blue",
         "size": "M",
         "apparelType": "men"
     },
     {
+        "name": "Kurta",
+        "logo": "https://images.freeimages.com/variants/7Wx7kZCqfjfwXQGXFsZEMoNQ/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350",
+        "category": "clothes",
+        "price": 350,
+        "color": "green",
+        "size": "S",
+        "apparelType": "men"
+    },
+    {
         "name": "T-Shirt",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/7c0/t-shirt-1424641.jpg?fmt=webp&h=350",
         "category": "clothes",
         "price": 200,
-        "color": "red",
+        "color": "blue",
         "size": "L",
         "apparelType": "men"
     },
     {
         "name": "Sofa",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/57d/sofa-1233675.jpg?fmt=webp&h=350",
         "category": "homeDecor",
         "price": 2900,
-        "color": "indigo"
+        "color": "black"
     },
     {
         "name": "Flower Vase",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/9b1/tulips-1380120.jpg?fmt=webp&h=350",
         "category": "homeDecor",
         "price": 1590,
         "color": "white"
     },
     {
         "name": "Hand Bag",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/7e6/purse-1545247.jpg?fmt=webp&h=350",
         "category": "luggage",
         "price": 200,
         "color": "red"
     },
     {
         "name": "Purse",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/db0/empty-change-purse-1240020.jpg?fmt=webp&h=350",
         "category": "luggage",
         "price": 2900,
         "color": "blue"
     },
     {
         "name": "Book",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/76e/book-with-white-pages-1507326.jpg?fmt=webp&h=350",
         "category": "stationary",
         "price": 290
     },
     {
         "name": "Pencil",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/093/pencil-1416283.jpg?fmt=webp&h=350",
         "category": "stationary",
         "price": 15
     },
     {
         "name": "Pencil Stand",
-        "logo": "",
+        "logo": "https://images.freeimages.com/images/large-previews/975/pencils-1236788.jpg?fmt=webp&h=350",
         "category": "stationary",
         "price": 220,
         "color": "black"
     },
     {
         "name": "Tulsi",
-        "logo": "",
+        "logo": "https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-rama-tulsi-plant-holy-basil-ocimum-sanctum-green-plant_large.jpg?v=1634227321",
         "category": "plants",
         "price": 120
     },
     {
         "name": "Cactus",
-        "logo": "",
+        "logo": "https://nurserylive.com/cdn/shop/products/nurserylive-phalaenopsis-yellow-plant_92edb738-95b1-4386-94ec-60980a6ed195_295x295.jpg?v=1634226144",
         "category": "plants",
         "price": 100
     },
     {
-        "name": "Sunflower",
-        "logo": "",
+        "name": "Daffodil",
+        "logo": "https://nurserylive.com/cdn/shop/collections/60713d771e8e222d7a50ff71da6fb980-334575_260x260.jpg?v=1681381694",
+        "category": "plants",
+        "price": 150
+    },
+    {
+        "name": "Tulip",
+        "logo": "https://nurserylive.com/cdn/shop/collections/3deea72de3e1251177beb61e9648481d_260x260.jpg?v=1681381553",
         "category": "plants",
         "price": 150
     }
-    
-    
 ]

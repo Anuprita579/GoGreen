@@ -5,22 +5,21 @@ import Button from "../../commonComponents/ButtonComponent";
 import AlertComponent from "../../commonComponents/AlertComponent";
 import { useScroll } from "../../utils/ScrollContext";
 import { useLoginState } from "../../utils/LoginStateContext";
+import styles from "./styles.module.scss"
 
 const CalculateCF = () => {
   //Scroll Effect
   const { pathwayRef } = useScroll();
-
-
   return (
-    <div className="pathway" ref={pathwayRef} id="personalise-home-div">
-      <div className="main-pathway">
+    <div className={styles.pathway} ref={pathwayRef} id="personalise-home-div">
+      <div className={styles.mainPathway}>
         <h1>
         GoGreen: Your Path to a Sustainable Future <br></br>{" "}
           <span>What's On Your Mind?</span>
         </h1>
-        <div className="pathway-button">
+        <div className={styles.pathwayButton}>
             <Link to="/calculate">
-              <Button className={"gradient-button"} >
+              <Button className={styles.gradientButton} >
                 Calculate Carbon Footprint
               </Button>
             </Link>

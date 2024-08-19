@@ -2,7 +2,11 @@ import React from 'react';
 //MUI Components
 import DatePicker from '@mui/lab/DatePicker';
 
-const DatePickerComponent = ({ label, value, onChange }) => {
+const DatePickerComponent = ({ 
+  label, 
+  value, 
+  onChange 
+}) => {
   return (
       <DatePicker
         label={label}

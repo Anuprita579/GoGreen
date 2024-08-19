@@ -50,9 +50,8 @@ const AfterSigninProfile = ({ onClose }) => {
           headingClassname='accordian-title'
           content={
             <ul className='accordian-list'>
-              <Link to="https://api.whatsapp.com/send/?phone=917204677888&text&type=phone_number&app_absent=0" target='_blank' style={{ color: "#555555" }} onClick={() => onClose()}><li>Chat with us</li></Link>
-              <Link to="/confirm-slot" style={{ color: "#555555" }} onClick={() => onClose()}>
-                <li>Connect with counsellor</li>
+              <Link to='/confirm-slot' style={{ color: "#555555" }} onClick={() => onClose()}>
+                <li>Dashboard</li>
               </Link>
             </ul>
           }

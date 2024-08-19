@@ -12,6 +12,7 @@ import ModalComponent from '../commonComponents/ModalComponent';
 import CloseIcon from '@mui/icons-material/Close';
 //Imports
 import Signin from '../pages/CustomizePathway/Signin';
+import styles from "./styles.module.scss"
 
 const Menu = ({onClose}) => {
   const location = useLocation();
@@ -41,21 +42,20 @@ const Menu = ({onClose}) => {
   }
   return (
     <>
-        <div className='menu'>
-          <div className='left-section'>
+        <div className={styles.menu}>
+          <div className={styles.leftSection}>
             <nav>
               <ul>
-                <Link to="/" onClick={handleCloseMenu}><li>Home</li></Link>
-                <Link to="about" onClick={handleCloseMenu}><li>About Us</li></Link>
-                <Link to="work-integrated-programs" onClick={handleCloseMenu}><li>Carbon Footprint Calculator</li></Link>
-                {/* <Link><li>Aptitude Test</li></Link> */}
-                <Link to="/eco-system" onClick={handleCloseMenu}><li>Education</li></Link>
-                <Link to="/contact-us" onClick={handleCloseMenu}><li>Contact Us</li></Link>
-                <Link to="/faq" onClick={handleCloseMenu}><li>FAQs</li></Link>
+                <Link to='/' onClick={handleCloseMenu}><li>Home</li></Link>
+                <Link to='about' onClick={handleCloseMenu}><li>About Us</li></Link>
+                <Link to='work-integrated-programs' onClick={handleCloseMenu}><li>Carbon Footprint Calculator</li></Link>
+                <Link to='/eco-system' onClick={handleCloseMenu}><li>Education</li></Link>
+                <Link to='/contact-us' onClick={handleCloseMenu}><li>Contact Us</li></Link>
+                <Link to='/faq' onClick={handleCloseMenu}><li>FAQs</li></Link>
               </ul>
             </nav>
           </div>
-          <div className='right-section'>
+          <div className={styles.rightSection}>
             <ButtonComponent onClick={handleCloseMenu}> <CloseIcon /> </ButtonComponent>
           </div>
         </div>

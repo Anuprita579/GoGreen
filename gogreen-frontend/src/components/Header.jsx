@@ -9,6 +9,7 @@ import PopoverComponent from '../commonComponents/PopoverComponent';
 //MUI ICONS
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 //Assets
 // import Logo from "../assets/digavarsity_logo.png"
 //Imports
@@ -16,6 +17,10 @@ import Menu from '../components/Menu';
 import Searchbox from './Searchbox';
 import AfterSigninProfile from "./AfterSigninProfile";
 import Signin from '../pages/CustomizePathway/Signin';
+//Styles
+import styles from "./styles.module.scss"
+import ButtonComponent from '../commonComponents/ButtonComponent';
+import { useSelector } from 'react-redux';
 
 const Header = ({headerType}) => {
   const location = useLocation();
@@ -40,7 +45,7 @@ const Header = ({headerType}) => {
   return () => window.removeEventListener('scroll', checkScrollTop);
   }, []);
 
-  const headerStyle = headerType === 'header-home'? 'header-other' :currentPath !== '/'? ' header-other' : hasScrolled? 'header-scrolled': 'header-home';
+  const headerStyle = headerType === 'headerHome'? styles.headerOther :currentPath !== '/'? styles.headerOther : hasScrolled? styles.headerScrolled: styles.headerHome;
 
 
   const [displaySearchBox, setDisplaySearchBox] = useState(false);
@@ -48,10 +53,7 @@ const Header = ({headerType}) => {
   const [anchorElMenu, setAnchorElMenu] = useState(null);
   const [anchorElSignin, setAnchorElSignin] = useState(null);
   const username = sessionStorage.getItem('name');
-  // const isUserLogin = sessionStorage.getItem('signInCompleted');
   
-  // const isUserLogin = null;
-  console.log("User Login in Header Layout : ", isLoggedIn);
 
 
   const handleDisplaySearch = () => {
@@ -69,6 +71,8 @@ const Header = ({headerType}) => {
     setDisplaySearchIcon(true);
   }
 
+  const cartItems = useSelector(store => store.cart.items);
+
   const closePopover = (setter) => {
     setter(null)
   }
@@ -83,49 +87,30 @@ const Header = ({headerType}) => {
 
   return (
     <>
-      <div className={`header ${headerStyle}`}>
-        <div className='header-left'>
-          {/* <img src={Logo} alt='logo' className='logo' /> */}
-          {/* {headerType!=='home' && <img src={Logo} alt='logo' className='logo' />} */}
-          {(currentPath!=='/' || headerStyle==='header-scrolled') && (
+      <div className={`${styles.header} ${headerStyle}`}>
+        <div className={styles.headerLeft}>
+          {(currentPath!=='/' || headerStyle===styles.headerScrolled) && (
             <Link to="/">
             {/* <img src={Logo} alt='logo' className='logo' /> */}
             </Link>
           )}
         </div>
 
-        {/* {displaySearchBox ? (
-          <div className='search-box-display'><Searchbox onClose={handleClose} /></div>
-        ) : null} */}
 
-        <div className='header-right'>
+        <div className={styles.headerRight}>
+          <Link to="/cart">
+            <ButtonComponent children={<><ShoppingCartIcon /> {cartItems.length}</>} className={styles.cartBtn}/>
+          </Link>
 
-          {/* <Button className={"language-icon language-select-mobile"}><GTranslateIcon /></Button>
-
-          <LanguageSelect /> */}
-
-          {/* {displaySearchIcon ? (
-            <Button onClick={handleDisplaySearch} ><SearchIcon className='search-icon' /></Button>
-          ) : null} */}
           <PopoverComponent
             anchorEl={anchorElMenu}
             handleClick={handleClickMenu}
             handleClose={()=>closePopover(setAnchorElMenu)}
-            buttonContent={<MenuIcon className='menu-icon' />} 
+            buttonContent={<MenuIcon className={styles.menuIcon} />} 
             popoverContent={<Menu onClose={()=>closePopover(setAnchorElMenu)} />} 
-            buttonClassName={'menu-icon'} 
-            popoverClassName={'menu-popover'} 
+            buttonClassName={styles.menuIcon} 
+            popoverClassName={styles.menuPopover} 
           />
-
-
-          {/* <PopoverComponent 
-            anchorEl={anchorElSignin}
-            handleClick={handleClickSignin}
-            handleClose={()=>closePopover(setAnchorElSignin)}
-            buttonContent="Sign In" 
-            popoverContent={<AfterSigninProfile onClose={()=>closePopover(setAnchorElSignin)}/>} 
-            buttonClassName={'signin-button'} 
-          /> */}
 
           {isLoggedIn === false? (
             <PopoverComponent 
@@ -133,10 +118,9 @@ const Header = ({headerType}) => {
             handleClick={handleClickSignin}
             handleClose={()=>closePopover(setAnchorElSignin)}
             buttonContent="Sign In" 
-            // popoverContent={<div>Signin Component</div>}
             popoverContent={<Signin sourceComponent={'header'} onClose={()=>closePopover(setAnchorElSignin)}/>} 
-            buttonClassName={'signin-button'} 
-            popoverClassName={'sigin-corner-popover'}
+            buttonClassName={styles.signinButton} 
+            popoverClassName={styles.siginCornerPopover}
           />
           ):(
             <PopoverComponent 
@@ -145,7 +129,7 @@ const Header = ({headerType}) => {
             handleClose={()=>closePopover(setAnchorElSignin)}
             buttonContent={<> <PersonIcon /> Hi {username} </>} 
             popoverContent={<AfterSigninProfile onClose={()=>closePopover(setAnchorElSignin)}/>} 
-            buttonClassName={'signin-button-with-name'} 
+            buttonClassName={styles.signinButtonWithName} 
           />
           )}
 

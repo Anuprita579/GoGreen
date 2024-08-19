@@ -14,7 +14,21 @@ import PropTypes from 'prop-types';
 //MUI ICONS
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
-const HorizontalStepper = ({ stepLabels, stepComponents, FinishComponent, showNextButton, showBackButton, finalButtonContent, stepperClassName,buttonBackClassName, buttonNextClassName, buttonSkipClassName, disabledNextButton, finalButtonAction , isOptional = () => false }) => {
+const HorizontalStepper = ({ 
+  stepLabels, 
+  stepComponents, 
+  FinishComponent, 
+  showNextButton, 
+  showBackButton, 
+  finalButtonContent, 
+  stepperClassName,
+  buttonBackClassName, 
+  buttonNextClassName, 
+  buttonSkipClassName, 
+  disabledNextButton, 
+  finalButtonAction, 
+  isOptional = () => false 
+}) => {
   const { activeStep, incrementStep, decrementStep, resetStep,canAdvanceToNextStep } = useActiveStep();
   const [skipped, setSkipped] = useState(new Set()); // Initialize skipped state
   const [showAlert, setShowAlert] = useState(false);

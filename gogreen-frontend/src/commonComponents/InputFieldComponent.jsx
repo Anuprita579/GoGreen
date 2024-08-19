@@ -7,13 +7,13 @@ const InputFieldComponent = ({
   label,
   value,
   onChange,
-  variant,
-  fullWidth,
-  margin,
-  size,
-  type,
-  disabled,
-  error,
+  variant='standard',
+  fullWidth=false,
+  margin='normal',
+  size='medium',
+  type='text',
+  disabled=false,
+  error=false,
   helperText,
 }) => {
   const textFieldProps = {
@@ -48,16 +48,6 @@ InputFieldComponent.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   helperText: PropTypes.string,
-};
-
-InputFieldComponent.defaultProps = {
-  variant: 'standard',
-  fullWidth: false,
-  margin: 'normal',
-  size: 'medium',
-  type: 'text',
-  disabled: false,
-  error: false,
 };
 
 export default InputFieldComponent;

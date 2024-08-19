@@ -8,6 +8,7 @@ import { useScroll } from '../../utils/ScrollContext';
 import ButtonComponent from '../../commonComponents/ButtonComponent';
 //MUI ICONS
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import styles from "./styles.module.scss"
 
 const OhNoComponent = () => {
     const { scrollToChoosePathway } = useScroll();
@@ -40,13 +41,12 @@ const OhNoComponent = () => {
     }
 
   return (
-    <div className='ohno-component'>
-        {/* <img src={OhNoImage} alt='sorry' className='ohno-image'/> */}
-        <h1 className='heading'>Sorry!</h1>
-        <h4 className='content'>We don't have any programs that match your preferences right now.</h4>
-        <div className='buttons-section'>
-        {activeStep===1 ? null : <ButtonComponent className={'back-button-stepper'} onClick={handleBack} > <KeyboardBackspaceIcon /> Back </ButtonComponent>}
-        <ButtonComponent children={"Personalise another Pathway "} className={'retry-button'} onClick={handleChangePreferences} />
+    <div className={styles.ohnoComponent}>
+        <h1 className={styles.heading}>Sorry!</h1>
+        <h4 className={styles.content}>We don't have any programs that match your preferences right now.</h4>
+        <div className={styles.buttonsSection}>
+        {activeStep===1 ? null : <ButtonComponent className={styles.backButtonStepper} onClick={handleBack} > <KeyboardBackspaceIcon /> Back </ButtonComponent>}
+        <ButtonComponent children={"Personalise another Pathway"} className={styles.retryButton} onClick={handleChangePreferences} />
 
         </div>
 

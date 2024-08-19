@@ -1,17 +1,33 @@
-import React from 'react';
+import React from "react";
 //Common Components
-import Button from './ButtonComponent';
+import Button from "./ButtonComponent";
 //MUI Components
-import Popover from '@mui/material/Popover';
-import PropTypes from 'prop-types';
+import Popover from "@mui/material/Popover";
+import PropTypes from "prop-types";
 
-function PopoverComponent({anchorEl,handleClick,handleClose, buttonContent, buttonId, popoverContent, anchorOrigin, buttonClassName, popoverClassName }) {
+function PopoverComponent({
+  anchorEl,
+  handleClick,
+  handleClose,
+  buttonContent,
+  buttonId,
+  popoverContent,
+  anchorOrigin = { vertical: 'bottom', horizontal: 'left' }, //Default Props
+  buttonClassName,
+  popoverClassName,
+}) {
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <>
-      <Button variant="contained" onClick={handleClick} className={buttonClassName} id={buttonId} color="primary" >
+      <Button
+        variant="contained"
+        onClick={handleClick}
+        className={buttonClassName}
+        id={buttonId}
+        color="primary"
+      >
         {buttonContent}
       </Button>
       <Popover
@@ -29,19 +45,12 @@ function PopoverComponent({anchorEl,handleClick,handleClose, buttonContent, butt
 }
 
 PopoverComponent.propTypes = {
-    // buttonText: PropTypes.string.isRequired,
-    popoverContent: PropTypes.node.isRequired,
-    anchorOrigin: PropTypes.shape({
-        vertical: PropTypes.oneOf(['top', 'center', 'bottom', 'left', 'right']),
-        horizontal: PropTypes.oneOf(['top', 'center', 'bottom', 'left', 'right']),
-    }),
+  // buttonText: PropTypes.string.isRequired,
+  popoverContent: PropTypes.node.isRequired,
+  anchorOrigin: PropTypes.shape({
+    vertical: PropTypes.oneOf(["top", "center", "bottom", "left", "right"]),
+    horizontal: PropTypes.oneOf(["top", "center", "bottom", "left", "right"]),
+  }),
 };
-
-// PopoverComponent.defaultProps = {
-//   anchorOrigin: {
-//     vertical: 'bottom',
-//     horizontal: 'left',
-//   },
-// };
 
 export default PopoverComponent;

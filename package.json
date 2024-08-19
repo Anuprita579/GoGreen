@@ -1,0 +1,11 @@
+{
+  "name": "gogreen",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix gogreen-backend\" \"npm start --prefix gogreen-frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
