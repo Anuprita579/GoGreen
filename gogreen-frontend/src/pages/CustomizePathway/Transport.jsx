@@ -16,253 +16,227 @@ import Lottie from "react-lottie";
 import axios from "axios";
 //Imports
 import OhNoComponent from "./OhNoComponent";
+import styles from "./styles.module.scss";
 
+const modesOfTransport = [
+  {
+    id: "mot1",
+    img_src:
+      "https://img.freepik.com/free-vector/flat-design-indian-man-driving-van_23-2149757883.jpg?t=st=1726585863~exp=1726589463~hmac=672fd1fb8a123c0065e0d9696484c7f98e5131492c0111aaef74ca416346b790&w=826",
+    title: "Auto",
+  },
+  {
+    id: "mot2",
+    img_src:
+      "https://img.freepik.com/free-vector/bus-driver-concept-illustration_114360-6330.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Bus",
+  },
+  {
+    id: "mot3",
+    img_src:
+      "https://img.freepik.com/free-vector/suv-car-concept-illustration_114360-13226.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Car",
+  },
+  {
+    id: "mot4",
+    img_src:
+      "https://img.freepik.com/free-vector/hand-drawn-india-lifestyle-illustration_23-2149827027.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Cycle",
+  },
+  {
+    id: "mot5",
+    img_src:
+      "https://img.freepik.com/free-vector/train-station-concept-illustration_114360-12177.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Train",
+  },
+  {
+    id: "mot6",
+    img_src:
+      "https://img.freepik.com/free-vector/calling-taxi-concept-illustration_114360-24757.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Taxi",
+  },
+  {
+    id: "mot7",
+    img_src:
+      "https://img.freepik.com/free-vector/walking-around-concept-illustration_114360-4033.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
+    title: "Walking",
+  },
+];
 
-
-const LocationCard = ({ id, img_src, city_name, selected, onSelect }) => {
+const ModesofTransportCard = ({
+  id,
+  img_src,
+  title,
+  icon,
+  selected,
+  onSelect,
+}) => {
   return (
     <ButtonComponent
-      className={`content-button ${selected ? "selected" : ""}`}
+      className={`${styles.contentButton} ${selected ? styles.selected : ""}`}
       onClick={() => onSelect(id)}
     >
-      <div key={id} className={`content `}>
-        <>
-          <img src={img_src || "" } alt="city" />
-          <h5>{city_name}</h5>
-        </>
+      <div key={id} className={styles.content}>
+        <>{icon ? icon : <img src={img_src} className={styles.icon} />}</>
+
+        <h3 className={styles.transportTitle}>{title}</h3>
+
       </div>
     </ButtonComponent>
   );
 };
 
-const Transport = ({onClose}) => {
-  const { selectLocation, selectedLocation } = useActiveStep();
-  // const LocationURL = LocationListAPI;
-  const [locationData, setLocationData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
-  const [locationDataAvailable, setLocationDataAvailable] = useState(null);
-  const { updateDataAvailability } = useActiveStep();
-  console.log({ selectedLocation });
-  sessionStorage.setItem("LocationID", selectedLocation?.id);
-  sessionStorage.setItem("LocationName", selectedLocation?.name);
+const Transport = () => {
+  const { addToSelectedTransport, removeFromSelectedTransport, selectedTransportList } = useActiveStep();
+  const [selectedMode, setSelectedMode] = useState({});
+  const [enteredPercentages, setEnteredPercentages] = useState({});
+  const [distributionMethod, setDistributionMethod] = useState('equal'); // 'equal' or 'percentage'
+  const [selectedModesData, setSelectedModesData] = useState([]);
 
-  const [city, setCity] = useState(null);
-  const [enteredCity, setEnteredCity] = useState("");
-  const [enteredState, setEnteredState] = useState("");
+  const totalDistance = sessionStorage.getItem('distanceData');
 
   useEffect(() => {
-    if (city !== null) {
-      setEnteredCity("");
-    } else if (enteredCity.trim() !== "") {
-      setCity(null);
-    }
-  }, [city, enteredCity]);
+    setSelectedMode(selectedTransportList.reduce((acc, id) => ({ ...acc, [id]: true }), {}));
+  }, [selectedTransportList]);
 
-  const handleEnteredCityChange = (event) => {
-    const newEnteredCity = event.target.value;
-    setCity(null);
-    setEnteredCity(newEnteredCity);
-  };
-
-  const queryParams = {
-    _industry: sessionStorage.getItem("IndustryID"),
-    _qualification: sessionStorage.getItem("QualificationID"),
-    _aspiration: sessionStorage.getItem("RoleID"),
-    _courseId: sessionStorage.getItem("DegreeID"),
-    _unvId: sessionStorage.getItem("UniversityID"),
-    _city: enteredCity || "",
-    _state: enteredState || "",
-    _pincode: 0,
-  };
-
-  // const fetchComboData = async () => {
-  //   // setIsLoading(true);
-  //   try {
-  //     let finalQueryParams = { ...queryParams };
-  //     if (city !== null) {
-  //       finalQueryParams._city = city;
-  //     }
-  //     const { data } = await callAPI(LocationURL, "POST", finalQueryParams, {
-  //       Authorization: "Bearer YourAccessToken",
-  //     });
-  //     setLocationData(data);
-  //     console.log("Data for Location : ", data);
-  //     if (data.length !== 0 && data !== null) {
-  //       setLocationDataAvailable(true);
-  //       updateDataAvailability(true);
-  //     } else {
-  //       setLocationDataAvailable(false);
-  //       updateDataAvailability(false);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     updateDataAvailability(false);
-  //   } finally {
-  //     // setIsLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     setPageLoading(true);
-  //     await fetchComboData();
-  //     setPageLoading(false);
-  //   })();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (city || enteredCity || enteredState) {
-  //     (async () => {
-  //       setIsLoading(true);
-  //       locationData !== null && console.log("Location Data outside fetch function : ", locationData);
-  //       await fetchComboData();
-  //       setIsLoading(false);
-  //     })();
-  //   }
-  // }, [city, enteredCity, enteredState]);
-
-  console.log("Location Data Available (useState) : ", locationDataAvailable);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-  };
-
-  if (pageLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Lottie options={defaultOptions} height={300} width={300} />
-      </div>
-    );
-  }
-
-  // const handleLocationClick = () => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(showPosition);
-  //     // navigator.geolocation.getCurrentPosition(handleGeoSuccess);
-  //   } else {
-  //     alert("Geolocation is not supported by this browser.");
-  //   }
-  // };
-
-  const handleLocationClick = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+  const handleSelect = (modeId) => {
+    if (!selectedMode[modeId]) {
+      addToSelectedTransport(modeId);
+      const modeDetails = modesOfTransport.find(item => item.id === modeId);
+      setSelectedModesData(prev => [...prev, {
+        id: modeId,
+        title: modeDetails.title,
+        distance: distributedDistance[modeId] || 0
+      }]);
     } else {
-      alert("Geolocation is not supported by this browser.");
+      removeFromSelectedTransport(modeId);
+      setSelectedModesData(prev => prev.filter(item => item.id !== modeId));
+    }
+  };
+  useEffect(() => {
+    const modesData = selectedModesData.map(item => ({
+      id: item.id,
+      title: item.title,
+      distance: item.distance
+    }));
+    sessionStorage.setItem("SelectedTransportModes", JSON.stringify(modesData));
+  }, [selectedModesData]);
+
+
+
+  useEffect(() => {
+    sessionStorage.setItem("SelectedTransportModes", JSON.stringify(selectedTransportList));
+  }, [selectedTransportList]);
+
+  console.log("Selected Transport List : ", selectedTransportList.length);
+
+  const handleDistributionChange = (method) => {
+    setDistributionMethod(method);
+    if (method === "equal") {
+      setEnteredPercentages({});
     }
   };
 
-  function showPosition(position) {
-    axios
-      .get(
-        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`
-      )
-      .then((response) => {
-        const city = response.data.city;
-        setCity(city);
-        console.log(`City detected : ${city}`);
-      })
-      .catch((error) => {
-        console.error(error);
-        setCity("Error");
-      });
-  }
+  const handlePercentageChange = (modeId, value) => {
+    setEnteredPercentages((prev) => ({
+      ...prev,
+      [modeId]: value,
+    }));
+  };
 
-  console.log(city);
+  const distributeDistance = () => {
+    const selectedModes = Object.keys(selectedMode).filter((id) => selectedMode[id]);
+    const totalModes = selectedModes.length;
+
+    const modesWithDistances = {};
+
+    if (distributionMethod === "equal") {
+      const equalDistance = totalDistance / totalModes;
+      selectedModes.forEach((modeId) => {
+        const modeTitle = modesOfTransport.find((item) => item.id === modeId)?.title || "";
+        modesWithDistances[modeId] = {
+          id: modeId,
+          title: modeTitle,
+          distance: Math.round(equalDistance)
+        };
+      });
+    } else if (distributionMethod === "percentage") {
+      let totalPercentage = Object.values(enteredPercentages).reduce((sum, perc) => sum + parseFloat(perc || 0), 0);
+      selectedModes.forEach((modeId) => {
+        const modeTitle = modesOfTransport.find((item) => item.id === modeId)?.title || "";
+        const percentage = parseFloat(enteredPercentages[modeId] || 0);
+        const distance = Math.round((percentage / totalPercentage) * totalDistance);
+        modesWithDistances[modeId] = {
+          id: modeId,
+          title: modeTitle,
+          distance
+        };
+      });
+    }
+
+    // Store in sessionStorage
+    sessionStorage.setItem("DistributedTransportModes", JSON.stringify(modesWithDistances));
+
+    return modesWithDistances;
+  };
+
+
+
+  const distributedDistance = distributeDistance();
+
+  const storedTransportModes = JSON.parse(sessionStorage.getItem("DistributedTransportModes"));
+  console.log(storedTransportModes);
+
+
 
   return (
     <>
-      {locationDataAvailable !== null && locationDataAvailable ? (
-        <div className="degree-page">
-          <h1>Where Will Your Internship Adventure Be?</h1>
-          <h4>Select your preferred location of internship</h4>
-
-          <div className="location-section">
-            <ButtonComponent
-              onClick={handleLocationClick}
-              className="location-detect"
-            >
-              <input
-                value={city || ""}
-                className="location-detect-inputbox"
-                placeholder="Detect my current location"
-                readOnly
-              />
-              <LocationOnIcon />
-            </ButtonComponent>
-            <h5>or</h5>
-            <input
-              value={enteredCity}
-              onChange={handleEnteredCityChange}
-              className="location-input-box"
-              placeholder="Enter city"
+      <div className={styles.transportCard}>
+        {modesOfTransport.map((item) => {
+          return (
+            <ModesofTransportCard
+              id={item?.id}
+              img_src={item?.img_src}
+              title={item?.title}
+              selected={selectedMode[item.id]}
+              onSelect={() => handleSelect(item.id)}
             />
-            <h5>or</h5>
-            <input
-              value={enteredState}
-              onChange={(e) => {
-                setEnteredState(e.target.value);
-              }}
-              className="location-input-box"
-              placeholder="Enter state"
-            />
-          </div>
+          );
+        })}
 
-          <div className="error-message-section">
-            {city === "Error" && (
-              <h5 className="error-messages-location">
-                Failed to detect your location. Please try again.
-              </h5>
-            )}
-            {locationData === null && city === null && (
-              <h5 className="error-messages-location">
-                Currently there are no jobs available at selected location.
-                Please try another location or select from the below available
-                locations
-              </h5>
-            )}
-          </div>
+      </div>
 
-          <h3>Popular Cities</h3>
-          <div className="popular-cities">
-            {isLoading ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Lottie options={defaultOptions} height={300} width={300} />
-              </div>
-            ) : (
-              locationData !== null &&
-              locationData.slice(0, 7).map((item) => {
-                return (
-                  <LocationCard
-                    id={item?.id}
-                    img_src={item?.img_src}
-                    city_name={item?.cityName}
-                    selected={selectedLocation?.id === item?.id}
-                    onSelect={() => selectLocation(item?.id, item?.cityName)}
-                  />
-                );
-              })
+      <div className={styles.distributionOptions}>
+        <select value={distributionMethod} onChange={(e) => handleDistributionChange(e.target.value)}>
+          <option value="equal">Equal Distribution</option>
+          <option value="percentage">Percentage Wise</option>
+        </select>
+      </div>
+
+      {Object.entries(distributedDistance).map(([modeId, modeDetails]) => {
+        const modeName = modesOfTransport.find((item) => item.id === modeId)?.title || "";
+        return (
+          <div key={modeId} className={styles.distanceDisplay}>
+            <span>Mode: {modeDetails.title}</span>
+            <span>Allocated Distance: {modeDetails.distance || 0} km</span>
+
+            {distributionMethod === "percentage" && (
+              <>
+                <input
+                  type="number"
+                  placeholder="Enter percentage"
+                  value={enteredPercentages[modeId] || ""}
+                  onChange={(e) => handlePercentageChange(modeId, e.target.value)}
+                />
+                <span>Percentage Entered: {enteredPercentages[modeId] || 0}%</span>
+              </>
             )}
           </div>
-        </div>
-      ) : (
-        <OhNoComponent />
-      )}
+        );
+      })}
+
+
+
     </>
   );
 };

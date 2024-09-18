@@ -7,12 +7,10 @@ export const useActiveStep = () => useContext(ActiveStepContext);
 
 export const ActiveStepProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [selectedDegree, setSelectedDegree] = useState(null);
-  const [selectedUniversity, setSelectedUniversity] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedJob, setSelectedJob] = useState([]);
-  const [selectedJobList, setSelectedJobList] = useState([]);
-  const [dataAvailable, setDataAvailable] = useState(null);
+  const [distanceData, setDistanceData] = useState("");
+  const [selectedTransport, setSelectedTransport] = useState({});
+  const [selectedTransportList, setSelectedTransportList] = useState([]);
+  // const [dataAvailable, setDataAvailable] = useState(null);
 
   const incrementStep = () => setActiveStep((prevStep) => prevStep + 1);
   const decrementStep = () => setActiveStep((prevStep) => prevStep - 1);
@@ -21,32 +19,33 @@ export const ActiveStepProvider = ({ children }) => {
   const canAdvanceToNextStep = () => {
     switch(activeStep){
       case 1: 
-        return selectedDegree !==null;
+        return distanceData !== "";
       case 2:
-        return selectedUniversity !==null;
-      case 3:
-        return selectedLocation !==null;
-      case 4:
-        return selectedJob.length >0;
+        return selectedTransportList.length >0;
       default: 
         return true;
     }
   }
-  const updateDataAvailability = (available) => {
-    setDataAvailable(available);
+
+  const setDistanceDataValue = (value) => setDistanceData(value);
+  const selectTransport = (transId) => setSelectedTransport(transId);
+
+  // const addToSelectedTransport =(transport)=>{
+  //   setSelectedTransportList((prevTrans)=>[...prevTrans, transport]);
+  // }
+  const addToSelectedTransport = (transportId) => {
+    setSelectedTransport(prev => ({ ...prev, [transportId]: !prev[transportId] }));
+    setSelectedTransportList(prev => [...new Set([...prev, transportId])]);
   };
 
-  const selectDegree = (degreeId) => setSelectedDegree(degreeId);
-  const selectUniversity = (universityId) => setSelectedUniversity(universityId);
-  const selectLocation = (locationId, locationName) => setSelectedLocation({id: locationId, name: locationName});
-  const selectJob = (jobId) => setSelectedJob(jobId);
+  const removeFromSelectedTransport = (transportId) => {
+    setSelectedTransport(prev => ({ ...prev, [transportId]: false }));
+    setSelectedTransportList(prev => prev.filter(id => id !== transportId));
+  };
 
-  const addToSelectedJobs =(job)=>{
-    setSelectedJobList((prevJobs)=>[...prevJobs, job]);
-  }
 
   return (
-    <ActiveStepContext.Provider value={{ activeStep, setActiveStep, incrementStep, decrementStep, resetStep, selectDegree, selectUniversity, selectLocation, selectJob, selectedDegree, selectedUniversity, selectedLocation, selectedJob, canAdvanceToNextStep, setSelectedDegree, setSelectedUniversity, setSelectedLocation, setSelectedJob, addToSelectedJobs, selectedJobList, setSelectedJobList, updateDataAvailability, dataAvailable }}>
+    <ActiveStepContext.Provider value={{ activeStep, setActiveStep, incrementStep, decrementStep, resetStep, distanceData, canAdvanceToNextStep, setDistanceDataValue, addToSelectedTransport, removeFromSelectedTransport, selectedTransportList, setSelectedTransportList, selectTransport, }}>
       {children}
     </ActiveStepContext.Provider>
   );

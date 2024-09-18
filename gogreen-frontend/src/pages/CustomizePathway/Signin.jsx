@@ -162,7 +162,7 @@ function OTP({ separator, length, value, onChange, validatedOtp }) {
       }}
     >
       {new Array(length).fill(null).map((_, index) => (
-        <>
+        <div key={index}>
           <BaseInput
             className={validatedOtp ? `${styles.otpInputboxDisabled}` : `${styles.otpInputbox}`}
             aria-label={`Digit ${index + 1} of OTP`}
@@ -181,7 +181,7 @@ function OTP({ separator, length, value, onChange, validatedOtp }) {
             }}
           />
           {index === length - 1 ? null : separator}
-        </>
+        </div>
       ))}
     </Box>
   );
@@ -228,9 +228,8 @@ const Signin = ({ sourceComponent, onClose }) => {
   };
 
   useEffect(() => {
-    // const isUserLoggedIn = sessionStorage.getItem('signInCompleted');
     if (isLoggedIn) {
-      incrementStep();
+      setActiveStep(1);
     }
   }, []);
 

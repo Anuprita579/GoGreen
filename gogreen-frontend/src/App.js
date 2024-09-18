@@ -11,6 +11,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import Home from "./pages/Home/index.jsx";
 import Store from "./pages/Store/index.jsx"
 import Cart from "./pages/Cart/index.jsx"
+import LeaderBoard from "./pages/LeaderBoard/index.jsx"
 // import Pathways from "./pages/Pathways/index.jsx";
 import Events from "./pages/Events/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
@@ -25,11 +26,10 @@ const AppContent = () => {
         <Route path={process.env.REACT_APP_HOME_PAGE_ROUTE} element={<Home />} />
         <Route path={process.env.REACT_APP_STORE_PAGE_ROUTE} element={<Store />} />
         <Route path={process.env.REACT_APP_CART_PAGE_ROUTE} element={<Cart />} />
-        {/* <Route path={process.env.REACT_APP_PATHWAYS_PAGE_ROUTE} element={<Pathways />} /> */}
         <Route path={process.env.REACT_APP_EVENTS_PAGE_ROUTE} element={<Events />} />
         {/* <Route path={process.env.REACT_APP_EVENT_SPEC_PAGE_ROUTE} element={<EventDetails/>}></Route> */}
         <Route path={process.env.REACT_APP_CALCULATE_PAGE_ROUTE} element={<CustomizePathway />} />
-        {/* <Route path={process.env.REACT_APP_PATH_COMP_PAGE_ROUTE} element={<FindPathway />} /> */}
+        <Route path={process.env.REACT_APP_LEADERBOARD_PAGE_ROUTE} element={<LeaderBoard />} />
 
       </Routes>
       <FooterLayout />

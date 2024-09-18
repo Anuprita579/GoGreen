@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+$screen-ratio: 1vw;
+@import "../../theme.scss";
+
+html * {
+    margin: 0;
+    padding: 0;
+    font-family: 'MyFont' !important;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.carbonCalculatedContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .carbonCalculatedCard{
+        background-color: #E5F6FE;
+        border-radius: calc(($screen-ratio)*0.5);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: calc(($screen-ratio)*2) calc(($screen-ratio)*8);
+        margin: calc(($screen-ratio)*5);
+        max-width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .caption{
+            font-weight:  $font-weight-semibold;
+            font-size: calc(($screen-ratio)*2);
+            text-transform: capitalize;
+            color: #0e6d8f;
+        }
+        .carbonItem{
+            padding: calc(($screen-ratio)*0.75);
+            .modeName{
+                padding: calc(($screen-ratio)*1);
+                background-color: #98abbd;
+                color: #f8f9fa;
+                width: fit-content;
+                border-radius: calc(($screen-ratio)*0.5);
+            }
+            p{
+                font-weight: $font-weight-bold;
+                color:  #0e6d8f;
+                font-size: calc(($screen-ratio)*1.4);
+                .subtitle{
+                    font-weight: $font-weight-semibold;
+                    color: #475869;
+                }
+                .units{
+                    font-size: calc(($screen-ratio)*1);
+                    font-weight: $font-weight-medium;
+                    color: gray;
+                }
+            }
+            
+        }
+        .totalCarbon{
+            text-align: center;
+            .totalCarbonTitle{
+                font-weight: $font-weight-bold;
+                font-size: calc(($screen-ratio)*2);
+            }
+            .totalCarbonContent{
+                font-weight: $font-weight-bold;
+                color:  #0e6d8f;
+                font-size: calc(($screen-ratio)*1.5);
+                span{
+                    font-size: calc(($screen-ratio)*1);
+                    font-weight: $font-weight-medium;
+                    color: gray;
+                }
+            }
+        }
+    
+    }    
+}
+.leaderboardBox{
+    width: 100%;
+    .leaderboardTitle{
+        font-weight: $font-weight-bold;
+        padding: 0 calc(($screen-ratio)*3);
+        font-size: calc(($screen-ratio)*2);
+    }
+    .leaderboardContainer{
+        display: flex;
+        flex-direction: column;
+        padding: calc(($screen-ratio)*2);
+        gap: calc(($screen-ratio)*0.5);
+        .leaderboardCard{
+            background-color: rgb(109, 189, 218);
+            padding: calc(($screen-ratio)*1.5);
+            display: flex;
+            justify-content: space-between;
+            .rankRounded{
+                background-color: #f8f9fa;
+                color: black;
+                padding: 4px 10px;
+                border-radius: 50%;
+            }
+            .rankUsername{
+                text-transform: capitalize;
+            }
+            .currentUser{
+                background-color: burlywood;
+            }
+        }
+    }
+}
+

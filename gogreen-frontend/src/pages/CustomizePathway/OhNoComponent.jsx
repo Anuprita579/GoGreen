@@ -16,14 +16,12 @@ const OhNoComponent = () => {
     const { isLoggedIn, userInfo, login, logout } = useLoginState();
   console.log("isuserLogin inside Pathway Stepper :", isLoggedIn);
 
-  const {activeStep, decrementStep, canAdvanceToNextStep, setActiveStep, setSelectedDegree, setSelectedUniversity, setSelectedLocation, setSelectedJob, dataAvailable} = useActiveStep(); 
+  const {activeStep, decrementStep, canAdvanceToNextStep,setDistanceDataValue, setSelectedTransportList, setActiveStep} = useActiveStep(); 
     const handleChangePreferences = () => {
         navigate("/");
         setActiveStep(isLoggedIn===true? 1 : 0); 
-        setSelectedDegree(null);
-        setSelectedUniversity(null);
-        setSelectedLocation(null);
-        setSelectedJob([]);
+        setDistanceDataValue("");
+        setSelectedTransportList([]);
         const delayTime = 300;
         const timer = setTimeout(() => {
             scrollToChoosePathway();

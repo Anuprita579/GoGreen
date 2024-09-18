@@ -14,20 +14,18 @@ const PathwayStepper = () => {
   const navigate = useNavigate();
   const isLoggedIn = sessionStorage.getItem('signInCompleted'); 
 
-  const {activeStep, setActiveStep, setSelectedDegree, setSelectedUniversity, setSelectedLocation, setSelectedJob, dataAvailable} = useActiveStep(); 
+  const {activeStep, setActiveStep, setDistanceDataValue} = useActiveStep(); 
+  console.log("active Step is : ", activeStep);
   const handleNavigate = () =>{
-    navigate("/pathway-comparison");
+    navigate("/leaderboard");
   }
 
   useEffect(() => {
-    if (activeStep === 5) { 
+    if (activeStep === 3) { 
       setActiveStep(isLoggedIn===true? 1 : 0); 
-      setSelectedDegree(null);
-      setSelectedUniversity(null);
-      setSelectedLocation(null);
-      setSelectedJob([]);
+      setDistanceDataValue("");
     }
-  }, [activeStep, isLoggedIn, setActiveStep, setSelectedDegree, setSelectedUniversity, setSelectedLocation, setSelectedJob]);
+  }, [activeStep, isLoggedIn, setActiveStep, setDistanceDataValue]);
   return (
     <>
         <HorizontalStepper 
@@ -38,20 +36,14 @@ const PathwayStepper = () => {
                 <Transport />
             ]}
             FinishComponent={() => <FinalComponent />}
-            showNextButton={activeStep >0 && dataAvailable}
-            showBackButton={activeStep>1 && dataAvailable}
+            showNextButton={activeStep>0 }
+            showBackButton={activeStep>1 }
             stepperClassName={'stepper-connector'}
             finalButtonContent="Next"
             buttonNextClassName={'next-button'}
             buttonBackClassName={'back-button-stepper'}
             finalButtonAction={handleNavigate}
         />
-
-        {activeStep ===2 && (
-          <div className='university-disclaimer'>
-            <p><span>*Please note:</span> Enrollment is subject to meeting the eligibility criteria of the university.</p>
-          </div>
-        )}
     </>
   )
 }

@@ -58,7 +58,7 @@ AlertComponent.propTypes = {
     vertical: PropTypes.oneOf(["top", "bottom"]),
     horizontal: PropTypes.oneOf(["left", "center", "right"]),
   }),
-  transition: PropTypes.oneOf(["fade", "grow", "slide"]).isRequired,
+  transition: PropTypes.oneOf(["fade", "grow", "slide"]),
 };
 
 export default AlertComponent;

@@ -3,6 +3,7 @@
 # dependencies
 gogreen-frontend/node_modules/
 gogreen-backend/node_modules/
+/node_modules/
 gogreen-frontend/.env
 gogreen-backend/.env
 /.pnp

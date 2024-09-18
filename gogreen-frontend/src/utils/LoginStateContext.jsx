@@ -8,23 +8,12 @@ export const useLoginState = () => useContext(LoginStateContext);
 
 export const LoginStateProvider = ({ children }) => {
   const navigate = useNavigate();
-  const { setActiveStep, setSelectedDegree, setSelectedUniversity, setSelectedLocation, setSelectedJob } = useActiveStep();
+  const { setActiveStep, setDistanceDataValue, setSelectedTransportList } = useActiveStep();
   const [shouldNavigate, setShouldNavigate] = useState(false);
 
-  const [selectedQualification, setSelectedQualification] = useState(
-    JSON.parse(sessionStorage.getItem('selectedQualification')) || null
-  );
-  const [selectedIndustry, setSelectedIndustry] = useState(
-    JSON.parse(sessionStorage.getItem('selectedIndustry')) || null
-  );
-  const [selectedRole, setSelectedRole] = useState(
-    JSON.parse(sessionStorage.getItem('selectedRole')) || null
-  );
-
   const resetFields = () => {
-    setSelectedRole(null);
-    setSelectedQualification(null);
-    setSelectedIndustry(null);
+    setDistanceDataValue("");
+    setSelectedTransportList([]);
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -46,18 +35,6 @@ export const LoginStateProvider = ({ children }) => {
   }, [isLoggedIn, userInfo]);
 
   useEffect(() => {
-    sessionStorage.setItem('selectedQualification', JSON.stringify(selectedQualification));
-  }, [selectedQualification]);
-
-  useEffect(() => {
-    sessionStorage.setItem('selectedIndustry', JSON.stringify(selectedIndustry));
-  }, [selectedIndustry]);
-
-  useEffect(() => {
-    sessionStorage.setItem('selectedRole', JSON.stringify(selectedRole));
-  }, [selectedRole]);
-
-  useEffect(() => {
     if (shouldNavigate && !isLoggedIn) {
       navigate("/");
       setShouldNavigate(false); 
@@ -74,17 +51,11 @@ export const LoginStateProvider = ({ children }) => {
     navigate("/");
     setIsLoggedIn(false);
     setUserInfo(null);
-    sessionStorage.removeItem('userInfo');
-    sessionStorage.removeItem('selectedQualification');
-    sessionStorage.removeItem('selectedIndustry');
-    sessionStorage.removeItem('selectedRole');
     sessionStorage.clear();
     setShouldNavigate(true); 
     setActiveStep(0);
-    setSelectedDegree(null);
-    setSelectedUniversity(null);
-    setSelectedLocation(null);
-    setSelectedJob([]);
+    setDistanceDataValue("");
+    setSelectedTransportList([]);
     resetFields();
   };
 
@@ -94,13 +65,7 @@ export const LoginStateProvider = ({ children }) => {
       userInfo, 
       login, 
       logout, 
-      resetFields, 
-      selectedQualification, 
-      selectedIndustry, 
-      selectedRole, 
-      setSelectedQualification, 
-      setSelectedIndustry, 
-      setSelectedRole 
+      resetFields,
     }}>
       {children}
     </LoginStateContext.Provider>

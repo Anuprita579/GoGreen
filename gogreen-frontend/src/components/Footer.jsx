@@ -37,7 +37,7 @@ const Footer = () => {
                         <h3>GOGREEN</h3>
                         <ul>
                             <Link to="/about"><li>About Us</li></Link>
-                            <Link to="/"><li>Carbon Footprint Calculator</li></Link>
+                            <Link to="/calculate"><li>Carbon Footprint Calculator</li></Link>
                             <Link to="/faq"><li>FAQs</li></Link>
                         </ul>
                     </div>
@@ -53,7 +53,7 @@ const Footer = () => {
                         <h3>CONTACT US</h3>
                         <div className={styles.iconTextInline}>
                             <MailOutlineIcon />
-                            <h5>info@gogreen.com</h5>
+                            <h5>gogreen2226@.com</h5>
                         </div>
                     </div>
                 </div>
@@ -61,9 +61,9 @@ const Footer = () => {
                     <div className={styles.section1}>
                         <h3>Connect With Us</h3>
                         <ul className={styles.connectUsIcons}>
-                            <Link to='https://www.facebook.com/digivarsity.the.uni.of.work'  target='_blank'><li><FacebookIcon /> </li></Link>
-                            <Link to='https://www.instagram.com/digivarsity.the.uni.of.work/' target='_blank'><li> <InstagramIcon /></li></Link>
-                            <Link to='https://www.youtube.com/channel/UCJnL4J428DyhA-KzdNvE5Ng' target='_blank'><li><YouTubeIcon /></li></Link>
+                            <Link to='/'  target='_blank'><li><FacebookIcon /> </li></Link>
+                            <Link to='/' target='_blank'><li> <InstagramIcon /></li></Link>
+                            <Link to='/' target='_blank'><li><YouTubeIcon /></li></Link>
                         </ul>
                     </div>
                     <Button className={styles.scrollTop} onClick={scrollToTop} style={{backgroundColor: "white", color: "black" }}>

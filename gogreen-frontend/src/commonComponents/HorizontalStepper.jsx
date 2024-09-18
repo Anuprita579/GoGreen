@@ -151,10 +151,11 @@ const HorizontalStepper = ({
       <AlertComponent
           open={showAlert}
           onClose={() => setShowAlert(false)}
-          message="Please select an option"
+          message='Please select an option'
           severity="error"
           autoHideDuration={6000}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          transition='slide'
         />
     </Box>
   );

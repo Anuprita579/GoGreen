@@ -47,9 +47,9 @@ const Menu = ({onClose}) => {
             <nav>
               <ul>
                 <Link to='/' onClick={handleCloseMenu}><li>Home</li></Link>
-                <Link to='about' onClick={handleCloseMenu}><li>About Us</li></Link>
-                <Link to='work-integrated-programs' onClick={handleCloseMenu}><li>Carbon Footprint Calculator</li></Link>
-                <Link to='/eco-system' onClick={handleCloseMenu}><li>Education</li></Link>
+                <Link to='/about' onClick={handleCloseMenu}><li>About Us</li></Link>
+                <Link to='/calculate' onClick={handleCloseMenu}><li>Carbon Footprint Calculator</li></Link>
+                <Link to='/education' onClick={handleCloseMenu}><li>Education</li></Link>
                 <Link to='/contact-us' onClick={handleCloseMenu}><li>Contact Us</li></Link>
                 <Link to='/faq' onClick={handleCloseMenu}><li>FAQs</li></Link>
               </ul>

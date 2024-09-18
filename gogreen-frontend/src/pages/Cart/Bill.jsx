@@ -10,7 +10,7 @@ const Bill = () => {
     const total = totalCost + deliveryCost
   return (
     <>
-        <div>
+        <div className={styles.billContainer}>
             <p>Total Items - {cartItems.length} </p>
             <p>Total - &#8377; {totalCost.toFixed(2)}</p>
             <p>Delivery Cost - &#8377; {deliveryCost.toFixed(2)}</p>
