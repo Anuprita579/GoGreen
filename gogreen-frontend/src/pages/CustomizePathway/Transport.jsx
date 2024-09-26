@@ -17,6 +17,8 @@ import axios from "axios";
 //Imports
 import OhNoComponent from "./OhNoComponent";
 import styles from "./styles.module.scss";
+import InputFieldComponent from "../../commonComponents/InputFieldComponent";
+import SelectComponent from "../../commonComponents/SelectComponent";
 
 const modesOfTransport = [
   {
@@ -93,6 +95,10 @@ const Transport = () => {
   const [distributionMethod, setDistributionMethod] = useState('equal'); // 'equal' or 'percentage'
   const [selectedModesData, setSelectedModesData] = useState([]);
 
+  const distributionOptions = [
+    {value: "equal", label: "Equal Distribution"},
+    {value: "percentage", label: "Percentage Wise"},
+  ]
   const totalDistance = sessionStorage.getItem('distanceData');
 
   useEffect(() => {
@@ -207,10 +213,8 @@ const Transport = () => {
       </div>
 
       <div className={styles.distributionOptions}>
-        <select value={distributionMethod} onChange={(e) => handleDistributionChange(e.target.value)}>
-          <option value="equal">Equal Distribution</option>
-          <option value="percentage">Percentage Wise</option>
-        </select>
+        <SelectComponent  value={distributionMethod} options={distributionOptions} onChange={(e) => handleDistributionChange(e.target.value)}/>
+         
       </div>
 
       {Object.entries(distributedDistance).map(([modeId, modeDetails]) => {
@@ -222,7 +226,7 @@ const Transport = () => {
 
             {distributionMethod === "percentage" && (
               <>
-                <input
+                <InputFieldComponent
                   type="number"
                   placeholder="Enter percentage"
                   value={enteredPercentages[modeId] || ""}

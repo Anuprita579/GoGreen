@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux"
 import { ActiveStepProvider } from "./utils/ActiveStepContext.jsx";
 import { LoginStateProvider } from "./utils/LoginStateContext.jsx";
@@ -14,7 +14,9 @@ import Cart from "./pages/Cart/index.jsx"
 import LeaderBoard from "./pages/LeaderBoard/index.jsx"
 // import Pathways from "./pages/Pathways/index.jsx";
 import Events from "./pages/Events/index.jsx";
+import Education from "./pages/Education/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
+import Bicycle from "./pages/Bicycle/index.jsx"
 import './fonts/OpenSauceSans-Regular.ttf'
 import "./theme.scss";
 
@@ -27,9 +29,11 @@ const AppContent = () => {
         <Route path={process.env.REACT_APP_STORE_PAGE_ROUTE} element={<Store />} />
         <Route path={process.env.REACT_APP_CART_PAGE_ROUTE} element={<Cart />} />
         <Route path={process.env.REACT_APP_EVENTS_PAGE_ROUTE} element={<Events />} />
+        <Route path={process.env.REACT_APP_EDUCATION_PAGE_ROUTE} element={<Education />} />
         {/* <Route path={process.env.REACT_APP_EVENT_SPEC_PAGE_ROUTE} element={<EventDetails/>}></Route> */}
         <Route path={process.env.REACT_APP_CALCULATE_PAGE_ROUTE} element={<CustomizePathway />} />
         <Route path={process.env.REACT_APP_LEADERBOARD_PAGE_ROUTE} element={<LeaderBoard />} />
+        <Route path={process.env.REACT_APP_BICYCLE_PAGE_ROUTE} element={<Bicycle />} />
 
       </Routes>
       <FooterLayout />

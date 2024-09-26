@@ -6,6 +6,7 @@ const connectDB  = require("../database/connect")
 const products_routes = require("../routes/products") 
 const user_routes = require('../routes/users')
 const leaderboard_routes = require('../routes/leaderboard');
+const bicycle_routes = require('../routes/bicycle');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 app.use("/api/products", products_routes);
 app.use('/api/user', user_routes);
 app.use('/api/leaderboard', leaderboard_routes);
+app.use('/api/bicycle', bicycle_routes);
 
 const start = async() => {
     try{

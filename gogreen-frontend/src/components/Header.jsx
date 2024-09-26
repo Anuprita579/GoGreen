@@ -10,6 +10,7 @@ import PopoverComponent from '../commonComponents/PopoverComponent';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 //Assets
 // import Logo from "../assets/digavarsity_logo.png"
 //Imports
@@ -98,6 +99,10 @@ const Header = ({headerType}) => {
 
 
         <div className={styles.headerRight}>
+          <Link to="/bicycle">
+            <ButtonComponent children={<><DirectionsBikeIcon /></>} className={styles.cartBtn}/>
+          </Link>
+
           <Link to="/cart">
             <ButtonComponent children={<><ShoppingCartIcon /> {cartItems.length}</>} className={styles.cartBtn}/>
           </Link>

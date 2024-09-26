@@ -176,26 +176,26 @@ const Distance = () => {
       </div>
 
       <div>
-        <button onClick={() => setIsSelectingStartPoint(true)}>
+        <ButtonComponent onClick={() => setIsSelectingStartPoint(true)} className={styles.distanceButton}>
           Select Start Point
-        </button>
-        <button
+        </ButtonComponent>
+        <ButtonComponent
           onClick={() => setIsSelectingEndPoint(true)}
           disabled={!startPoint}
         >
           Select End Point
-        </button>
-        <button onClick={handleRestart}>Restart</button>
-        <button onClick={() => handleLocationClick("start")}>
+        </ButtonComponent>
+        <ButtonComponent onClick={handleRestart}>Restart</ButtonComponent>
+        <ButtonComponent onClick={() => handleLocationClick("start")}>
           Detect Location (Set as Start)
-        </button>
-        <button
+        </ButtonComponent>
+        <ButtonComponent
           onClick={() => handleLocationClick("end")}
           disabled={!startPoint}
         >
           {" "}
           Detect Location (Set as End)
-        </button>
+        </ButtonComponent>
       </div>
 
       <p>
