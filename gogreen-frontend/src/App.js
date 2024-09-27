@@ -12,11 +12,11 @@ import Home from "./pages/Home/index.jsx";
 import Store from "./pages/Store/index.jsx"
 import Cart from "./pages/Cart/index.jsx"
 import LeaderBoard from "./pages/LeaderBoard/index.jsx"
-// import Pathways from "./pages/Pathways/index.jsx";
 import Events from "./pages/Events/index.jsx";
 import Education from "./pages/Education/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
-import Bicycle from "./pages/Bicycle/index.jsx"
+import Bicycle from "./pages/Bicycle/index.jsx";
+import About from "./pages/About/index.jsx";
 import './fonts/OpenSauceSans-Regular.ttf'
 import "./theme.scss";
 
@@ -34,6 +34,7 @@ const AppContent = () => {
         <Route path={process.env.REACT_APP_CALCULATE_PAGE_ROUTE} element={<CustomizePathway />} />
         <Route path={process.env.REACT_APP_LEADERBOARD_PAGE_ROUTE} element={<LeaderBoard />} />
         <Route path={process.env.REACT_APP_BICYCLE_PAGE_ROUTE} element={<Bicycle />} />
+        <Route path={process.env.REACT_APP_ABOUT_PAGE_ROUTE} element={<About />} />
 
       </Routes>
       <FooterLayout />

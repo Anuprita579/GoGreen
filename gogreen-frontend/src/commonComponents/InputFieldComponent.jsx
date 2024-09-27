@@ -15,6 +15,7 @@ const InputFieldComponent = ({
   disabled=false,
   error=false,
   helperText,
+  placeholder
 }) => {
   const textFieldProps = {
     label,
@@ -26,6 +27,7 @@ const InputFieldComponent = ({
     disabled,
     error,
     helperText,
+    placeholder
   };
 
   if (value !== undefined) {

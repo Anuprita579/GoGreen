@@ -23,19 +23,13 @@ const BicycleCard = ({ bicycle }) => {
     return (
         <div style={{ border: '1px solid #ccc', padding: '16px', marginBottom: '16px' }}>
             <img src={bicycle.bicycleLogo} alt='logo'/>
-            <h3>Bicycle in {bicycle.location}</h3>
+            <h3>{bicycle.location}</h3>
             <p>Price per km: &#8377; {bicycle.pricePerKm}</p>
 
-            {/* <input
-                type="text"
-                placeholder="Enter destination"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-            /> */}
             <InputFieldComponent
                 type="number"
                 placeholder="Enter estimated distance (km)"
-                value={distance}
+                value={distance===0? null: distance}
                 onChange={(e) => setDistance(e.target.value)}
             />
             <ButtonComponent onClick={calculateCost}>Calculate Cost</ButtonComponent>
