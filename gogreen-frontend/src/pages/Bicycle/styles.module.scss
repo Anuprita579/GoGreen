@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+$screen-ratio: 1vw;
+@import "../../theme.scss";
+
+html * {
+    margin: 0;
+    padding: 0;
+    font-family: 'MyFont' !important;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.animationContainer{
+    .animationSubHeading{
+        font-weight: $font-weight-semibold;
+        padding: calc(($screen-ratio)*0.5);
+    }
+}
+
+.bicycleCard{
+    border: 1px solid #ccc; 
+    width: calc(($screen-ratio)*25);
+    border-radius: calc(($screen-ratio)*1);
+    .bicycleLogo{
+        width: 100%;
+        height: calc(($screen-ratio)*15);
+        border-top-left-radius: calc(($screen-ratio)*1);
+        border-top-right-radius: calc(($screen-ratio)*1);
+    }
+    .bicycleBottomContent{
+        padding: calc(($screen-ratio)*1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .bicycleLocation{
+            color: #7D7C7F;
+        }
+        .bicycleSubTitle{
+            color: #1976D2;
+            font-weight: $font-weight-medium;
+        }
+        .bicycleButton{
+            background-color: $background-color-primary;
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.bicycleBooking{
+    padding: calc(($screen-ratio)*4);
+    .bicycleBookingList{
+        display: flex;
+        gap: calc(($screen-ratio)*2);
+    }
+
+}

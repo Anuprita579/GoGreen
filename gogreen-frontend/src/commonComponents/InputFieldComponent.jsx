@@ -39,7 +39,7 @@ const InputFieldComponent = ({
 };
 
 InputFieldComponent.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']),
