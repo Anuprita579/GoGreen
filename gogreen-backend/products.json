@@ -1,7 +1,7 @@
 [
     {
         "name": "Saree",
-        "logo": "https://images.freeimages.com/variants/suAzK5Hq555ePUdM9T9ghdi8/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/71hrXszoFEL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "clothes",
         "price": 290,
         "color": "pink",
@@ -9,7 +9,7 @@
     },
     {
         "name": "Jeans",
-        "logo": "https://images.freeimages.com/images/large-previews/728/jeans-1421398.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/91gpcEpnLRL._AC_UL480_QL65_.jpg",
         "category": "clothes",
         "price": 350,
         "color": "blue",
@@ -18,7 +18,7 @@
     },
     {
         "name": "Kurta",
-        "logo": "https://images.freeimages.com/variants/7Wx7kZCqfjfwXQGXFsZEMoNQ/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/91cNdScI4XL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "clothes",
         "price": 350,
         "color": "green",
@@ -27,7 +27,7 @@
     },
     {
         "name": "T-Shirt",
-        "logo": "https://images.freeimages.com/images/large-previews/7c0/t-shirt-1424641.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/51N2cG-uhZL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "clothes",
         "price": 200,
         "color": "blue",
@@ -36,47 +36,47 @@
     },
     {
         "name": "Sofa",
-        "logo": "https://images.freeimages.com/images/large-previews/57d/sofa-1233675.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/81kQ4zXjkmL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "homeDecor",
         "price": 2900,
         "color": "black"
     },
     {
         "name": "Flower Vase",
-        "logo": "https://images.freeimages.com/images/large-previews/9b1/tulips-1380120.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/517XCOxJnpL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "homeDecor",
         "price": 1590,
         "color": "white"
     },
     {
         "name": "Hand Bag",
-        "logo": "https://images.freeimages.com/images/large-previews/7e6/purse-1545247.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/819ARdIuEvS._AC_UL480_FMwebp_QL65_.jpg",
         "category": "luggage",
         "price": 200,
         "color": "red"
     },
     {
         "name": "Purse",
-        "logo": "https://images.freeimages.com/images/large-previews/db0/empty-change-purse-1240020.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/71b8eDHLFBL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "luggage",
         "price": 2900,
         "color": "blue"
     },
     {
         "name": "Book",
-        "logo": "https://images.freeimages.com/images/large-previews/76e/book-with-white-pages-1507326.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/81avjKuFFuL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "stationary",
         "price": 290
     },
     {
         "name": "Pencil",
-        "logo": "https://images.freeimages.com/images/large-previews/093/pencil-1416283.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/51AYbFJHSoL._AC_UL480_QL65_.jpg",
         "category": "stationary",
         "price": 15
     },
     {
         "name": "Pencil Stand",
-        "logo": "https://images.freeimages.com/images/large-previews/975/pencils-1236788.jpg?fmt=webp&h=350",
+        "logo": "https://m.media-amazon.com/images/I/71awyXSBwkL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "stationary",
         "price": 220,
         "color": "black"

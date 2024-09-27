@@ -3,17 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { additem, decrementItem } from '../../utils/CartSlice';
 import ButtonComponent from "../../commonComponents/ButtonComponent"
 import axios from 'axios';
+import StoreBanner1 from '../../assets/store_banner1.jpg';
+import StoreBanner2 from '../../assets/store_banner2.jpg';
+import StoreBanner3 from '../../assets/store_banner3.jpg';
 import styles from "./styles.module.scss"
 
 const store_banner = [
     {
         id:"001",
-        img_src: "https://plus.unsplash.com/premium_photo-1668902223840-4f29626b25c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z29ncmVlbiUyMHN0b3JlfGVufDB8fDB8fHww",
+        img_src: StoreBanner1,
         img_text: "Transform your space into a verdant paradise with our plant collection."
     },
     {
         id:"002",
-        img_src: "https://plus.unsplash.com/premium_photo-1716762544257-d6a38cc86cef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGdvZ3JlZW4lMjBzdG9yZXxlbnwwfHwwfHx8MA%3D%3D",
+        img_src: StoreBanner2,
         img_text: "Life's too short for dull spaces. Light up with Green!"
     },
 ];
@@ -21,27 +24,27 @@ const store_banner = [
 const categories_list = [
     {
         id: "001",
-        img_src: "https://iconscout.com/icon/clothes-309",
+        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/clothes-1756752-1494242.png?f=webp&w=256",
         category: "clothes"
     },
     {
         id: "002",
-        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/flower-3370429-2814922.png?f=webp&w=256",
+        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/sofa-5656345-4714774.png?f=webp&w=256",
         category: "homeDecor"
     },
     {
         id: "003",
-        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/flower-3370429-2814922.png?f=webp&w=256",
+        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/luggage-3254722-2712587.png?f=webp&w=256",
         category: "luggage"
     },
     {
         id: "004",
-        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/flower-3370429-2814922.png?f=webp&w=256",
+        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/stationary-2826405-2347432.png?f=webp&w=256",
         category: "stationary"
     },
     {
         id: "005",
-        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/flower-3370429-2814922.png?f=webp&w=256",
+        img_src: "https://cdn.iconscout.com/icon/premium/png-512-thumb/plants-2344353-1969834.png?f=webp&w=256",
         category: "plants"
     }
 ]
@@ -83,7 +86,7 @@ const CategoryCard = ({img_src, category, handleClickCategory, className}) => {
     return(
         <div onClick={handleClickCategory} className={className}>
             <img src={img_src} alt='category'/>
-            <h1>{category}</h1> 
+            <p>{category}</p> 
         </div>
     )
 }
@@ -130,7 +133,7 @@ function StorePage() {
         <div className={styles.storePage}>
             <div className={styles.storeBanner}>
                 <img src={store_banner[image].img_src} alt='storeBanner' className={styles.storeBannerImg}/>
-                <h1>{store_banner[image].img_text}</h1>  
+                <p>{store_banner[image].img_text}</p>  
             </div> 
             <div className={styles.storeList}>
                 <div className={styles.categoryList}>
@@ -145,7 +148,7 @@ function StorePage() {
                         )
                     })}
                 </div>
-                <h1 >Your cart seems empty, why not fill it with some greenary</h1>
+                <p className={styles.storeListSlogan}>Your cart seems empty, why not fill it with some greenary</p>
                 <div className={styles.storeItemsList}>
                     {storeData!==null && storeData[selectedCategory]?.myData.map((item)=>{
                         return(

@@ -21,7 +21,7 @@ a {
             height: calc(($screen-ratio)*30);
             width: 100%;
         }
-        h1{
+        p{
             background-color: $background-color-primary;
             color: white;
             text-align: center;
@@ -41,6 +41,10 @@ a {
                     width: calc(($screen-ratio)*10);
                 }
             }
+        }
+        .storeListSlogan{
+            text-align: center;
+            padding: calc(($screen-ratio)*4);
         }
         .storeItemsList{
             display: flex;
