@@ -9,6 +9,7 @@ import Signin from './Signin'
 import Distance from './Distance'
 import Transport from "./Transport"
 import FinalComponent from './FinalComponent'
+import styles from "./styles.module.scss"
 
 const PathwayStepper = () => {
   const navigate = useNavigate();
@@ -38,10 +39,10 @@ const PathwayStepper = () => {
             FinishComponent={() => <FinalComponent />}
             showNextButton={activeStep>0 }
             showBackButton={activeStep>1 }
-            stepperClassName={'stepper-connector'}
+            stepperClassName={styles.stepperConnector}
             finalButtonContent="Next"
-            buttonNextClassName={'next-button'}
-            buttonBackClassName={'back-button-stepper'}
+            buttonNextClassName={styles.nextButton}
+            buttonBackClassName={styles.backButtonStepper}
             finalButtonAction={handleNavigate}
         />
     </>

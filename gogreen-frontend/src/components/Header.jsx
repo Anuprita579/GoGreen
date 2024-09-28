@@ -3,7 +3,6 @@ import { useLocation, Link } from 'react-router-dom';
 //useContext
 import { useLoginState } from '../utils/LoginStateContext';
 //Common Components
-import Button from "../commonComponents/ButtonComponent"
 import PopoverComponent from '../commonComponents/PopoverComponent';
 //MUI Components
 //MUI ICONS
@@ -12,10 +11,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 //Assets
-// import Logo from "../assets/digavarsity_logo.png"
+import Logo from "../assets/gogreen_logo.png"
 //Imports
 import Menu from '../components/Menu';
-import Searchbox from './Searchbox';
 import AfterSigninProfile from "./AfterSigninProfile";
 import Signin from '../pages/CustomizePathway/Signin';
 //Styles
@@ -27,7 +25,7 @@ const Header = ({headerType}) => {
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname); 
   const [hasScrolled, setHasScrolled] = useState(false);
-  const { isLoggedIn, userInfo, login, logout } = useLoginState();
+  const { isLoggedIn } = useLoginState();
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -48,29 +46,10 @@ const Header = ({headerType}) => {
 
   const headerStyle = headerType === 'headerHome'? styles.headerOther :currentPath !== '/'? styles.headerOther : hasScrolled? styles.headerScrolled: styles.headerHome;
 
-
-  const [displaySearchBox, setDisplaySearchBox] = useState(false);
-  const [displaySearchIcon, setDisplaySearchIcon] = useState(true);
   const [anchorElMenu, setAnchorElMenu] = useState(null);
   const [anchorElSignin, setAnchorElSignin] = useState(null);
   const username = sessionStorage.getItem('name');
   
-
-
-  const handleDisplaySearch = () => {
-    if (displaySearchBox === false) {
-      setDisplaySearchBox(true);
-      setDisplaySearchIcon(false);
-    }
-    else {
-      setDisplaySearchBox(false);
-      setDisplaySearchIcon(true);
-    }
-  }
-  const handleClose = () => {
-    setDisplaySearchBox(false);
-    setDisplaySearchIcon(true);
-  }
 
   const cartItems = useSelector(store => store.cart.items);
 
@@ -92,7 +71,7 @@ const Header = ({headerType}) => {
         <div className={styles.headerLeft}>
           {(currentPath!=='/' || headerStyle===styles.headerScrolled) && (
             <Link to="/">
-            {/* <img src={Logo} alt='logo' className='logo' /> */}
+            <img src={Logo} alt='logo' className={styles.logo} />
             </Link>
           )}
         </div>

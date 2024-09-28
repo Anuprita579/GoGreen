@@ -5,13 +5,12 @@ import { useScroll } from "../utils/ScrollContext";
 //Common Components
 import Button from "../commonComponents/ButtonComponent";
 //MUI ICONS
-import PhoneIcon from '@mui/icons-material/Phone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 //Assets
+import Logo from '../assets/gogreen_logo.png'
 import styles from "./styles.module.scss"
 
 const Footer = () => {
@@ -19,14 +18,11 @@ const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   };
-  const formatTitleForURL = (title) => {
-    return title.toLowerCase().replace(/ /g, '-');
-  };
   return (
     <footer className={styles.footer} ref={footerRef}>
         <div className={styles.footerTop}>
             <div className={styles.leftSection}>
-                {/* <img src={Logo} alt="logo" className='logo'/> */}
+                <img src={Logo} alt="logo" className={styles.logo}/>
                 <p>
                 GoGreen makes living sustainably easy and rewarding. Our project encourages eco-friendly actions by offering rewards, educational campaigns, and a marketplace for green products. Join us in making a real impact on the environment and building a better future.
                 </p>

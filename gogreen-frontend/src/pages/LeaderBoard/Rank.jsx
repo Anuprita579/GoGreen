@@ -57,15 +57,15 @@ const Rank = ({totalCarbonEmissions}) => {
         <h3 className={styles.leaderboardTitle}>Leaderboard</h3>
         <div className={styles.leaderboardContainer}>
                 {leaderboardEntries.map((entry) => (
-                    <p 
+                    <div
                         key={entry.rank} 
                         className={styles.leaderboardCard} 
-                        style={{ backgroundColor: entry.username.toLowerCase() === sessionStorage.getItem('name').toLowerCase() ? '#E3AC47' : 'rgb(109, 189, 218)' }}
+                        style={{ backgroundImage: entry.username.toLowerCase() === sessionStorage.getItem('name').toLowerCase() ? 'linear-gradient(to right, #FFD580, #000000)' : 'linear-gradient(to right, #00A86B, #333333)' }}
                     > 
                         <span className={styles.rankRounded}>{entry.rank}</span> 
                         <span className={styles.rankUsername}> {entry.username}</span>
-                        {`${entry.carbonFootprint.toFixed(2)} kg CO2e`}
-                    </p>
+                        <p className={styles.carbonFootprintText}><span className={styles.carbonFootprintValue}>{entry.carbonFootprint.toFixed(2)}</span> kg CO2e</p>
+                    </div>
                 ))}
             </div>
       

@@ -1,24 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 //useContext
 import { useActiveStep } from "../../utils/ActiveStepContext";
-//API URL
-// import { LocationListAPI } from "../../utils/apiUrl";
-// import callAPI from "../../utils/apiAction";
 //Common Components
 import ButtonComponent from "../../commonComponents/ButtonComponent";
-//MUI Components
-//MUI ICONS
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-//Assets
-import animationData from "../../assets/spinner_loader.json";
-//Other Library
-import Lottie from "react-lottie";
-import axios from "axios";
-//Imports
-import OhNoComponent from "./OhNoComponent";
-import styles from "./styles.module.scss";
 import InputFieldComponent from "../../commonComponents/InputFieldComponent";
 import SelectComponent from "../../commonComponents/SelectComponent";
+//Imports
+import styles from "./styles.module.scss";
+
 
 const modesOfTransport = [
   {
@@ -79,7 +68,7 @@ const ModesofTransportCard = ({
       onClick={() => onSelect(id)}
     >
       <div key={id} className={styles.content}>
-        <>{icon ? icon : <img src={img_src} className={styles.icon} />}</>
+        {icon ? icon : <img src={img_src} alt="icon" className={styles.icon} />}
 
         <h3 className={styles.transportTitle}>{title}</h3>
 
@@ -196,7 +185,7 @@ const Transport = () => {
 
 
   return (
-    <>
+    <div className={styles.tranportBox}>
       <div className={styles.transportCard}>
         {modesOfTransport.map((item) => {
           return (
@@ -214,34 +203,32 @@ const Transport = () => {
 
       <div className={styles.distributionOptions}>
         <SelectComponent  value={distributionMethod} options={distributionOptions} onChange={(e) => handleDistributionChange(e.target.value)}/>
-         
       </div>
 
+      <div className={styles.modeOfTransportContent}>
+
       {Object.entries(distributedDistance).map(([modeId, modeDetails]) => {
-        const modeName = modesOfTransport.find((item) => item.id === modeId)?.title || "";
         return (
           <div key={modeId} className={styles.distanceDisplay}>
-            <span>Mode: {modeDetails.title}</span>
-            <span>Allocated Distance: {modeDetails.distance || 0} km</span>
+            <p><span className={styles.distanceDisplayTitle}>Mode : </span> {modeDetails.title}</p>
+            <p> <span className={styles.distanceDisplayTitle}>Allocated Distance : </span>{modeDetails.distance || 0} km</p>
 
             {distributionMethod === "percentage" && (
-              <>
                 <InputFieldComponent
                   type="number"
                   placeholder="Enter percentage"
                   value={enteredPercentages[modeId] || ""}
                   onChange={(e) => handlePercentageChange(modeId, e.target.value)}
                 />
-                <span>Percentage Entered: {enteredPercentages[modeId] || 0}%</span>
-              </>
             )}
           </div>
         );
       })}
+      </div>
 
 
 
-    </>
+    </div>
   );
 };
 

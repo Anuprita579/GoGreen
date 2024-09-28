@@ -20,7 +20,7 @@ a {
     justify-content: center;
     align-items: center;
     .carbonCalculatedCard{
-        background-color: #E5F6FE;
+        background-image: linear-gradient(to right, #006400, #000000);
         border-radius: calc(($screen-ratio)*0.5);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: calc(($screen-ratio)*2) calc(($screen-ratio)*8);
@@ -32,29 +32,27 @@ a {
         justify-content: center;
         .caption{
             font-weight:  $font-weight-semibold;
-            font-size: calc(($screen-ratio)*2);
             text-transform: capitalize;
-            color: #0e6d8f;
+            color: #FFD580;
         }
         .carbonItem{
             padding: calc(($screen-ratio)*0.75);
             .modeName{
-                padding: calc(($screen-ratio)*1);
-                background-color: #98abbd;
-                color: #f8f9fa;
+                padding: calc(($screen-ratio)*0.5) calc(($screen-ratio)*2) calc(($screen-ratio)*0.5) calc(($screen-ratio)*2);
+                background-color: #B2FFFC;
+                color: $text-color-dark;
                 width: fit-content;
                 border-radius: calc(($screen-ratio)*0.5);
             }
             p{
                 font-weight: $font-weight-bold;
-                color:  #0e6d8f;
-                font-size: calc(($screen-ratio)*1.4);
+                color:  #FFD580;
                 .subtitle{
                     font-weight: $font-weight-semibold;
-                    color: #475869;
+                    color:  $text-color-white;
+                    letter-spacing: 1px;
                 }
                 .units{
-                    font-size: calc(($screen-ratio)*1);
                     font-weight: $font-weight-medium;
                     color: gray;
                 }
@@ -65,14 +63,14 @@ a {
             text-align: center;
             .totalCarbonTitle{
                 font-weight: $font-weight-bold;
-                font-size: calc(($screen-ratio)*2);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #B2FFFC;
             }
             .totalCarbonContent{
                 font-weight: $font-weight-bold;
-                color:  #0e6d8f;
-                font-size: calc(($screen-ratio)*1.5);
+                color:  #FFD580;
                 span{
-                    font-size: calc(($screen-ratio)*1);
                     font-weight: $font-weight-medium;
                     color: gray;
                 }
@@ -86,7 +84,6 @@ a {
     .leaderboardTitle{
         font-weight: $font-weight-bold;
         padding: 0 calc(($screen-ratio)*3);
-        font-size: calc(($screen-ratio)*2);
     }
     .leaderboardContainer{
         display: flex;
@@ -94,21 +91,28 @@ a {
         padding: calc(($screen-ratio)*2);
         gap: calc(($screen-ratio)*0.5);
         .leaderboardCard{
-            background-color: rgb(109, 189, 218);
             padding: calc(($screen-ratio)*1.5);
             display: flex;
             justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             .rankRounded{
-                background-color: #f8f9fa;
+                background-color: $background-color-light;
                 color: black;
                 padding: 4px 10px;
                 border-radius: 50%;
             }
             .rankUsername{
                 text-transform: capitalize;
+                color: $text-color-white;
+                font-weight: $font-weight-medium;
             }
-            .currentUser{
-                background-color: burlywood;
+            .carbonFootprintText{
+                color: gray;
+                .carbonFootprintValue{
+                    font-weight: $font-weight-bold;
+                    color:  #FFD580;
+                }
+
             }
         }
     }

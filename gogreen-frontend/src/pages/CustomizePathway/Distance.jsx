@@ -10,25 +10,16 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 //useContext
 import { useActiveStep } from "../../utils/ActiveStepContext";
-//API URL
-// import { CourseListAPI } from "../../utils/apiUrl";
-// import callAPI from "../../utils/apiAction";
 //Common Components
 import ButtonComponent from "../../commonComponents/ButtonComponent";
 //Assets
-import animationData from "../../assets/spinner_loader.json";
-import Lottie from "react-lottie";
 import endMarkerImg from "../../assets/endMarkerImg.png";
 import startMarkerImg from "../../assets/startMarkerImg.png";
 //Import
-import OhNoComponent from "./OhNoComponent";
 import styles from "./styles.module.scss";
 
 const Distance = () => {
   const { distanceData, setDistanceDataValue } = useActiveStep();
-  // const [startPoint, setStartPoint] = useState(null);
-  // const [endPoint, setEndPoint] = useState(null);
-  const userName = sessionStorage.getItem("name");
   console.log("distance Data : ", distanceData);
   sessionStorage.setItem("distanceData", distanceData);
   //   if (type === "start") {
@@ -153,12 +144,12 @@ const Distance = () => {
   };
 
   return (
-    <>
+    <div className={styles.distanceBox}>
       <div className={styles.distanceContainer}>
         <MapContainer
           center={[19.03642, 72.85947]}
           zoom={13}
-          style={{ height: "100%", width: "80%" }}
+          style={{ height: "100%", width: "80%", zIndex: 2 }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {startPoint && (
@@ -175,34 +166,19 @@ const Distance = () => {
         </MapContainer>
       </div>
 
-      <div>
-        <ButtonComponent onClick={() => setIsSelectingStartPoint(true)} className={styles.distanceButton}>
-          Select Start Point
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => setIsSelectingEndPoint(true)}
-          disabled={!startPoint}
-        >
-          Select End Point
-        </ButtonComponent>
-        <ButtonComponent onClick={handleRestart}>Restart</ButtonComponent>
-        <ButtonComponent onClick={() => handleLocationClick("start")}>
-          Detect Location (Set as Start)
-        </ButtonComponent>
-        <ButtonComponent
-          onClick={() => handleLocationClick("end")}
-          disabled={!startPoint}
-        >
-          {" "}
-          Detect Location (Set as End)
-        </ButtonComponent>
+      <div className={styles.mapFeatureButtons}>
+        <ButtonComponent onClick={() => setIsSelectingStartPoint(true)} className={styles.startDistanceButton} children="Select Start Point" />
+        <ButtonComponent onClick={() => setIsSelectingEndPoint(true)} disabled={!startPoint} className={styles.endDistanceButton} children="Select End Point" />
+        <ButtonComponent onClick={handleRestart} className={styles.restartButton} children="Restart" />
+        <ButtonComponent onClick={() => handleLocationClick("start")} className={styles.detectStartLocationButton} children="Detect Location (Set as Start)" />
+        <ButtonComponent onClick={() => handleLocationClick("end")} disabled={!startPoint} className={styles.detectEndLocationButton} children="Detect Location (Set as End)" />
       </div>
 
-      <p>
-        Distance:{" "}
+      <p className={styles.distanceInfo}>
+        <span className={styles.distanceTitle}> Distance :  </span>
         {distanceData ? `${distanceData} km` : "Select points to calculate"}
       </p>
-    </>
+    </div>
   );
 };
 

@@ -180,8 +180,7 @@ a {
                 font-weight: $font-weight-normal;
                 border: transparent;
                 border-radius: calc(($screen-ratio) *2); 
-                background-image: linear-gradient(to right, #a9416f, #7240b2, #2d4cb0)
-                // border-radius: calc(($screen-ratio) * 2);
+                background-image: linear-gradient(to right, #006400, #000000);
             }
             .continueGradientButton{
                 @extend.gradient-common-button;
@@ -253,47 +252,28 @@ a {
     border-radius: calc(($screen-ratio) * 1);
 }
 
-.degreePage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: calc(($screen-ratio)*3) calc(($screen-ratio)*3) calc(($screen-ratio)*1) calc(($screen-ratio)*3);
+.tranportBox{
     text-align: center;
-    .heading{
-        padding-bottom: 0;
-        margin-bottom: calc(($screen-ratio)*0.5);
-    }
-    .opportunityContainer{
+    .modeOfTransportContent{
+        width: 100%;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        .MuiButton-root{
-            padding: 0;
-        } 
-    }   
-    h2{
-        font-weight: $font-weight-semibold;
-        background: linear-gradient(to right, #C5276C, #6C29C2, #1C44CB);
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        text-transform: capitalize;
-        padding-bottom: calc(($screen-ratio)*1.5);
+        .distanceDisplay{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            align-items: center;
+            width: 80%;
+            .distanceDisplayTitle{
+                font-weight: $font-weight-semibold;
+            }
+        }
     }
-    h1{
-        font-weight: $font-weight-semibold;
-        font-size: x-large;
-        text-transform: capitalize;
-        line-height: $line-height-heading;
-        padding-bottom: calc(($screen-ratio)*0.75);
-    }
-    h4{
-        font-weight: $font-weight-normal;
-    }
-    h3{
-        font-weight: $font-weight-semibold;
-    }
+    
+
 }
+
 .transportCard{
     display: flex;
     flex-wrap: wrap;
@@ -302,7 +282,7 @@ a {
     justify-content: center;
     align-items: center;
     .selected{
-        background-image: linear-gradient(to right, #F9D6E5, #EADAFF, #D8E0FD);
+        background-image: linear-gradient(to right, #90EE90, #BCE3C5, #D2EAD7);
     }
     .contentButton{
         border: 1px solid #A04179;
@@ -364,6 +344,55 @@ a {
 .errorMessages{
     color: red;
 }
+.distanceBox{
+    width: 100%;
+    text-align: center;
+    .distanceContainer{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mapFeatureButtons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: calc(($screen-ratio)*0.5);
+        .restartButton{
+            background-color: #E4AF0B;
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+        .startDistanceButton{
+            background-color: #2B81E4; 
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+        .detectStartLocationButton{
+            background-color: #5390EE; 
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+        .endDistanceButton{
+            background-color: #E65446; 
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+        .detectEndLocationButton{
+            background-color: #DA0000; 
+            color: $text-color-white;
+            text-transform: capitalize;
+        }
+
+    }
+    .distanceInfo{
+        .distanceTitle{
+            font-weight: $font-weight-semibold;
+        }
+    }
+
+}
 
 
 
@@ -402,40 +431,16 @@ a {
     // border-radius: calc(($screen-ratio) *2);  
 }
 
-.distanceContainer{
-    height: 400px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-//MUI Stepper Styling
-.MuiStepConnector-line {
-    border-style: dashed;
-    border-top-width: 0px !important;
-}
-.MuiStepConnector-root.Mui-active .MuiStepConnector-line{
-    border-color: #005CB5 !important;
-    border-style: solid;
-  }
-.MuiStepConnector-root.Mui-completed .MuiStepConnector-line{
-    border-color: #005CB5 !important;
-    border-style: solid;
-}
-.MuiSvgIcon-root.MuiStepIcon-root.Mui-completed {
+
+
+//MUI Stepper Styling 
+[class*='Mui-completed']{
     color: #1D8841 !important;
 }
-.MuiBox-root{
-    display: flex;
-    // padding: 30vh 0 0 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.MuiStepper-root{
-    width: 50%;
-    // padding-top: calc(($screen-ratio)*8);
+[class*='MuiStepper-root']{
+    width: 100%;
+    padding: calc(($screen-ratio)*2) 0;
 }
 
 @media only screen and (max-width: 640px) {
@@ -592,87 +597,6 @@ a {
     }
     .errorMessages{
         font-style: italic;
-    }
-    .degreeCard{
-        flex-direction: column;
-        gap: calc(($screen-ratio)*2);
-        padding: calc(($screen-ratio)*2.5);
-        width: 100%;
-        .contentButton{
-            border-radius: calc(($screen-ratio)*2);
-            width: 90%;
-            .content{
-                padding: calc(($screen-ratio)*1.5);
-                width: 100%;
-                height: calc(($screen-ratio)*18);
-                gap: calc(($screen-ratio)*2);
-                flex-direction: row;
-                justify-content: flex-start;
-                .degreeContentContainer{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    text-align: left;
-                }
-                .icon{
-                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 70.48%, #FFF 93.62%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(180deg, rgba(30, 54, 87, 0.00) 0%, rgba(30, 54, 87, 0.01) 100%), #FAFAFA;
-                    box-shadow: 0px 1.432px 1.074px 0px rgba(255, 255, 255, 0.50) inset, 0px -2.864px 1.074px 0px rgba(22, 36, 44, 0.06) inset, 0px 5.729px 11.457px -5.729px rgba(22, 36, 44, 0.16), 0px 1.432px 2.864px 0px rgba(22, 36, 44, 0.16), 0px 0px 0px 1.432px rgba(22, 36, 44, 0.12);
-                    padding-left: 3px;
-                    padding-right: 3px;
-                    border-radius: 50%;
-                    width: 40px;
-                    height: 40px;
-                }
-                svg{
-                    width: 50px;
-                    height: 50px;
-                }
-                .degreeTitle{
-                    font-size: small;
-                }
-                .degreeFullname{
-                    font-size: small;
-                }
-            }
-        }
-    }
-    .degreePage{
-        padding: calc(($screen-ratio)*3);
-        .heading{
-            padding-top: calc(($screen-ratio)*4);
-            padding-bottom: calc(($screen-ratio)*2);
-        }
-        .opportunityContainer{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            .MuiButton-root{
-                padding: 0;
-            } 
-        } 
-        h2{
-            padding-bottom: calc(($screen-ratio)*1.5);
-            display: none;
-        }
-        h1{
-            font-weight: $font-weight-semibold;
-            font-size: large;
-            text-transform: capitalize;
-            line-height: $line-height-heading;
-            padding-left: calc(($screen-ratio)*2);
-            padding-right: calc(($screen-ratio)*2);
-            padding-bottom: calc(($screen-ratio)*4);
-        }
-        h4{
-            font-weight: $font-weight-normal;
-            font-size: small;
-        }
-        h3{
-            font-weight: $font-weight-semibold;
-        }
-        .error-message-section{
-            padding-top: calc(($screen-ratio)*4);
-        }
     }
     .ohnoComponent{
         display: flex;

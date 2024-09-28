@@ -15,10 +15,8 @@ const CarbonCalculated = () => {
           bus: 0.069,
           car: 0.133,
         };
-    // Convert mode to lowercase and remove spaces
     const factorKey = Object.keys(emissionFactors).find(key => key.toLowerCase() === mode.replace(/\s+/g, '').toLowerCase());
     const factor = emissionFactors[factorKey] || 0;
-        // const factor = emissionFactors[mode.toLowerCase()] || 0;
         return distance * factor;
     }
     const distributedModes = JSON.parse(sessionStorage.getItem('DistributedTransportModes') || '{}');
