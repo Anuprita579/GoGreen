@@ -7,6 +7,7 @@ import { useLoginState } from '../utils/LoginStateContext';
 // import callAPI from '../utils/apiAction';
 //Common Components
 import AccordionComponent from '../commonComponents/AccordionComponent';
+import styles from './styles.module.scss'
 
 const AfterSigninProfile = ({ onClose }) => {
   const username = sessionStorage.getItem('name');
@@ -40,23 +41,13 @@ const AfterSigninProfile = ({ onClose }) => {
   // }, []);
 
   return (
-    <div className='after-signin-profile'>
-      <ul className='after-signin-list'>
+    <div className={styles.afterSigninProfile}>
+      <ul className={styles.afterSigninList}>
         <h2>Hi {username}!</h2>
-          <li>My Pathway</li>
-        <AccordionComponent 
-          panelId='panel1' 
-          heading='Support' 
-          headingClassname='accordian-title'
-          content={
-            <ul className='accordian-list'>
-              <Link to='/confirm-slot' style={{ color: "#555555" }} onClick={() => onClose()}>
-                <li>Dashboard</li>
-              </Link>
-            </ul>
-          }
-          className={'signin-profile-accordian'}
-        />
+        <Link to={sessionStorage.getItem('DistributedTransportModes')? '/leaderboard': '/calculate'}>
+          <li>My Carbon Footprint</li>
+        </Link>
+
         <Link onClick={logout} style={{ color: "black" }}>
           <li>Logout</li>
         </Link>

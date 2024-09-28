@@ -87,6 +87,10 @@ a {
     }
     .itemCardContentSection{
         padding: calc(($screen-ratio)*1.25);
+        background-color: #F2F2F2;
+        color: $text-color-dark;
+        border-bottom-right-radius: calc(($screen-ratio)*1);
+        border-bottom-left-radius: calc(($screen-ratio)*1);
         .itemCardMidSection{
             display: flex;
             justify-content: space-between;
@@ -110,11 +114,22 @@ a {
                 justify-content: space-between;
                 align-items: center;
                 text-align: center;
-                border: 1px solid Green;
+                border: 2px solid black;
                 width: fit-content;
+
                 .minusButton,
                 .plusButton{
-                    padding: 10px;
+                    padding: 4px 2px;
+                    font-weight: $font-weight-bold;
+                    font-size: calc(($screen-ratio)*1);
+                    background-color: $background-color-primary;
+                    color: $text-color-white;
+                }
+                .minusButton{
+                    border-right: 2px solid black;
+                }
+                .plusButton{
+                    border-left: 2px solid black;
                 }
                 .quantity{
                     padding: 0px 10px;

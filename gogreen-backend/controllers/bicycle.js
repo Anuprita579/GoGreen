@@ -1,18 +1,3 @@
-// const Bicycle = require('../models/bicycle');
-
-// const getBicyclesByLocation = async (req, res) => {
-//     const { location } = req.query;
-//     try {
-//         const bicycles = await Bicycle.find({ location, isAvailable: true });
-//         res.status(200).json(bicycles);
-//     } catch (error) {
-//         res.status(500).json({ message: "Error fetching bicycles", error });
-//     }
-// };
-
-// module.exports = { getBicyclesByLocation, calculateCost };
-
-
 const Bicycle = require('../models/bicycle');
 
 // Simulate city mapping logic (you can use external APIs like Google Maps for real geocoding)
@@ -28,7 +13,6 @@ const getCityFromCoordinates = (lat, lon) => {
 const getBicyclesByLocation = async (req, res) => {
     const { lat, lon } = req.query;
     const city = getCityFromCoordinates(lat, lon);
-    console.log(`Detected city: ${city}`); // Debugging log
 
     if (city === 'Unknown City') {
         return res.status(404).json({ message: 'Bicycles not available in this city' });
@@ -36,7 +20,6 @@ const getBicyclesByLocation = async (req, res) => {
 
     try {
         const bicycles = await Bicycle.find({ location: city, isAvailable: true });
-        console.log(`Bicycles for ${city}:`, bicycles); // Debugging log
         res.status(200).json(bicycles);
     } catch (error) {
         res.status(500).json({ message: "Error fetching bicycles", error });

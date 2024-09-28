@@ -359,6 +359,7 @@ a {
         justify-content: center;
         align-items: center;
         gap: calc(($screen-ratio)*0.5);
+        padding: calc(($screen-ratio)*1) 0 ;
         .restartButton{
             background-color: #E4AF0B;
             color: $text-color-white;
