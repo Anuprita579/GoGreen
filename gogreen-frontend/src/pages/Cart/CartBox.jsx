@@ -30,7 +30,7 @@ const CartBox = () => {
 
   return (
     <>
-    <ButtonComponent children={'Empty Cart'} onClick={handleClear}/>
+    <ButtonComponent children={'Empty Cart'} onClick={handleClear} className={styles.emptyCartButton}/>
     <div className={styles.viewCartItems}>
         {cartItems.map((item, index)=>{
             return <ItemCard key={index} {...item} quantity={item.quantity} />

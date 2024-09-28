@@ -172,7 +172,7 @@ function StorePage() {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            transition={{ duration: 0.3, delay: index * 0.2 }}
+                            transition={{ duration: 0.3, delay: index * 0.2}}
                         >
                             <ItemCard 
                             key={item.id || index}

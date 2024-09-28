@@ -36,6 +36,14 @@ a {
 }
 .billContainer{
     float: right;
+    background-color: #fef5f5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: calc(($screen-ratio)*2);
+    gap: calc(($screen-ratio)*1);
+    .billTitle{
+        font-weight: $font-weight-semibold;
+    }
 }
 .billWrapper {
     position: fixed;
@@ -47,6 +55,15 @@ a {
 .viewCartItems{
     display: flex;
     flex-wrap: wrap;
+    gap: calc(($screen-ratio)*2);
+    padding: calc(($screen-ratio)*2);
+    width: 70%;
+}
+.emptyCartButton{
+    margin: calc(($screen-ratio)*2) !important; 
+    background-color: #0C3D2A !important;
+    color: $text-color-white !important;
+    text-transform: capitalize !important;
 }
 .itemCard{
     width: calc(($screen-ratio)*20);

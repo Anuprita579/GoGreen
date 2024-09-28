@@ -11,11 +11,15 @@ const Bill = () => {
   return (
     <>
         <div className={styles.billContainer}>
-            <p>Total Items - {cartItems.length} </p>
-            <p>Total - &#8377; {totalCost.toFixed(2)}</p>
-            <p>Delivery Cost - &#8377; {deliveryCost.toFixed(2)}</p>
-            <hr></hr>
-            <p>To Pay - &#8377; {total.toFixed(2)}</p>
+            <p className={styles.billTitle}>Total Items - </p>
+            <span className={styles.billContent}>{cartItems.length}</span>
+            <p className={styles.billTitle}>Total -  </p>
+            <span className={styles.billContent}> &#8377; {totalCost.toFixed(2)}</span>
+            <p className={styles.billTitle}>Delivery Cost - </p>
+            <span className={styles.billContent}>&#8377; {deliveryCost.toFixed(2)}</span>
+
+            <p className={styles.billTitle}>To Pay - </p>
+            <span className={styles.billContent}>&#8377; {total.toFixed(2)}</span>
             <ButtonComponent children={'Pay Now'}/>
         </div>
       
