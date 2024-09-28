@@ -3,22 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { additem, decrementItem } from '../../utils/CartSlice';
 import ButtonComponent from "../../commonComponents/ButtonComponent"
 import axios from 'axios';
-import StoreBanner1 from '../../assets/store_banner1.jpg';
-import StoreBanner2 from '../../assets/store_banner2.jpg';
-import StoreBanner3 from '../../assets/store_banner3.jpg';
+import StoreBanner1 from '../../assets/store_banner1.png';
+import StoreBanner2 from '../../assets/store_banner2.png';
 import styles from "./styles.module.scss"
+import { motion} from 'framer-motion'
 
 const store_banner = [
-    {
-        id:"001",
-        img_src: StoreBanner1,
-        img_text: "Transform your space into a verdant paradise with our plant collection."
-    },
-    {
-        id:"002",
-        img_src: StoreBanner2,
-        img_text: "Life's too short for dull spaces. Light up with Green!"
-    },
+    { id:"001", img_src: StoreBanner1 },
+    { id:"002", img_src: StoreBanner2 }
 ];
 
 const categories_list = [
@@ -65,35 +57,38 @@ export const ItemCard = ({id, logo, price, title, color}) => {
     return(
         <div key={id} className={styles.itemCard} >
             <img src={logo} alt='product' className={styles.itemImg}/>
-            <p className={styles.itemTitle}>{title}</p>
-            <div className={styles.itemCardMidSection}>
-                <p className={styles.itemPrice}>&#8377; {price}</p>
-                {color && <div style={{backgroundColor: color}} className={styles.colorBox}> </div>}
-            </div>
-
-            <div className={styles.ItemCardBottomSection}>
-                <div className={styles.buttonContainer}>
-                    <ButtonComponent onClick={() => handleSubQuantity(id)}  className={styles.minusButton} children="-" />
-                    <p className={styles.quantity}>{quantity}</p>
-                    <ButtonComponent onClick={() => handleAddQuantity(id)} className={styles.plusButton} children="+" />
+            <div className={styles.itemCardContentSection}>
+                <p className={styles.itemTitle}>{title}</p>
+                <div className={styles.itemCardMidSection}>
+                    <p className={styles.itemPrice}>&#8377; {price}</p>
+                    {color && <div style={{backgroundColor: color}} className={styles.colorBox}> </div>}
                 </div>
+
+                <div className={styles.ItemCardBottomSection}>
+                    <div className={styles.buttonContainer}>
+                        <ButtonComponent onClick={() => handleSubQuantity(id)}  className={styles.minusButton} children="-" />
+                        <p className={styles.quantity}>{quantity}</p>
+                        <ButtonComponent onClick={() => handleAddQuantity(id)} className={styles.plusButton} children="+" />
+                    </div>
+                </div>
+
             </div>
+            
         </div>
     )
 }
 
-const CategoryCard = ({img_src, category, handleClickCategory, className}) => {
+const CategoryCard = ({img_src, category, handleClickCategory}) => {
     return(
-        <div onClick={handleClickCategory} className={className}>
-            <img src={img_src} alt='category'/>
-            <p>{category}</p> 
+        <div onClick={handleClickCategory} className={styles.categoryCard}>
+            <img src={img_src} alt='category' className={styles.categoryCardIcon}/>
+            <p className={styles.categoryCardTitle}>{category}</p> 
         </div>
     )
 }
 
 function StorePage() {
     const [image, setImage] = useState(0);
-    // const [quantity, setQuantity] = useState({});
     const categories = ['clothes', 'homeDecor', 'luggage', 'stationary', 'plants'];
     const [selectedCategory, setSelectedCategory] = useState('clothes');
     const [storeData, setStoreData] = useState(null);
@@ -132,14 +127,24 @@ function StorePage() {
     <>
         <div className={styles.storePage}>
             <div className={styles.storeBanner}>
-                <img src={store_banner[image].img_src} alt='storeBanner' className={styles.storeBannerImg}/>
+                <motion.div 
+                    key={image} 
+                    initial={{ x: 100, opacity: 0 }}  
+                    animate={{ x: 0, opacity: 1 }}  
+                    exit={{ x: -100, opacity: 0 }}    
+                    transition={{ duration: 0.5 }}  
+                >
+                    <img src={store_banner[image].img_src} alt='storeBanner' className={styles.storeBannerImg}/>
+                </motion.div>
+
                 <p>{store_banner[image].img_text}</p>  
             </div> 
             <div className={styles.storeList}>
                 <div className={styles.categoryList}>
-                    {categories_list.map((item)=>{
+                    {categories_list.map((item, index)=>{
                         return(
                             <CategoryCard 
+                                key={index}
                                 img_src={item?.img_src}
                                 category={item?.category}
                                 handleClickCategory={()=>setSelectedCategory(item?.category)}
@@ -148,17 +153,38 @@ function StorePage() {
                         )
                     })}
                 </div>
-                <p className={styles.storeListSlogan}>Your cart seems empty, why not fill it with some greenary</p>
+                <div className={styles.storeSloganContainer}>
+                    <hr className={styles.horizontalLine}/>
+                    <p className={styles.storeListSlogan}>Your cart seems empty, why not fill it with some greenary</p>
+                    <hr className={styles.horizontalLine}/>
+                </div>
+
                 <div className={styles.storeItemsList}>
-                    {storeData!==null && storeData[selectedCategory]?.myData.map((item)=>{
+                    {storeData!==null && storeData[selectedCategory]?.myData.map((item, index)=>{
                         return(
+                        <motion.div
+                            key={item._id || index}
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },   
+                                visible: { opacity: 1, y: 0 },   
+                                exit: { opacity: 0, y: -20 },   
+                            }}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            transition={{ duration: 0.3, delay: index * 0.2 }}
+                        >
                             <ItemCard 
+                            key={item.id || index}
                                 id={item._id}
                                 logo={item.logo}
                                 price={item.price}
                                 title={item.name}
                                 color={item.color}
                             />
+
+                        </motion.div>
+                            
                         )
                     })}
                 </div>                
