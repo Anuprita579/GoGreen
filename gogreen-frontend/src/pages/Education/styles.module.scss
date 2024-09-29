@@ -23,14 +23,30 @@ a {
         flex-wrap: wrap;
         gap: calc(($screen-ratio)*2);
         padding-left: calc(($screen-ratio)*3);
+        padding-bottom: calc(($screen-ratio)*3);
+    }
+    .progressWrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        padding: calc(($screen-ratio)*3) 0;
+        .progress{
+            width: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: calc(($screen-ratio)*2);
+        }
     }
 }
 .itemCard{
     width: calc(($screen-ratio)*20);
+    height: 100%;
     border-radius: calc(($screen-ratio)*2);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: stretch;
     border: 1px solid #f2f2f2;
     gap: calc(($screen-ratio)*1.25);
@@ -49,6 +65,12 @@ a {
         .itemTitle{
             font-weight: $font-weight-semibold;
             display: flex;  
+        }
+        .completedBadge{
+            background-color: #1E8282;
+            color: $text-color-white;
+            width: fit-content;
+            padding: calc(($screen-ratio)*0.5);
         }
     }
 }

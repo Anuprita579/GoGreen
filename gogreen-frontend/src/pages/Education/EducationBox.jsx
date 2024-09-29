@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom'
 import styles from "./styles.module.scss";
 import ButtonComponent from "../../commonComponents/ButtonComponent";
+import LinearProgressComponent from "../../commonComponents/LinearProgress";
 
 // Function to fetch YouTube playlist items
 async function fetchYouTubePlaylist() {
@@ -17,87 +18,104 @@ async function fetchYouTubePlaylist() {
   }));
 }
 
-const EducationCard = ({ id, logo, videoId, title, owner, isCompleted, onProgressUpdate }) => {
-  const playerRef = useRef(null);
-  const [player, setPlayer] = useState(null);
+const EducationCard = ({ id, logo, videoId, title, owner, isCompleted, onProgressUpdate, playerRefs, onVideoClick }) => {
+  // const [player, setPlayer] = useState(null);
 
-  useEffect(() => {
-    // Load YouTube IFrame Player API script if not already loaded
-    if (!window.YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
+  // useEffect(() => {
+  //   console.log(`Initializing player for video ${videoId}`);
+  //   const loadYouTubeAPI = () => {
+  //     if (!window.YT) {
+  //       // Load YouTube IFrame API
+  //       const tag = document.createElement("script");
+  //       tag.src = "https://www.youtube.com/iframe_api";
+  //       document.body.appendChild(tag);
+  //     }
+  //     else {
+  //       onYouTubeIframeAPIReady();
+  //       console.log("calling onYouTubeIframeAPIReady inside else statement");
+  //     }
+  //   };
 
-      window.onYouTubeIframeAPIReady = () => {
-        initializePlayer();
-      };
-    } else {
-      initializePlayer();
-    }
-  }, []);
+  //   const onYouTubeIframeAPIReady = () => {
+  //     if (window.YT && playerRefs.current[videoId]) {
+  //       const newPlayer = new window.YT.Player(playerRefs.current[videoId], {
+  //         videoId,
+  //         events: {
+  //           onStateChange: onPlayerStateChange,
+  //         },
+  //       });
+  //       setPlayer(newPlayer);
+  //     }
+  //   };
 
-  const initializePlayer = () => {
-    setPlayer(
-      new window.YT.Player(playerRef.current, {
-        videoId: videoId,
-        events: {
-          onStateChange: onPlayerStateChange,
-        },
-      })
-    );
-  };
+  //   if (!window.YT) {
+  //     loadYouTubeAPI();
+  //     window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+  //   } else {
+  //     onYouTubeIframeAPIReady();
+  //   }
 
-  const onPlayerStateChange = (event) => {
-    if (event.data === window.YT.PlayerState.PLAYING) {
-      const duration = event.target.getDuration();
-      const interval = setInterval(() => {
-        const currentTime = event.target.getCurrentTime();
-        const progress = (currentTime / duration) * 100;
+  //   return () => {
+  //     if (player) {
+  //       player.destroy();
+  //     }
+  //   };
+  // }, [videoId]);
 
-        // Update progress in parent component
-        onProgressUpdate(videoId, progress);
+  // const onPlayerStateChange = (event) => {
+  //   let interval;
+  //   if (event.data === window.YT.PlayerState.PLAYING) {
+  //     const duration = event.target.getDuration();
+  //     interval = setInterval(() => {
+  //       const currentTime = event.target.getCurrentTime();
+  //       const progress = (currentTime / duration) * 100;
 
-        // Mark video as completed if progress exceeds 90%
-        if (progress >= 90) {
-          onProgressUpdate(videoId, 100); // Video is completed
-          clearInterval(interval); // Stop tracking
-        }
+  //       onProgressUpdate(videoId, progress);
 
-        // Stop tracking if video is paused or ended
-        if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
-  };
+  //       if (progress >= 90) {
+  //         onProgressUpdate(videoId, 100);
+  //         clearInterval(interval);
+  //       }
+
+  //       if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+  //         clearInterval(interval);
+  //       }
+  //     }, 1000);
+  //   } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+  //     clearInterval(interval);
+  //   }
+  // };
 
 
   
   return (
-    // <Link to={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer">
-    // <div key={id} className={styles.itemCard}>
-    //   <img src={logo} alt="product" className={styles.itemImg} />
-    //   <div className={styles.itemCardMidSection}>
-    //     <p className={styles.itemTitle}>{title}</p>
-    //     <p className={styles.itemOwner}> {owner}</p>
-    //     {isCompleted && <span className={styles.completedBadge}>Completed</span>}
-    //   </div>
-
-    //   <div ref={playerRef} style={{ width: '100%'}}></div>
-    // </div>
-    // </Link>
+    <Link to={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" onClick={() => onVideoClick(videoId)}>
     <div key={id} className={styles.itemCard}>
-        <img src={logo} alt="product" className={styles.itemImg} />
-      
+      <img src={logo} alt="product" className={styles.itemImg} />
       <div className={styles.itemCardMidSection}>
         <p className={styles.itemTitle}>{title}</p>
-        <p className={styles.itemOwner}>{owner}</p>
+        <p className={styles.itemOwner}> {owner}</p>
         {isCompleted && <span className={styles.completedBadge}>Completed</span>}
       </div>
 
-      {/* Iframe for YouTube video */}
-      <div ref={playerRef} style={{ width: '100%' }}></div>
     </div>
+    </Link>
+    // <div key={id} className={styles.itemCard}>
+    //     <img src={logo} alt="product" className={styles.itemImg} />
+      
+    //   <div className={styles.itemCardMidSection}>
+    //     <p className={styles.itemTitle}>{title}</p>
+    //     <p className={styles.itemOwner}>{owner}</p>
+    //     {isCompleted && <span className={styles.completedBadge}>Completed</span>}
+    //   </div>
+
+    //   {/* Iframe for YouTube video */}
+    //   {console.log({playerRefELEMENET:playerRefs.current,player})}
+    //   <div ref={(el) => (playerRefs.current[videoId] = el)} style={{ width: '100%' }}>
+    //     {player ? null : <div>Loading...</div>}
+    //   </div>
+      
+    // </div>
   );
 };
 
@@ -105,29 +123,55 @@ const EducationBox = () => {
   const [playlistItems, setPlaylistItems] = useState([]);
   const [overallProgress, setOverallProgress] = useState(0);
   const [watchHistory, setWatchHistory] = useState({});
+  // const playerRefs = useRef({});
+
+  // useEffect(() => {
+  //   fetchYouTubePlaylist().then((items) => setPlaylistItems(items));
+  //   const history = JSON.parse(sessionStorage.getItem("watchHistory")) || {};
+  //   setWatchHistory(history);
+  // }, []);
+
+  // const handleProgressUpdate = (videoId, progress) => {
+  //   setWatchHistory((prevHistory) => {
+  //     const updatedHistory = { ...prevHistory, [videoId]: progress };
+  //     sessionStorage.setItem("watchHistory", JSON.stringify(updatedHistory));
+  //     return updatedHistory;
+  //   });
+
+  //   const completedVideos = Object.values({ ...watchHistory, [videoId]: progress }).filter(
+  //     (p) => p === 100
+  //   ).length;
+  //   const progressPercentage = Math.min(Math.round((completedVideos / playlistItems.length) * 100), 100);
+  //   setOverallProgress(progressPercentage);
+  // };
 
   useEffect(() => {
     fetchYouTubePlaylist().then((items) => setPlaylistItems(items));
-
-    // Load watch history from session storage
     const history = JSON.parse(sessionStorage.getItem("watchHistory")) || {};
     setWatchHistory(history);
+    const savedProgress = sessionStorage.getItem("overallProgress");
+    if (savedProgress) {
+      setOverallProgress(Number(savedProgress));  // Retrieve and set overall progress
+    }
   }, []);
+  
 
-  // Update progress based on each video
-  const handleProgressUpdate = (videoId, progress) => {
+  const handleVideoClick = (videoId) => {
     setWatchHistory((prevHistory) => {
-      const updatedHistory = { ...prevHistory, [videoId]: progress };
-      sessionStorage.setItem("watchHistory", JSON.stringify(updatedHistory)); 
+      const updatedHistory = { ...prevHistory, [videoId]: 100 };
+      sessionStorage.setItem("watchHistory", JSON.stringify(updatedHistory));
       return updatedHistory;
     });
-
-    const completedVideos = Object.values({ ...watchHistory, [videoId]: progress }).filter(
+  
+    const completedVideos = Object.values({ ...watchHistory, [videoId]: 100 }).filter(
       (p) => p === 100
     ).length;
-    const progressPercentage = Math.min( Math.round((completedVideos / playlistItems.length) * 100), 100);
+    const progressPercentage = Math.min(Math.round((completedVideos / playlistItems.length) * 100), 100);
+  
     setOverallProgress(progressPercentage);
+    sessionStorage.setItem("overallProgress", progressPercentage); // Save overall progress
   };
+  
 
   // useEffect(() => {
   //   fetchYouTubePlaylist().then((items) => setPlaylistItems(items));
@@ -136,11 +180,11 @@ const EducationBox = () => {
 
   return (
     <div className={styles.educationContainer}>
-      <h1 className={styles.heading}>Education</h1>
+      {/* <h1 className={styles.heading}>Education</h1> */}
 
       <div className={styles.progressWrapper}>
-        <progress value={overallProgress} max="100" className={styles.progress}></progress>
-        <span className={styles.progressText}>{overallProgress}% Completed</span>
+        <p>Your Progress</p>
+        <LinearProgressComponent value={overallProgress} max="100" className={styles.progress}/>
       </div>
 
       <div className={styles.educationSection}>
@@ -153,7 +197,9 @@ const EducationBox = () => {
           title={item.title}
           owner={item.owner}
           isCompleted={watchHistory[item.videoId] === 100}
-          onProgressUpdate={handleProgressUpdate}
+          // onProgressUpdate={handleProgressUpdate}
+          // playerRefs={playerRefs}
+          onVideoClick={handleVideoClick}
         />
       ))}
 

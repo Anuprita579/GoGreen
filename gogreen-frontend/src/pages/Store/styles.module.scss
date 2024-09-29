@@ -65,6 +65,7 @@ a {
             flex-wrap: wrap;
             gap: calc(($screen-ratio)*4);
             padding: calc(($screen-ratio)*3);
+            background-color: #F1F1F1;
         }
     }
 }
@@ -77,6 +78,7 @@ a {
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     .itemImg{
         height: calc(($screen-ratio)*20);
@@ -124,6 +126,7 @@ a {
                     font-size: calc(($screen-ratio)*1);
                     background-color: $background-color-primary;
                     color: $text-color-white;
+                    border-radius: 0 !important;
                 }
                 .minusButton{
                     border-right: 2px solid black;
@@ -147,6 +150,7 @@ a {
     border: 1px solid #D2D2D2;
     text-transform: capitalize;
     border-radius: calc(($screen-ratio)*1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     .categoryCardTitle{
         font-weight: $font-weight-semibold;
         letter-spacing: 2px;
