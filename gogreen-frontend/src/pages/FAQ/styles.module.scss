@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+$screen-ratio: 1vw;
+@import "../../theme.scss";
+
+html * {
+    margin: 0;
+    padding: 0;
+    font-family: 'MyFont' !important;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.faqContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(($screen-ratio)*3);
+    .faqHeading{
+        font-weight: $font-weight-bold;
+    }
+    .accordionWrapper{
+        width: 80%;
+    }
+
+}

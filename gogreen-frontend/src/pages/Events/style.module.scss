@@ -7,20 +7,20 @@ html * {
     font-family: 'MyFont' !important;
     font-weight: 400;
 }
-.events-overview{
-    .event-overview-card{
+.eventsOverview{
+    .eventOverviewCard{
         display: flex;
         padding: calc(($screen-ratio)*3.5);
         align-items: center;
         justify-content: center;
         gap: calc(($screen-ratio)*2);
-        .left-section{
+        .leftSection{
             img{
                 border-radius: calc(($screen-ratio)*1);
                 width: calc(($screen-ratio)*45);
             }
         }
-        .right-section{
+        .rightSection{
             padding: calc(($screen-ratio)*3);
             padding-right: calc(($screen-ratio)*10);
             display: flex;

@@ -17,6 +17,7 @@ import Education from "./pages/Education/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
 import Bicycle from "./pages/Bicycle/index.jsx";
 import About from "./pages/About/index.jsx";
+import FAQ from "./pages/FAQ/index.jsx"
 import './fonts/OpenSauceSans-Regular.ttf'
 import "./theme.scss";
 
@@ -35,6 +36,7 @@ const AppContent = () => {
         <Route path={process.env.REACT_APP_LEADERBOARD_PAGE_ROUTE} element={<LeaderBoard />} />
         <Route path={process.env.REACT_APP_BICYCLE_PAGE_ROUTE} element={<Bicycle />} />
         <Route path={process.env.REACT_APP_ABOUT_PAGE_ROUTE} element={<About />} />
+        <Route path={process.env.REACT_APP_FAQ_PAGE_ROUTE} element={<FAQ />} />
 
       </Routes>
       <FooterLayout />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { events } from '../Home/Events';
+import styles from './style.module.scss'
 
 
 const EventOverviewCard = ({ key, img_src, title, content, direction }) => {
@@ -9,11 +10,11 @@ const EventOverviewCard = ({ key, img_src, title, content, direction }) => {
   };
   return (
     <>
-      <div className='event-overview-card' style={{ flexDirection: direction }} key={key}>
-        <div className='left-section'>
+      <div className={styles.eventOverviewCard} style={{ flexDirection: direction }} key={key}>
+        <div className={styles.leftSection}>
           <img src={img_src} alt="event" />
         </div>
-        <div className='right-section'>
+        <div className={styles.rightSection}>
           <h1>{title}</h1>
           <h3>{content}</h3>
           <Link to={`/events/${formatTitleForURL(title)}`}>
@@ -34,10 +35,10 @@ const EventOverviewCard = ({ key, img_src, title, content, direction }) => {
 }
 
 const EventsOverview = () => {
-  const colors = ['#F0E9FA', 'white'];
+  const colors = ['#E6FFF5', 'white'];
   const direction = ['row', 'row-reverse']
   return (
-    <div className='events-overview'>
+    <div className={styles.eventsOverview}>
       {events.map((item, index) => {
         const bgcolor = index % 2 === 0 ? colors[0] : colors[1];
         const bgdirection = index % 2 === 0 ? direction[0] : direction[1];
