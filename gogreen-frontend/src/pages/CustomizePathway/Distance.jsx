@@ -58,19 +58,19 @@ const Distance = () => {
   const [isSelectingStartPoint, setIsSelectingStartPoint] = useState(false);
   const [isSelectingEndPoint, setIsSelectingEndPoint] = useState(false);
 
-  // Create custom icons for the markers
+  // Custom icons for the markers
   const startIcon = L.icon({
     iconUrl: startMarkerImg,
-    iconSize: [32, 32], // Adjust the size as per your image
-    iconAnchor: [16, 32], // The anchor is the point of the icon which will correspond to the marker's location
-    popupAnchor: [0, -32], // Popup position relative to the icon
+    iconSize: [32, 32],
+    iconAnchor: [16, 32], 
+    popupAnchor: [0, -32], 
   });
 
   const endIcon = L.icon({
     iconUrl: endMarkerImg,
-    iconSize: [32, 32], // Adjust the size as per your image
-    iconAnchor: [16, 32], // The anchor is the point of the icon which will correspond to the marker's location
-    popupAnchor: [0, -32], // Popup position relative to the icon
+    iconSize: [32, 32], 
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32], 
   });
 
   // Automatically calculate the distance once both startPoint and endPoint are set
@@ -89,8 +89,10 @@ const Distance = () => {
           const lng = position.coords.longitude;
           if (type === "start") {
             setStartPoint({ lat, lng });
+            sessionStorage.setItem("startPoint", JSON.stringify({ lat, lng }));
           } else if (type === "end") {
             setEndPoint({ lat, lng });
+            sessionStorage.setItem("endPoint", JSON.stringify({ lat, lng }));
           }
         },
         (error) => {
@@ -107,9 +109,11 @@ const Distance = () => {
       click(e) {
         if (isSelectingStartPoint) {
           setStartPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
+          sessionStorage.setItem("startPoint", JSON.stringify({ lat: e.latlng.lat, lng: e.latlng.lng }));
           setIsSelectingStartPoint(false); // Stop selecting start point
         } else if (isSelectingEndPoint) {
           setEndPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
+          sessionStorage.setItem("endPoint", JSON.stringify({ lat: e.latlng.lat, lng: e.latlng.lng }));
           setIsSelectingEndPoint(false); // Stop selecting end point
         }
       },
@@ -137,7 +141,9 @@ const Distance = () => {
 
   const handleRestart = () => {
     setStartPoint(null);
+    sessionStorage.setItem("startPoint", null);
     setEndPoint(null);
+    sessionStorage.setItem("endPoint", null);
     setDistanceDataValue(""); // Clear stored distance
     setIsSelectingStartPoint(false);
     setIsSelectingEndPoint(false);

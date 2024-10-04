@@ -413,6 +413,47 @@ a {
     gap: calc(($screen-ratio)*0.5);
 }
 
+.transportTypeModal{
+    background-color: $background-color-light;
+    width: 80%;
+    .transportTypeOptions{
+        padding: calc(($screen-ratio)*2);
+        .transportTypesList{
+            display: flex;
+            gap: calc(($screen-ratio)*1);
+            .selected{
+                background-image: linear-gradient(to right, #90EE90, #BCE3C5, #D2EAD7);
+            }
+            .contentButton{
+                border: 1px solid #A04179;
+                border-radius: calc(($screen-ratio)*0.75);
+                text-transform: capitalize;
+                padding: calc(($screen-ratio)*1.5);
+                width: calc(($screen-ratio)*14);
+                height: calc(($screen-ratio)*8);
+            }
+
+        }
+        
+
+    }
+    .transportMapContainer{
+        .distanceContainer{
+            height: 400px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+}
+
+
+
+
+
 //Common Styling
 .gradient-common-button{
     background-image: linear-gradient(to right, #006400, #000000);

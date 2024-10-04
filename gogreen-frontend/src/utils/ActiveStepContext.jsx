@@ -21,7 +21,7 @@ export const ActiveStepProvider = ({ children }) => {
       case 1: 
         return distanceData !== "";
       case 2:
-        return selectedTransportList.length >0;
+        return selectedTransportList.length >0 && sessionStorage.getItem('remainingDistance')==="0";
       default: 
         return true;
     }
