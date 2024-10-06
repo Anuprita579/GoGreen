@@ -11,10 +11,10 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 //useContext
 import { useActiveStep } from "../../utils/ActiveStepContext";
+import { useTransportModes } from "./useTransportModes";
+import { modesOfTransport } from "../../constants/transport";
 //Common Components
 import ButtonComponent from "../../commonComponents/ButtonComponent";
-import InputFieldComponent from "../../commonComponents/InputFieldComponent";
-import SelectComponent from "../../commonComponents/SelectComponent";
 import ModalComponent from "../../commonComponents/ModalComponent";
 //Assets
 import endMarkerImg from "../../assets/endMarkerImg.png";
@@ -45,63 +45,6 @@ const middleIcon = L.icon({
   popupAnchor: [0, -32],
 });
 
-const modesOfTransport = [
-  {
-    id: "mot1",
-    img_src:
-      "https://img.freepik.com/free-vector/flat-design-indian-man-driving-van_23-2149757883.jpg?t=st=1726585863~exp=1726589463~hmac=672fd1fb8a123c0065e0d9696484c7f98e5131492c0111aaef74ca416346b790&w=826",
-    title: "Auto",
-    children: [
-      { id: "mot11", title: "CNG Auto" },
-      { id: "mot12", title: "Petrol Auto" },
-    ],
-  },
-  {
-    id: "mot2",
-    img_src:
-      "https://img.freepik.com/free-vector/bus-driver-concept-illustration_114360-6330.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Bus",
-    children: [
-      { id: "mot21", title: "EV Bus" },
-      { id: "mot22", title: "Normal Bus" },
-    ],
-  },
-  {
-    id: "mot3",
-    img_src:
-      "https://img.freepik.com/free-vector/suv-car-concept-illustration_114360-13226.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Car",
-    children: [
-      { id: "mot31", title: "EV Car" },
-      { id: "mot32", title: "Petrol Car" },
-    ],
-  },
-  {
-    id: "mot4",
-    img_src:
-      "https://img.freepik.com/free-vector/hand-drawn-india-lifestyle-illustration_23-2149827027.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Cycle",
-  },
-  {
-    id: "mot5",
-    img_src:
-      "https://img.freepik.com/free-vector/train-station-concept-illustration_114360-12177.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Train",
-  },
-  {
-    id: "mot6",
-    img_src:
-      "https://img.freepik.com/free-vector/calling-taxi-concept-illustration_114360-24757.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Taxi",
-  },
-  {
-    id: "mot7",
-    img_src:
-      "https://img.freepik.com/free-vector/walking-around-concept-illustration_114360-4033.jpg?ga=GA1.1.1655513578.1726562178&semt=ais_hybrid",
-    title: "Walking",
-  },
-];
-
 const ModesofTransportCard = ({
   id,
   img_src,
@@ -130,13 +73,14 @@ const Transport = () => {
     removeFromSelectedTransport,
     selectedTransportList,
   } = useActiveStep();
+
+  // const { selectedModesData, selectedInnerOptions, handleModeSelect, setSelectedInnerOptions } = useTransportModes();
   const [selectedMode, setSelectedMode] = useState({});
-  const [selectedInnerOptions, setSelectedInnerOptions] = useState({});
+  const [selectedInnerOptions, setSelectedInnerOptions] = useState(null);
   const [selectedOuterMode, setSelectedOuterMode] = useState(null);
 
-  const [selectedModesData, setSelectedModesData] = useState([]);
+  const [selectedModesData, setSelectedModesData] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [transportType, setTransportType] = useState(null);
 
   const [newMarkerPosition, setNewMarkerPosition] = useState(null);
   const [markerPositions, setMarkerPositions] = useState({});
@@ -151,36 +95,45 @@ const Transport = () => {
   const [hasMarker, setHasMarker] = useState({});
 
   // const storedTransportModes = JSON.parse(sessionStorage.getItem("DistributedTransportModes"));
+  console.log("Marker Positions : ", markerPositions);
+  console.log("New Marker Positions : ", newMarkerPosition);
 
   useEffect(() => {
-    if (newMarkerPosition) {
+    if (newMarkerPosition && showModal) {
       setMarkerPositions((prev) => ({
         ...prev,
-        [transportType]: newMarkerPosition,
+        [showModal?.transportType]: newMarkerPosition,
       }));
-      sessionStorage.setItem(`newMarkerPosition_${transportType}`, JSON.stringify(newMarkerPosition));
-      calculateDistance();
+      sessionStorage.setItem(
+        `newMarkerPosition_${showModal?.transportType}`,
+        JSON.stringify(newMarkerPosition)
+      );
+      calculateDistance(showModal?.transportType);
     }
   }, [newMarkerPosition]);
 
   const LocationMarker = ({ mode }) => {
-    const map = useMap();
+    console.log({ modeInfo: mode });
     useMapEvents({
       click(e) {
         if (isAddingMarker) {
-          // Update the marker position for the current mode
           setMarkerPositions((prev) => ({
             ...prev,
             [mode]: e.latlng,
           }));
-          sessionStorage.setItem(`newMarkerPosition_${mode}`, JSON.stringify(e.latlng));
+          sessionStorage.setItem(
+            `newMarkerPosition_${mode}`,
+            JSON.stringify(e.latlng)
+          );
           setNewMarkerPosition(e.latlng);
-          setIsAddingMarker(false); // Exit marker mode after adding marker
-          
+
+          addToSelectedTransport(modesOfTransport[mode].id);
+          setSelectedOuterMode(modesOfTransport[mode].id);
+          toggleModeSelection(modesOfTransport[mode]);
+          setIsAddingMarker(false);
         }
       },
     });
-
 
     return markerPositions[mode] ? (
       <Marker position={markerPositions[mode]} icon={middleIcon}>
@@ -197,151 +150,183 @@ const Transport = () => {
     );
   }, [selectedTransportList]);
 
-  const handleSelect = (modeId) => {
-    const modeDetails = modesOfTransport.find((item) => item.id === modeId);
-    setTransportType(modeDetails.title);
-    addToSelectedTransport(modeId);
-    setSelectedOuterMode(modeId);
-
-    if (modeDetails.children && modeDetails.children.length > 0) {
-      setShowModal(true);
-    } else {
-      toggleModeSelection(modeId, modeDetails);
-      setShowModal(true);
-    }
-  };
-
-  const handleInnerOptionSelect = (innerOptionId) => {
-    setSelectedInnerOptions((prev) => {
-      const currentInnerOption = prev[selectedOuterMode];
-
-      if (currentInnerOption === innerOptionId) {
-        const newInnerOptions = { ...prev };
-        delete newInnerOptions[selectedOuterMode];
-        const modeDetails = modesOfTransport.find(
-          (item) => item.id === selectedOuterMode
-        );
-        const remainingSelectedInnerOptions = Object.values(
-          newInnerOptions
-        ).filter((optionId) =>
-          modeDetails.children.some((child) => child.id === optionId)
-        );
-        if (remainingSelectedInnerOptions.length === 0) {
-          toggleModeSelection(selectedOuterMode, false);
-        }
-
-        return newInnerOptions;
-      } else {
-        const modeDetails = modesOfTransport.find(
-          (item) => item.id === selectedOuterMode
-        );
-        const innerOption = modeDetails.children.find(
-          (item) => item.id === innerOptionId
-        );
-        toggleModeSelection(selectedOuterMode, {
-          ...modeDetails,
-          title: innerOption.title,
-        });
-
-        return {
-          ...prev,
-          [selectedOuterMode]: innerOptionId,
-        };
-      }
-    });
-  };
-
-  const toggleModeSelection = (modeId, modeDetails) => {
-    if (!selectedMode[modeId]) {
-      addToSelectedTransport(modeId);
-      setSelectedModesData((prev) => [
-        ...prev,
-        {
-          id: modeId,
-          title: modeDetails.title
-        },
-      ]);
-      setHasMarker(prev => ({...prev, [modeId]: true}));
-
-    } else if (!modeDetails.children || modeDetails === false) {
-      removeFromSelectedTransport(modeId);
-      setSelectedModesData((prev) => prev.filter((item) => item.id !== modeId));
-      setHasMarker(prev => ({...prev, [modeId]: false}));
-    
-    // Remove the marker for the deselected mode
-    setMarkerPositions((prev) => {
-        const newPositions = { ...prev };
-        delete newPositions[modeDetails.title]; // Remove marker position
-        // If it's a parent mode, remove any inner mode markers too
-      if (modeDetails.children && modeDetails.children.length > 0) {
-        modeDetails.children.forEach((child) => {
-          delete newPositions[child.title];
-        });
-      }
-
-        return newPositions;
-      });
-
-      
-    
-    }
-  };
-
-  useEffect(() => {
-    setHasMarker(selectedModesData.reduce((acc, item) => ({...acc, [item.id]: true }), {}));
-  }, [selectedModesData]);
-  
-
-  useEffect(() => {
-    const modesData = selectedModesData.map((item) => ({
-      id: item.id,
-      title: item.title,
-      distance: item.distance,
+  const handleSelect = (modeTitle) => {
+    setShowModal({ transportType: modeTitle });
+    setSelectedModesData((prev) => ({
+      ...prev,
+      [modeTitle]: {
+        id: modesOfTransport[modeTitle].id,
+        title: modeTitle,
+        distance: 0,
+        innerOption: null,
+      },
     }));
-    sessionStorage.setItem("SelectedTransportModes", JSON.stringify(modesData));
-  }, [selectedModesData]);
+
+    
+
+    if (
+      Object.keys(modesOfTransport[modeTitle]?.children || {})?.length &&
+      !selectedInnerOptions
+    ) {
+      // setSelectedInnerOptions(selectedModesData[modeTitle]?.innerOptionId?selectedModesData[modeTitle]?.innerOptionId:modesOfTransport[modeTitle]?.children[0]?.id);
+      setSelectedInnerOptions(
+        selectedModesData[modeTitle]?.innerOptionId
+          ? selectedModesData[modeTitle]?.innerOptionId
+          : Object.keys(modesOfTransport[modeTitle]?.children)[0]
+      );
+    }
+  };
+
+  console.log("seletedInnerOptions is :", selectedInnerOptions);
+
+  const handleInnerOptionSelect = (innerOption) => {
+    console.log("Inner Option :", innerOption);
+    setSelectedInnerOptions(innerOption?.id);
+  };
+
+  const toggleModeSelection = (modeDetails) => {
+    if (!selectedMode[modeDetails.id]) {
+      addToSelectedTransport(modeDetails.id);
+      setHasMarker((prev) => ({ ...prev, [modeDetails.id]: true }));
+    }
+  };
 
   useEffect(() => {
+    setHasMarker(
+      Object.values(selectedModesData).reduce(
+        (acc, item) => ({ ...acc, [item.id]: true }),
+        {}
+      )
+    );
+    console.log("SelectedModes Data is : ", selectedModesData);
+
+    console.log("Selected inner options in useEffect :", selectedInnerOptions);
     sessionStorage.setItem(
       "SelectedTransportModes",
-      JSON.stringify(selectedTransportList)
+      JSON.stringify(selectedModesData)
     );
-  }, [selectedTransportList]);
+  }, [selectedModesData, selectedInnerOptions]);
 
-  console.log("Selected Transport List : ", selectedTransportList.length);
-  // console.log(storedTransportModes);
-  
-
-  const calculateDistance = () => {
+  const calculateDistance = (transportType) => {
     if (!endPoint) {
       console.log("End Point is missing to calculate distance.");
       return;
     }
 
     const endLatLng = L.latLng(endPoint.lat, endPoint.lng);
-    const distances = Object.entries(markerPositions).map(([mode, position]) => {
-      const markerLatLng = L.latLng(position.lat, position.lng);
-      return markerLatLng.distanceTo(endLatLng) / 1000; // Convert to kilometers
-    });
+    const modeKeys = Object.keys(markerPositions);
+    const distances = {};
 
-    const minDistance = Math.min(...distances);
-    setRemainingDistance(minDistance);
-    sessionStorage.setItem('remainingDistance', minDistance);
-    console.log(`Remaining Distance to End Point: ${minDistance.toFixed(2)} km`);
+    for (let i = 0; i < modeKeys.length; i++) {
+      const mode = modeKeys[i];
+      if (mode === transportType) {
+        const markerLatLng = L.latLng(
+          markerPositions[mode].lat,
+          markerPositions[mode].lng
+        );
+        let distance;
+
+        if (i === 0) {
+          distance = calculateModeDistance(
+            startPoint.lat,
+            startPoint.lng,
+            markerLatLng.lat,
+            markerLatLng.lng
+          );
+        } else {
+          const prevMode = modeKeys[i - 1];
+          const prevMarkerLatLng = L.latLng(
+            markerPositions[prevMode].lat,
+            markerPositions[prevMode].lng
+          );
+          distance = calculateModeDistance(
+            prevMarkerLatLng.lat,
+            prevMarkerLatLng.lng,
+            markerLatLng.lat,
+            markerLatLng.lng
+          );
+        }
+
+        if (distance !== undefined) {
+          const updatedModeData = {
+            id: modesOfTransport[mode].id,
+            title: mode,
+            distance: distance.toFixed(2),
+            innerOption: modesOfTransport[mode]?.children?.[selectedInnerOptions]?.title,
+          };
+
+          setSelectedModesData((prev) => {
+            const filteredData = prev;
+            filteredData[mode] = updatedModeData;
+            return filteredData;
+          });
+        }
+      }
+    }
+
+    const lastMarkerLatLng = L.latLng(
+      markerPositions[modeKeys[modeKeys.length - 1]].lat,
+      markerPositions[modeKeys[modeKeys.length - 1]].lng
+    );
+    const finalDistance = calculateModeDistance(
+      lastMarkerLatLng.lat,
+      lastMarkerLatLng.lng,
+      endPoint.lat,
+      endPoint.lng
+    );
+    distances.remainingDistance = finalDistance.toFixed(2);
+    setRemainingDistance(finalDistance);
+    sessionStorage.setItem("remainingDistance", finalDistance);
+    sessionStorage.setItem("calculatedDistances", JSON.stringify(distances));
+    console.log("Distances for each transportType:", distances);
+    console.log("Remaining Distance to End Point:", finalDistance.toFixed(2));
   };
 
-  const handleSetAsEntireDistance = () => {
-    console.log("NewMarkerPosition before setting as entire distance:", newMarkerPosition);
+  const calculateModeDistance = (
+    sourceLat,
+    sourceLng,
+    destinationLat,
+    destinationLng
+  ) => {
+    const sourceLatLng = L.latLng(sourceLat, sourceLng);
+    const destinationLatLng = L.latLng(destinationLat, destinationLng);
+    const distance = sourceLatLng.distanceTo(destinationLatLng) / 1000; // Convert to kilometers
+    return distance;
+  };
+
+  const handleSetAsEntireDistance = (mode) => {
+    console.log(
+      "NewMarkerPosition before setting as entire distance:",
+      newMarkerPosition
+    );
     if (newMarkerPosition) {
       setNewMarkerPosition(endPoint); // Move marker to end point
       console.log("Marker set to end point:", endPoint);
-      sessionStorage.setItem(
-        "newMarkerPosition",
-        JSON.stringify(endPoint)
+      sessionStorage.setItem("newMarkerPosition", JSON.stringify(endPoint));
+
+      console.log(
+        "Mode of transport in Handle Set as Entire distance :",
+        modesOfTransport[mode]
       );
+
+      addToSelectedTransport(modesOfTransport[mode]?.id);
+      setSelectedOuterMode(modesOfTransport[mode]?.id);
+      toggleModeSelection(modesOfTransport[mode]);
     } else {
       console.log("No marker position to set.");
     }
+  };
+
+  const removeMarker = (mode) => {
+    setMarkerPositions((prev) => {
+      const newState = { ...prev };
+      delete newState[mode];
+      return newState;
+    });
+    setNewMarkerPosition(null);
+    sessionStorage.removeItem(`newMarkerPosition_${mode}`);
+    setSelectedOuterMode(null);
+    removeFromSelectedTransport(modesOfTransport[mode]?.id);
   };
 
   useEffect(() => {
@@ -353,99 +338,52 @@ const Transport = () => {
   return (
     <div className={styles.tranportBox}>
       <div className={styles.transportCard}>
-        {modesOfTransport.map((item) => {
+        {Object.values(modesOfTransport).map((item) => {
           return (
             <ModesofTransportCard
               id={item?.id}
               img_src={item?.img_src}
               title={item?.title}
               selected={selectedMode[item.id]}
-              onSelect={() => handleSelect(item.id)}
+              onSelect={() => handleSelect(item.title)}
+              key={item.id}
             />
           );
         })}
       </div>
 
-
       <div className={styles.modeOfTransportContent}>
-
-
         {showModal && startPoint && endPoint && (
           <ModalComponent
-            buttonContent={transportType}
+            buttonContent={showModal?.transportType}
             children={
               <div className={styles.transportTypeModal}>
                 <div className={styles.transportTypeOptions}>
-                  {transportType === "Bus" ? (
+                  {console.log({
+                    modesOfTransport,
+                    "showModal.transportType": showModal.transportType,
+                  })}
+                  {Object.values(
+                    modesOfTransport[showModal?.transportType]?.children || {}
+                  ).length > 0 ? (
                     <>
                       <h2>Transport Type</h2>
+
                       <div className={styles.transportTypesList}>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot21"
-                              ? styles.selected
-                              : ""
+                        {Object.values(
+                          modesOfTransport[showModal?.transportType]?.children
+                        ).map((transport) => (
+                          <ButtonComponent
+                            className={`${styles.contentButton} ${
+                              selectedInnerOptions === transport.id
+                                ? styles.selected
+                                : ""
                             }`}
-                          onClick={() => handleInnerOptionSelect("mot21")}
-                        >
-                          EV Bus
-                        </ButtonComponent>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot22"
-                              ? styles.selected
-                              : ""
-                            }`}
-                          onClick={() => handleInnerOptionSelect("mot22")}
-                        >
-                          Normal Bus
-                        </ButtonComponent>
-                      </div>
-                    </>
-                  ) : transportType === "Auto" ? (
-                    <>
-                      <h2>Transport Type</h2>
-                      <div className={styles.transportTypesList}>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot11"
-                              ? styles.selected
-                              : ""
-                            }`}
-                          onClick={() => handleInnerOptionSelect("mot11")}
-                        >
-                          CNG Auto
-                        </ButtonComponent>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot12"
-                              ? styles.selected
-                              : ""
-                            }`}
-                          onClick={() => handleInnerOptionSelect("mot12")}
-                        >
-                          Petrol Auto
-                        </ButtonComponent>
-                      </div>
-                    </>
-                  ) : transportType === "Car" ? (
-                    <>
-                      <h2>Transport Type</h2>
-                      <div className={styles.transportTypesList}>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot31"
-                              ? styles.selected
-                              : ""
-                            }`}
-                          onClick={() => handleInnerOptionSelect("mot31")}
-                        >
-                          EV Car
-                        </ButtonComponent>
-                        <ButtonComponent
-                          className={`${styles.contentButton} ${selectedInnerOptions[selectedOuterMode] === "mot32"
-                              ? styles.selected
-                              : ""
-                            }`}
-                          onClick={() => handleInnerOptionSelect("mot32")}
-                        >
-                          Petrol Car
-                        </ButtonComponent>
+                            onClick={() => handleInnerOptionSelect(transport)}
+                          >
+                            {transport.title}
+                          </ButtonComponent>
+                        ))}
                       </div>
                     </>
                   ) : null}
@@ -453,12 +391,20 @@ const Transport = () => {
                 <div className={styles.transportMapContainer}>
                   <p>Map:</p>
                   <div className={styles.transportTypeModalButtons}>
-                    <ButtonComponent onClick={() => setIsAddingMarker(true)}>
-                      Add marker
-                    </ButtonComponent>
-                    <ButtonComponent onClick={handleSetAsEntireDistance}>
-                      Set as Entire Distance
-                    </ButtonComponent>
+                    <ButtonComponent
+                      onClick={() => setIsAddingMarker(true)}
+                      children="Add marker"
+                    />
+                    <ButtonComponent
+                      onClick={() =>
+                        handleSetAsEntireDistance(showModal.transportType)
+                      }
+                      children="Set as entire distance"
+                    />
+                    <ButtonComponent
+                      onClick={() => removeMarker(showModal.transportType)}
+                      children="Remove Marker"
+                    />
                   </div>
 
                   <div className={styles.distanceContainer}>
@@ -473,24 +419,25 @@ const Transport = () => {
                         <Popup>Start Point</Popup>
                       </Marker>
 
-                      {Object.entries(markerPositions).map(([mode, position]) => (
-                        <Marker key={mode} position={position} icon={middleIcon}>
-                          <Popup>{`${mode} Marker`}</Popup> 
-                        </Marker>
-                      ))}
-
+                      {Object.entries(markerPositions).map(
+                        ([mode, position]) => (
+                          <Marker
+                            key={mode}
+                            position={position}
+                            icon={middleIcon}
+                          >
+                            <Popup>{`${mode} Marker`}</Popup>
+                          </Marker>
+                        )
+                      )}
 
                       {/* New marker */}
-                      <LocationMarker mode={transportType} />
+                      <LocationMarker mode={showModal?.transportType} />
 
                       <Marker position={endPoint} icon={endIcon}>
                         <Popup>End Point</Popup>
                       </Marker>
-
-                      {/* <LocationMarker /> */}
                     </MapContainer>
-
-
                   </div>
                   {remainingDistance !== null && (
                     <p className={styles.remainingDistance}>
@@ -502,7 +449,10 @@ const Transport = () => {
             }
             buttonClassName={styles.transportTypeButton}
             open={showModal}
-            onClose={() => setShowModal(false)}
+            onClose={() => {
+              setShowModal(false);
+              setSelectedInnerOptions(null);
+            }}
             onOpen={() => setShowModal(true)}
           />
         )}
