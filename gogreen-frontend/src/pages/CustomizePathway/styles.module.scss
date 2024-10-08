@@ -380,6 +380,10 @@ a {
             color: $text-color-white;
             text-transform: capitalize;
         }
+        .endDistanceButton:disabled,
+        .detectEndLocationButton:disabled{
+            opacity: 0.4;
+        }
         .detectEndLocationButton{
             background-color: #DA0000; 
             color: $text-color-white;
@@ -438,6 +442,20 @@ a {
 
     }
     .transportMapContainer{
+        padding: 0 calc(($screen-ratio)*2) calc(($screen-ratio)*1) calc(($screen-ratio)*2);
+        .transportTypeModalButtons{
+            display: flex;
+            gap: calc(($screen-ratio)*1);
+            padding: calc(($screen-ratio)*0.2);
+            .mapButton{
+                background-color: #2B81E4; 
+                color: $text-color-white;
+                text-transform: capitalize;
+            }
+            .mapButton:disabled {
+                opacity: 0.6; 
+            }
+        }
         .distanceContainer{
             height: 400px;
             width: 100%;

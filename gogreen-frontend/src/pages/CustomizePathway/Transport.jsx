@@ -94,7 +94,6 @@ const Transport = () => {
 
   const [hasMarker, setHasMarker] = useState({});
 
-  // const storedTransportModes = JSON.parse(sessionStorage.getItem("DistributedTransportModes"));
   console.log("Marker Positions : ", markerPositions);
   console.log("New Marker Positions : ", newMarkerPosition);
 
@@ -389,21 +388,23 @@ const Transport = () => {
                   ) : null}
                 </div>
                 <div className={styles.transportMapContainer}>
-                  <p>Map:</p>
                   <div className={styles.transportTypeModalButtons}>
                     <ButtonComponent
                       onClick={() => setIsAddingMarker(true)}
                       children="Add marker"
+                      className={styles.mapButton}
                     />
                     <ButtonComponent
-                      onClick={() =>
-                        handleSetAsEntireDistance(showModal.transportType)
-                      }
+                      onClick={() => handleSetAsEntireDistance(showModal.transportType)}
                       children="Set as entire distance"
+                      className={styles.mapButton}
+                      disabled={!newMarkerPosition || !markerPositions[showModal?.transportType]}
                     />
                     <ButtonComponent
                       onClick={() => removeMarker(showModal.transportType)}
                       children="Remove Marker"
+                      className={styles.mapButton}
+                      disabled={!markerPositions[showModal?.transportType]}
                     />
                   </div>
 
@@ -411,7 +412,7 @@ const Transport = () => {
                     <MapContainer
                       center={[19.03642, 72.85947]}
                       zoom={13}
-                      style={{ height: "100%", width: "80%", zIndex: 2 }}
+                      style={{ height: "100%", width: "100%", zIndex: 2 }}
                     >
                       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
