@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     //Optional Fields
     color: {
         type: String,

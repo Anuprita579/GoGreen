@@ -17,6 +17,10 @@ const bicycleSchema = new mongoose.Schema({
     bicycleLogo: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true
     }
 });
 

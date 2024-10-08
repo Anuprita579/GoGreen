@@ -5,7 +5,8 @@
         "category": "clothes",
         "price": 290,
         "color": "pink",
-        "apparelType": "women"
+        "apparelType": "women",
+        "description": "This saree is made from 100% organic cotton, which is grown without harmful pesticides and synthetic fertilizers, reducing soil and water pollution. The use of natural dyes ensures that the production process is environmentally friendly. Moreover, by supporting traditional weaving techniques, this product helps sustain local artisan communities, promoting fair trade practices and preserving cultural heritage."
     },
     {
         "name": "Jeans",
@@ -14,7 +15,8 @@
         "price": 350,
         "color": "blue",
         "size": "M",
-        "apparelType": "men"
+        "apparelType": "men",
+        "description": "These jeans are crafted from organic denim, which reduces water consumption by approximately 90% compared to conventional cotton. The production uses eco-friendly dyes and finishes, minimizing chemical runoff into waterways. Additionally, they are designed for durability, encouraging consumers to invest in quality over quantity, thus promoting a more sustainable fashion cycle."
     },
     {
         "name": "Kurta",
@@ -23,7 +25,8 @@
         "price": 350,
         "color": "green",
         "size": "S",
-        "apparelType": "men"
+        "apparelType": "men",
+        "description": "This kurta is made from sustainably sourced cotton, which not only supports eco-friendly agriculture but also provides breathability and comfort. By integrating traditional designs with modern aesthetics, this kurta encourages consumers to appreciate and invest in artisanal craftsmanship, reducing the carbon footprint associated with mass-produced garments."
     },
     {
         "name": "T-Shirt",
@@ -32,77 +35,89 @@
         "price": 200,
         "color": "blue",
         "size": "L",
-        "apparelType": "men"
+        "apparelType": "men",
+        "description": "This t-shirt is made from 100% recycled materials, contributing to waste reduction and promoting a circular economy. The use of low-impact dyes and an energy-efficient manufacturing process minimizes its carbon footprint. The shirt's classic design ensures longevity, encouraging wearers to opt for timeless styles rather than fast fashion."
     },
     {
         "name": "Sofa",
         "logo": "https://m.media-amazon.com/images/I/81kQ4zXjkmL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "homeDecor",
         "price": 2900,
-        "color": "black"
+        "color": "black",
+        "description": "This sofa is constructed from reclaimed wood and eco-friendly upholstery fabrics that are free from harmful chemicals. Its production prioritizes minimal waste, using leftover materials from other manufacturing processes. By investing in this piece, consumers are not only enhancing their living spaces but also making a conscious choice to reduce deforestation and promote sustainable forestry practices."
     },
     {
         "name": "Flower Vase",
         "logo": "https://m.media-amazon.com/images/I/517XCOxJnpL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "homeDecor",
         "price": 1590,
-        "color": "white"
+        "color": "white",
+        "description": "Crafted from 100% recycled glass, this flower vase embodies sustainability. The manufacturing process utilizes significantly less energy than producing new glass, thereby reducing greenhouse gas emissions. Its elegant design is versatile for various decor styles, encouraging consumers to choose sustainable decor options that contribute to a lower environmental impact."
     },
     {
         "name": "Hand Bag",
         "logo": "https://m.media-amazon.com/images/I/819ARdIuEvS._AC_UL480_FMwebp_QL65_.jpg",
         "category": "luggage",
         "price": 200,
-        "color": "red"
+        "color": "red",
+        "description": " This handbag is made from vegan leather, which is free from animal products and synthetic plastics. The materials used are designed to be biodegradable, reducing long-term waste. The production process incorporates sustainable practices, ensuring that the handbag is not only stylish but also aligns with ethical consumerism."
     },
     {
         "name": "Purse",
         "logo": "https://m.media-amazon.com/images/I/71b8eDHLFBL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "luggage",
         "price": 2900,
-        "color": "blue"
+        "color": "blue",
+        "description": "This purse is made from environmentally friendly materials, ensuring minimal impact on the planet. It is designed for durability, allowing it to be used for years, which contrasts with the fast-fashion mindset. By choosing this purse, consumers can make a statement about their commitment to sustainability and responsible fashion."
     },
     {
         "name": "Book",
         "logo": "https://m.media-amazon.com/images/I/81avjKuFFuL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "stationary",
-        "price": 290
+        "price": 290,
+        "description": "Printed on 100% recycled paper using soy-based inks, this book supports eco-friendly publishing practices. The choice of recycled materials reduces the demand for virgin paper, thus preserving forests and wildlife habitats. The book's content promotes awareness about sustainability, inspiring readers to adopt environmentally friendly practices."
     },
     {
         "name": "Pencil",
         "logo": "https://m.media-amazon.com/images/I/51AYbFJHSoL._AC_UL480_QL65_.jpg",
         "category": "stationary",
-        "price": 15
+        "price": 15,
+        "description": "Made from sustainably sourced cedar wood, this pencil is biodegradable and can decompose naturally, unlike plastic alternatives. Its production involves minimal waste and energy, making it an eco-conscious choice for everyday use. Promoting responsible consumption, this pencil serves as a reminder of the importance of choosing environmentally friendly stationery."
     },
     {
         "name": "Pencil Stand",
         "logo": "https://m.media-amazon.com/images/I/71awyXSBwkL._AC_UL480_FMwebp_QL65_.jpg",
         "category": "stationary",
         "price": 220,
-        "color": "black"
+        "color": "black",
+        "description": "This pencil stand is made from recycled materials, showcasing creativity in waste management. Its design not only organizes your workspace but also serves as a conversation starter about the importance of recycling and reusing materials. By choosing this product, consumers support the circular economy and sustainable design practices."
     },
     {
         "name": "Tulsi",
         "logo": "https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-rama-tulsi-plant-holy-basil-ocimum-sanctum-green-plant_large.jpg?v=1634227321",
         "category": "plants",
-        "price": 120
+        "price": 120,
+        "description": "Tulsi is not just a plant; it's a symbol of sustainability. It grows well in pots, making it suitable for urban gardening. This plant helps improve air quality and provides medicinal benefits, aligning with eco-friendly lifestyles. By growing tulsi, individuals can contribute to urban biodiversity and promote green spaces in their communities."
     },
     {
         "name": "Cactus",
         "logo": "https://nurserylive.com/cdn/shop/products/nurserylive-phalaenopsis-yellow-plant_92edb738-95b1-4386-94ec-60980a6ed195_295x295.jpg?v=1634226144",
         "category": "plants",
-        "price": 100
+        "price": 100,
+        "description": "Cacti are exceptionally low-maintenance and require minimal water, making them ideal for sustainable gardening, especially in arid climates. Their ability to thrive on limited resources highlights the importance of drought-resistant plants in adapting to climate change. Incorporating cacti into home decor not only enhances aesthetics but also supports water conservation efforts."
     },
     {
         "name": "Daffodil",
         "logo": "https://nurserylive.com/cdn/shop/collections/60713d771e8e222d7a50ff71da6fb980-334575_260x260.jpg?v=1681381694",
         "category": "plants",
-        "price": 150
+        "price": 150,
+        "description": "Daffodils are perennial plants that bloom year after year, requiring minimal care once established. Their ability to attract pollinators like bees enhances local biodiversity, supporting ecosystem health. Planting daffodils contributes to creating beautiful and sustainable landscapes, promoting a connection to nature."
     },
     {
         "name": "Tulip",
         "logo": "https://nurserylive.com/cdn/shop/collections/3deea72de3e1251177beb61e9648481d_260x260.jpg?v=1681381553",
         "category": "plants",
-        "price": 150
+        "price": 150,
+        "description": "The Tulip Plant is a symbol of beauty and grace, making it a popular choice among gardeners and plant lovers. Known for its vibrant and diverse color range, including red, yellow, purple, and white, the Tulip Plant adds a refreshing touch to any garden or indoor space. These plants thrive best in cool climates and well-drained soil, requiring only moderate care, and bloom in early spring, rewarding you with striking blossoms."
     }
 ]

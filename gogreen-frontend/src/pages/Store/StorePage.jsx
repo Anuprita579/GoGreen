@@ -40,7 +40,7 @@ const categories_list = [
         category: "plants"
     }
 ]
-export const ItemCard = ({id, logo, price, title, color}) => {
+export const ItemCard = ({id, logo, price, title, color, description}) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
     const itemInCart = cartItems.find(item => item.id === id);
@@ -59,6 +59,7 @@ export const ItemCard = ({id, logo, price, title, color}) => {
             <img src={logo} alt='product' className={styles.itemImg}/>
             <div className={styles.itemCardContentSection}>
                 <p className={styles.itemTitle}>{title}</p>
+                <p className={styles.itemDesc}>{description}</p>
                 <div className={styles.itemCardMidSection}>
                     <p className={styles.itemPrice}>&#8377; {price}</p>
                     {color && <div style={{backgroundColor: color}} className={styles.colorBox}> </div>}
@@ -181,6 +182,7 @@ function StorePage() {
                                 price={item.price}
                                 title={item.name}
                                 color={item.color}
+                                description={item.description}
                             />
 
                         </motion.div>

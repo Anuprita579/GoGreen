@@ -72,6 +72,7 @@ a {
 
 .itemCard{
     width: calc(($screen-ratio)*20);
+    height: 100%;
     border-radius: calc(($screen-ratio)*1);
     border: 1px solid #D2D2D2;
     display: flex;
@@ -101,6 +102,10 @@ a {
         .itemTitle
         .itemPrice{
             font-weight: $font-weight-normal;
+        }
+        .itemDesc{
+            font-size: x-small;
+            font-style: italic;
         }
         .colorBox{
             height: 20px;

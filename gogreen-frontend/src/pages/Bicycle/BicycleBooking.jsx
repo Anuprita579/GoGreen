@@ -25,6 +25,7 @@ const BicycleCard = ({ bicycle }) => {
             <div className={styles.bicycleBottomContent}>
                 <p className={styles.bicycleLocation}>{bicycle.location}</p>
                 <p ><span className={styles.bicycleSubTitle}>Price per km: </span>&#8377; {bicycle.pricePerKm}</p>
+                <p className={styles.bicycleDesc}>{bicycle.description}</p>
 
                 <InputFieldComponent
                     type="number"
@@ -92,6 +93,8 @@ const BicycleBooking = () => {
           </div>
         );
       }
+
+      console.log(bicycles);
 
     return (
         <div className={styles.bicycleBooking}>
