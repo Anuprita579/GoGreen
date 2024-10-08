@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 //useContext
@@ -20,60 +14,27 @@ import styles from "./styles.module.scss";
 
 const Distance = () => {
   const { distanceData, setDistanceDataValue } = useActiveStep();
-  console.log("distance Data : ", distanceData);
-  sessionStorage.setItem("distanceData", distanceData);
-  //   if (type === "start") {
-  //     setStartPoint({ lat: e.target.getLatLng().lat, lng: e.target.getLatLng().lng });
-  //   } else {
-  //     setEndPoint({ lat: e.target.getLatLng().lat, lng: e.target.getLatLng().lng });
-  //   }
-  // };
-
-  // const calculateDistance = (startPoint, endPoint) => {
-  //   if (!startPoint || !endPoint) return "Please select both points.";
-
-  //   // Haversine formula implementation
-  //   const lat1 = startPoint.lat * Math.PI / 180;
-  //   const lon1 = startPoint.lng * Math.PI / 180;
-  //   const lat2 = endPoint.lat * Math.PI / 180;
-  //   const lon2 = endPoint.lng * Math.PI / 180;
-
-  //   const dlat = lat2 - lat1;
-  //   const dlon = lon2 - lon1;
-  //   const a =
-  //     Math.sin(dlat / 2) ** 2 +
-  //     Math.cos(lat1) *
-  //       Math.cos(lat2) *
-  //       Math.sin(dlon / 2) ** 2;
-  //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  //   const earthRadius = 6371; // Radius of the Earth in kilometers
-
-  //   const distance = earthRadius * c;
-
-  //   return Math.round(distance * 1000) / 1000; // Convert kilometers to meters and round
-  // };
-
   const [startPoint, setStartPoint] = useState(null);
   const [endPoint, setEndPoint] = useState(null);
   const [isSelectingStartPoint, setIsSelectingStartPoint] = useState(false);
   const [isSelectingEndPoint, setIsSelectingEndPoint] = useState(false);
+  sessionStorage.setItem("distanceData", distanceData);
 
   // Custom icons for the markers
   const startIcon = L.icon({
     iconUrl: startMarkerImg,
     iconSize: [32, 32],
-    iconAnchor: [16, 32], 
-    popupAnchor: [0, -32], 
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
   });
 
   const endIcon = L.icon({
     iconUrl: endMarkerImg,
-    iconSize: [32, 32], 
+    iconSize: [32, 32],
     iconAnchor: [16, 32],
-    popupAnchor: [0, -32], 
+    popupAnchor: [0, -32],
   });
 
-  // Automatically calculate the distance once both startPoint and endPoint are set
   useEffect(() => {
     if (startPoint && endPoint) {
       const distance = calculateDistance(startPoint, endPoint);

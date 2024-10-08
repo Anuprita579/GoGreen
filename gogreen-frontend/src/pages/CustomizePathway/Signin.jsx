@@ -16,7 +16,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 //Sign in with Google
-// import { GoogleOAuthProvider, GoogleOAuthButton, GoogleLogin} from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleOAuthButton, GoogleLogin} from "@react-oauth/google";
+import { jwtDecode } from 'jwt-decode';
 import styles from "./styles.module.scss"
 
 function OTP({ separator, length, value, onChange, validatedOtp }) {
@@ -195,8 +196,8 @@ OTP.propTypes = {
 };
 
 const Signin = ({ sourceComponent, onClose }) => {
-//   const GenerateOtp = GenerateOTPAPI;
-//   const ValidateOtp = ValidateOTPAPI;
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENTID;
+  
   const [loginResponse, setLoginResponse] = useState(null);
 
   const { incrementStep, setActiveStep } = useActiveStep();
@@ -220,7 +221,22 @@ const Signin = ({ sourceComponent, onClose }) => {
   const [otpErrorMessage, setOtpErrorMessage] = useState("");
 
   const handleLoginSuccess = (response) => {
+    console.log("Login successful", response);
     setLoginResponse(response);
+    const { credential } = response;
+    const decodedToken = jwtDecode(credential);
+    // Extract name and email from the decoded token
+    const { name, email } = decodedToken;
+    // Store name and email in session storage
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('email', email);
+    console.log('User Info:', { name, email });
+    setIsContinueClicked(true);
+    login({
+        username: sessionStorage.getItem('name'),
+        email: sessionStorage.getItem('email')
+      });
+    incrementStep();
   };
 
   const handleLoginFailure = (error) => {
@@ -267,7 +283,7 @@ const Signin = ({ sourceComponent, onClose }) => {
     if (isAllValid) {
       login({
         username: sessionStorage.getItem("name"),
-        mobileNo: sessionStorage.getItem("mobileNo"),
+        email: sessionStorage.getItem('email')
       });
       setIsContinueClicked(true);
       switch (sourceComponent) {
@@ -282,16 +298,6 @@ const Signin = ({ sourceComponent, onClose }) => {
     } else {
       console.log("Form not submited");
     }
-  };
-
-  const handleSignInSuccess = (response) => {
-    console.log("Sign-in completed by GoogleOAuth : ", response);
-    // setIsContinueClicked(true);
-    // login({
-    //     username: sessionStorage.getItem('name'),
-    //     mobileNo: sessionStorage.getItem('mobileNo')
-    //   });
-    // incrementStep();
   };
 
   const mobileNo = email;
@@ -619,15 +625,15 @@ const Signin = ({ sourceComponent, onClose }) => {
               }
               disabled={!isAllValid || isContinueClicked}
             />
-            {/* <h4 className={styles.orSection}>OR</h4> */}
-{/* 
-            <GoogleOAuthProvider clientId={apiKey}>
+            <h4 className={styles.orSection}>OR</h4>
+
+            <GoogleOAuthProvider clientId={clientId}>
              
               <GoogleLogin
                 onSuccess={handleLoginSuccess}
                 onFailure={handleLoginFailure}
               />
-            </GoogleOAuthProvider> */}
+            </GoogleOAuthProvider>
           </form>
         </div>
       </div>
