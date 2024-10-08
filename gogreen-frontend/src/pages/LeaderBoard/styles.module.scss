@@ -35,6 +35,19 @@ a {
             text-transform: capitalize;
             color: #FFD580;
         }
+        .discountEligible{
+            font-weight:  $font-weight-semibold;
+            text-transform: capitalize;
+            color: #FFD580;
+            padding: calc(($screen-ratio)*2);
+            letter-spacing: 1px;
+            background-color:#00BFA5;
+            .discountNumber{
+                font-weight: $font-weight-bold;
+                color: $text-color-white;
+
+            }
+        }
         .carbonItem{
             padding: calc(($screen-ratio)*0.75);
             .modeName{

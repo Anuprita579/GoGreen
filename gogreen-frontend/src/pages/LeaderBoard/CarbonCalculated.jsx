@@ -5,6 +5,7 @@ import Rank from './Rank';
 
 const CarbonCalculated = () => {
     const username = sessionStorage.getItem('name');
+    const discount = sessionStorage.getItem('discount');
     function calculateCarbonEmissions(distance, mode, innerOption) {
         const emissionFactors = {
             dieselcar: 0.171, 
@@ -63,6 +64,8 @@ const CarbonCalculated = () => {
                 <p className={styles.totalCarbonTitle}>Total Carbon Emissions</p>
                 <p className={styles.totalCarbonContent}>{totalCarbonEmissions.toFixed(2)} <span> kg CO2e</span></p>
             </div>  
+
+            <p className={styles.discountEligible}>Congratulations {username} you're eligible for <span className={styles.discountNumber}>{(discount * 100).toFixed(2)}%</span> discount </p>
     </div>
 
         <Rank totalCarbonEmissions={totalCarbonEmissions}/>

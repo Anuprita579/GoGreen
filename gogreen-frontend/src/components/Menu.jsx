@@ -50,7 +50,7 @@ const Menu = ({onClose}) => {
                 <Link to='/about' onClick={handleCloseMenu}><li>About Us</li></Link>
                 <Link to='/calculate' onClick={handleCloseMenu}><li>Carbon Footprint Calculator</li></Link>
                 <Link to='/education' onClick={handleCloseMenu}><li>Education</li></Link>
-                <Link to='/contact-us' onClick={handleCloseMenu}><li>Contact Us</li></Link>
+                <Link to='/store' onClick={handleCloseMenu}><li>Shopping</li></Link>
                 <Link to='/faq' onClick={handleCloseMenu}><li>FAQs</li></Link>
               </ul>
             </nav>
