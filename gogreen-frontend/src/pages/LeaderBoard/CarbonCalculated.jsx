@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./styles.module.scss"
 import Rank from './Rank';
 
 
 const CarbonCalculated = () => {
     const username = sessionStorage.getItem('name');
-    const discount = sessionStorage.getItem('discount');
+    // const discount = sessionStorage.getItem('discount');
+    
+    const[discount,setDiscount]=useState(null);
+    const[reload,setReload]=useState(null);
+
     function calculateCarbonEmissions(distance, mode, innerOption) {
         const emissionFactors = {
             dieselcar: 0.171, 
@@ -39,7 +43,14 @@ const CarbonCalculated = () => {
     const distributedModes = JSON.parse(sessionStorage.getItem('SelectedTransportModes') || '{}');
     let totalCarbonEmissions = 0;
 
-    console.log(sessionStorage.getItem('SelectedTransportModes'));
+    console.log({reloadRender:reload})
+
+
+    useEffect(()=>{
+      const temp=sessionStorage.getItem('discount');
+      console.log({sessionStorage,temp})
+      setDiscount(temp)
+    },[reload])
 
       
   return (
@@ -68,7 +79,7 @@ const CarbonCalculated = () => {
             <p className={styles.discountEligible}>Congratulations {username} you're eligible for <span className={styles.discountNumber}>{(discount * 100).toFixed(2)}%</span> discount </p>
     </div>
 
-        <Rank totalCarbonEmissions={totalCarbonEmissions}/>
+        <Rank totalCarbonEmissions={totalCarbonEmissions} setReload={setReload}/>
     </div>
   )
 }

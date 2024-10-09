@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import styles from "./styles.module.scss"
 
-const Rank = ({ totalCarbonEmissions }) => {
+const Rank = ({ totalCarbonEmissions,setReload }) => {
 
     const [leaderboardEntries, setLeaderboardEntries] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +44,14 @@ const Rank = ({ totalCarbonEmissions }) => {
         return 0;
     };
     console.log("Discount : ", discount);
-    sessionStorage.setItem("discount", discount);
+    // sessionStorage.setItem("discount", discount);
+
+    useEffect(()=>{
+        if(discount){
+            sessionStorage.setItem("discount", discount);
+            setReload(new Date());
+        }
+    },[discount])
 
     const fetchLeaderboardData = async () => {
         try {
