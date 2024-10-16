@@ -37,6 +37,7 @@ https://gogreen-app.vercel.app/
    npm install
    ```
 4. Add environment variable in both backend and frontend folder
+
    For frontend folder - 
    ```
    REACT_APP_API_BASE_URL=http://localhost:5000
