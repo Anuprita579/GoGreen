@@ -36,7 +36,32 @@ https://gogreen-app.vercel.app/
    ```
    npm install
    ```
-4. Start the application:
+4. Add environment variable in both backend and frontend folder
+   For frontend folder - 
+   ```
+   REACT_APP_API_BASE_URL=http://localhost:5000
+   REACT_APP_HOME_PAGE_ROUTE=/
+   REACT_APP_STORE_PAGE_ROUTE=/store
+   REACT_APP_CART_PAGE_ROUTE=/cart
+   REACT_APP_EVENTS_PAGE_ROUTE=/events
+   REACT_APP_EDUCATION_PAGE_ROUTE=/education
+   REACT_APP_CALCULATE_PAGE_ROUTE=/calculate
+   REACT_APP_LEADERBOARD_PAGE_ROUTE=/leaderboard
+   REACT_APP_BICYCLE_PAGE_ROUTE=/bicycle
+   REACT_APP_ABOUT_PAGE_ROUTE=/about
+   REACT_APP_FAQ_PAGE_ROUTE=/faq
+   REACT_APP_GOOGLE_CLIENTID=
+   REACT_APP_YOUTUBE_API_KEY=
+   REACT_APP_PLAYLIST_ID=PLb5SyhPhDyTfB2NKLucvg6HDqX_3v9RHs
+   ```
+
+   For backend folder -
+   ```
+   MONGODB_URL = 
+   APP_MAILID=
+   APP_MAIL_PASSWORD=
+   ```
+5. Start the application:
    ```
    npm run start
    ```
