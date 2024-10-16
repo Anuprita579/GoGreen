@@ -10,11 +10,11 @@ const bicycle_routes = require('./routes/bicycle');
 
 const app = express();
 
-// app.use(cors({
-//     origin: 'http://localhost:3001', // Allow only your frontend
-//     methods: 'GET,POST',             // Allow specific methods
-//     credentials: true                // Enable to allow cookies and credentials
-// }));
+app.use(cors({
+    origin: 'http://localhost:3001', // Allow only your frontend
+    methods: 'POST',             // Allow specific methods
+    credentials: true                // Enable to allow cookies and credentials
+}));
 
 app.use(express.json()); // To parse JSON bodies
 
