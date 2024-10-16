@@ -20,7 +20,7 @@ GoGreen is a sustainabilty platform which promotes sustainablity by providing fe
 - **Events**: Participate in local sustainability events and workshops.
 
 ## Demo
-https://food-vista.vercel.app/
+https://gogreen-app.vercel.app/
 
 ## Installation
 
@@ -30,7 +30,7 @@ https://food-vista.vercel.app/
    ```
 2. Navigate to project directory
    ```
-   cd FoodVista
+   cd GoGreen
    ```
 3. Install dependencies:
    ```
@@ -40,16 +40,21 @@ https://food-vista.vercel.app/
    ```
    npm run start
    ```
-Open your browser and visit http://localhost:1234
+Open your browser and visit http://localhost:3001
 
 ## Technologies Used
 - React: Frontend
 - MongoDB: Database
 - Node.js: Backend
 - Express: Server Framework
-- Redux: State Management 
+- Redux: State Management
 - SASS: Styling
 - Material UI: Component Library
+- Nodemailer.js: Email Integration
+- React Leaflet: Map Integration
+- Framer motion: Animated Transitions
+- React-lottie: Animated Icons
+- jwt-decode: JWT Decoding
 - Webpack: Bundler
 
 ## Usage
