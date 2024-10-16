@@ -21,7 +21,7 @@ const Rank = ({ totalCarbonEmissions,setReload }) => {
         const carbonFootprint = totalCarbonEmissions.toFixed(2);
 
         try {
-            const response = await fetch('/api/leaderboard/submitScore', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/leaderboard/submitScore`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const Rank = ({ totalCarbonEmissions,setReload }) => {
 
     const fetchLeaderboardData = async () => {
         try {
-            const response = await fetch('/api/leaderboard/getScore');
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/leaderboard/getScore`);
             const data = await response.json();
             console.log('Leaderbord get data :', data);
             const sortedEntries = [...data].sort((a, b) => a.carbonFootprint - b.carbonFootprint);

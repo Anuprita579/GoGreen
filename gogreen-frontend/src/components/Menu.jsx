@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 //useContext
 import { useLoginState } from '../utils/LoginStateContext';
-//API URL
-// import { InitiateAssessmentAPI } from '../../utils/apiUrl';
-// import callAPI from '../../utils/apiAction';
 //Common Components
 import ButtonComponent from '../commonComponents/ButtonComponent';
 import ModalComponent from '../commonComponents/ModalComponent';

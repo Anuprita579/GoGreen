@@ -96,10 +96,12 @@ function StorePage() {
     const nextSlide = () => {
         setImage((nextImage)=> (nextImage +1) % store_banner.length );
     }
+
+    console.log(process.env.REACT_API_BASE_URL);
     
     const fetchStoreData = async() => {
         try {
-            const requests = categories.map((category)=>axios.get(`/api/products?category=${category}`));
+            const requests = categories.map((category)=>axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products?category=${category}`));
             const responses = await Promise.all(requests)
             const newData = {};
             responses.forEach((res, index)=>{

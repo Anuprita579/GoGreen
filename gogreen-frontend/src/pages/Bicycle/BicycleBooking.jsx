@@ -10,7 +10,7 @@ const BicycleCard = ({ bicycle }) => {
     const [estimatedCost, setEstimatedCost] = useState(0);
 
     const calculateCost = async () => {
-        const response = await fetch('/api/bicycle/calculate-cost', {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/bicycle/calculate-cost`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ distance, pricePerKm: bicycle.pricePerKm })
@@ -57,7 +57,7 @@ const BicycleBooking = () => {
 
     useEffect(() => {
         if (location) {
-            fetch(`/api/bicycle/availability?lat=${location.lat}&lon=${location.lon}`)
+            fetch(`${process.env.REACT_APP_API_BASE_URL}/api/bicycle/availability?lat=${location.lat}&lon=${location.lon}`)
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.message) {

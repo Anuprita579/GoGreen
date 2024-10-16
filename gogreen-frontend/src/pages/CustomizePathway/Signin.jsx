@@ -355,7 +355,7 @@ const Signin = ({ sourceComponent, onClose }) => {
         setMobileErrorMessage("");
         setNameErrorMessage("");
         try{
-          const response = await axios.post('/api/user/signup', {
+          const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user/signup`, {
             name: fullName,
             email: email,
           });
@@ -401,7 +401,7 @@ const Signin = ({ sourceComponent, onClose }) => {
       setOtpErrorMessage("");
 
     try{
-      const response = await axios.post('/api/user/verifyOTP', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/user/verifyOTP`, {
         userId: userId && userId,
         otp: otp,
       });
