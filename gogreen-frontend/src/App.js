@@ -26,17 +26,17 @@ const AppContent = () => {
     <>
       <HeaderLayout />
       <Routes>
-        <Route path={process.env.REACT_APP_HOME_PAGE_ROUTE} element={<Home />} />
-        <Route path={process.env.REACT_APP_STORE_PAGE_ROUTE} element={<Store />} />
-        <Route path={process.env.REACT_APP_CART_PAGE_ROUTE} element={<Cart />} />
-        <Route path={process.env.REACT_APP_EVENTS_PAGE_ROUTE} element={<Events />} />
-        <Route path={process.env.REACT_APP_EDUCATION_PAGE_ROUTE} element={<Education />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/education" element={<Education />} />
         {/* <Route path={process.env.REACT_APP_EVENT_SPEC_PAGE_ROUTE} element={<EventDetails/>}></Route> */}
-        <Route path={process.env.REACT_APP_CALCULATE_PAGE_ROUTE} element={<CustomizePathway />} />
-        <Route path={process.env.REACT_APP_LEADERBOARD_PAGE_ROUTE} element={<LeaderBoard />} />
-        <Route path={process.env.REACT_APP_BICYCLE_PAGE_ROUTE} element={<Bicycle />} />
-        <Route path={process.env.REACT_APP_ABOUT_PAGE_ROUTE} element={<About />} />
-        <Route path={process.env.REACT_APP_FAQ_PAGE_ROUTE} element={<FAQ />} />
+        <Route path="/calculate" element={<CustomizePathway />} />
+        <Route path="/leaderboard" element={<LeaderBoard />} />
+        <Route path="/bicycle" element={<Bicycle />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<FAQ />} />
 
       </Routes>
       <FooterLayout />
