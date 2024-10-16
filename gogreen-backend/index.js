@@ -2,11 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const PORT = process.env.PORT || 5000
-const connectDB  = require("../database/connect")
-const products_routes = require("../routes/products") 
-const user_routes = require('../routes/users')
-const leaderboard_routes = require('../routes/leaderboard');
-const bicycle_routes = require('../routes/bicycle');
+const connectDB  = require("./database/connect")
+const products_routes = require("./routes/products") 
+const user_routes = require('./routes/users')
+const leaderboard_routes = require('./routes/leaderboard');
+const bicycle_routes = require('./routes/bicycle');
 
 const app = express();
 

@@ -2,7 +2,7 @@
   "name": "gogreen-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "routes/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
