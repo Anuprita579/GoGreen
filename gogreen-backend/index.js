@@ -12,7 +12,7 @@ const app = express();
 
 app.use(cors({
     origin: 'http://localhost:3001', // Allow only your frontend
-    methods: 'POST',             // Allow specific methods
+    methods: 'GET,POST',             // Allow specific methods
     credentials: true                // Enable to allow cookies and credentials
 }));
 
