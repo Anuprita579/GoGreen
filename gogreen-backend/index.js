@@ -10,18 +10,36 @@ const bicycle_routes = require('./routes/bicycle');
 
 const app = express();
 
-app.use(cors({
-    // origin: 'http://localhost:3001', // Allow only your frontend
-    origin: ['https://go-green-frontend.vercel.app', 'http://localhost:3001'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-    credentials: true                // Enable to allow cookies and credentials
-}));
+// app.use(cors({
+//     // origin: 'http://localhost:3001', // Allow only your frontend
+//     origin: ['https://go-green-frontend.vercel.app', 'http://localhost:3001'],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+//     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+//     credentials: true                // Enable to allow cookies and credentials
+// }));
 
+// app.use((req, res, next) => {
+//     console.log('Request Origin:', req.headers.origin);
+//     console.log('Request Method:', req.method);
+//     console.log('Request Headers:', req.headers);
+//     next();
+// });
 app.use((req, res, next) => {
-    console.log('Request Origin:', req.headers.origin);
-    console.log('Request Method:', req.method);
-    console.log('Request Headers:', req.headers);
+    const allowedOrigins = ['https://go-green-frontend.vercel.app', 'http://localhost:3001'];
+    const origin = req.headers.origin;
+    
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
     next();
 });
 
