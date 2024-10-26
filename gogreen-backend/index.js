@@ -11,19 +11,12 @@ const bicycle_routes = require('./routes/bicycle');
 const app = express();
 
 // app.use(cors({
-//     // origin: 'http://localhost:3001', // Allow only your frontend
 //     origin: ['https://go-green-frontend.vercel.app', 'http://localhost:3001'],
 //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
 //     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-//     credentials: true                // Enable to allow cookies and credentials
+//     credentials: true 
 // }));
 
-// app.use((req, res, next) => {
-//     console.log('Request Origin:', req.headers.origin);
-//     console.log('Request Method:', req.method);
-//     console.log('Request Headers:', req.headers);
-//     next();
-// });
 app.use((req, res, next) => {
     const allowedOrigins = ['https://go-green-frontend.vercel.app', 'http://localhost:3001'];
     const origin = req.headers.origin;
