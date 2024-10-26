@@ -13,14 +13,9 @@ const app = express();
 app.use(cors({
     // origin: 'http://localhost:3001', // Allow only your frontend
     origin: ['https://go-green-frontend.vercel.app', 'http://localhost:3001'],
-    methods: 'GET,POST',             // Allow specific methods
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
     credentials: true                // Enable to allow cookies and credentials
-}));
-
-app.options('*', cors({
-    origin: 'https://go-green-frontend.vercel.app',
-    methods: 'GET,POST',
-    credentials: true
 }));
 
 
