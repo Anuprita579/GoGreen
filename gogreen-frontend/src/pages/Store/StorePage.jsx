@@ -101,9 +101,15 @@ function StorePage() {
     
     const fetchStoreData = async() => {
         try {
-            const requests = categories.map((category)=>axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products?category=${category}`), {
-                withCredentials: true
-            });
+            const requests = categories.map((category) => 
+                axios.get(
+                    `${process.env.REACT_APP_API_BASE_URL}/api/products?category=${category}`,
+                    { withCredentials: true },
+                    {headers: {
+                        'Content-Type': 'application/json'
+                    }}
+                )
+            );
             const responses = await Promise.all(requests)
             const newData = {};
             responses.forEach((res, index)=>{

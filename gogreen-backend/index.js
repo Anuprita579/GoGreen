@@ -18,6 +18,13 @@ app.use(cors({
     credentials: true                // Enable to allow cookies and credentials
 }));
 
+app.use((req, res, next) => {
+    console.log('Request Origin:', req.headers.origin);
+    console.log('Request Method:', req.method);
+    console.log('Request Headers:', req.headers);
+    next();
+});
+
 
 app.use(express.json()); // To parse JSON bodies
 
