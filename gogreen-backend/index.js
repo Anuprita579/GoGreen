@@ -17,6 +17,13 @@ app.use(cors({
     credentials: true                // Enable to allow cookies and credentials
 }));
 
+app.options('*', cors({
+    origin: 'https://go-green-frontend.vercel.app',
+    methods: 'GET,POST',
+    credentials: true
+}));
+
+
 app.use(express.json()); // To parse JSON bodies
 
 app.get("/", (req, res) => {
