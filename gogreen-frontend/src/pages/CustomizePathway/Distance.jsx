@@ -11,6 +11,7 @@ import endMarkerImg from "../../assets/endMarkerImg.png";
 import startMarkerImg from "../../assets/startMarkerImg.png";
 //Import
 import styles from "./styles.module.scss";
+import MapComponent from "./MapComponent";
 
 const Distance = () => {
   const { distanceData, setDistanceDataValue } = useActiveStep();
@@ -65,23 +66,6 @@ const Distance = () => {
     }
   };
 
-  const LocationMarker = () => {
-    useMapEvents({
-      click(e) {
-        if (isSelectingStartPoint) {
-          setStartPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
-          sessionStorage.setItem("startPoint", JSON.stringify({ lat: e.latlng.lat, lng: e.latlng.lng }));
-          setIsSelectingStartPoint(false); // Stop selecting start point
-        } else if (isSelectingEndPoint) {
-          setEndPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
-          sessionStorage.setItem("endPoint", JSON.stringify({ lat: e.latlng.lat, lng: e.latlng.lng }));
-          setIsSelectingEndPoint(false); // Stop selecting end point
-        }
-      },
-    });
-    return null;
-  };
-
   const calculateDistance = (startPoint, endPoint) => {
     const lat1 = (startPoint.lat * Math.PI) / 180;
     const lon1 = (startPoint.lng * Math.PI) / 180;
@@ -112,26 +96,16 @@ const Distance = () => {
 
   return (
     <div className={styles.distanceBox}>
-      <div className={styles.distanceContainer}>
-        <MapContainer
-          center={[19.03642, 72.85947]}
-          zoom={13}
-          style={{ height: "100%", width: "80%", zIndex: 2 }}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {startPoint && (
-            <Marker position={startPoint} icon={startIcon}>
-              <Popup>Start Point</Popup>
-            </Marker>
-          )}
-          {endPoint && (
-            <Marker position={endPoint} icon={endIcon}>
-              <Popup>End Point</Popup>
-            </Marker>
-          )}
-          <LocationMarker />
-        </MapContainer>
-      </div>
+      <MapComponent 
+        startPoint={startPoint}
+        endPoint={endPoint}
+        setStartPoint={setStartPoint}
+        setEndPoint={setEndPoint}
+        isSelectingStartPoint={isSelectingStartPoint}
+        setIsSelectingStartPoint={setIsSelectingStartPoint}
+        isSelectingEndPoint={isSelectingEndPoint}
+        setIsSelectingEndPoint={setIsSelectingEndPoint}
+      />
 
       <div className={styles.mapFeatureButtons}>
         <ButtonComponent onClick={() => setIsSelectingStartPoint(true)} className={styles.startDistanceButton} children="Select Start Point" />

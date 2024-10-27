@@ -3,9 +3,7 @@ import PathwayStepper from './PathwayStepper'
 
 const index = () => {
   return (
-    <>
-        <PathwayStepper /> 
-    </>
+    <PathwayStepper /> 
   )
 }
 

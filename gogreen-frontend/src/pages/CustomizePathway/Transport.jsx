@@ -1,71 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-  useMap,
-} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 //useContext
 import { useActiveStep } from "../../utils/ActiveStepContext";
-import { useTransportModes } from "./useTransportModes";
 import { modesOfTransport } from "../../constants/transport";
 //Common Components
 import ButtonComponent from "../../commonComponents/ButtonComponent";
 import ModalComponent from "../../commonComponents/ModalComponent";
-//Assets
-import endMarkerImg from "../../assets/endMarkerImg.png";
-import startMarkerImg from "../../assets/startMarkerImg.png";
-import middleMarkerImg from "../../assets/middleMarkerImg.png";
 //Imports
+import ModesOfTransportCard from "./ModesOfTransportCard";
+import TransportMapComponent from "./TransportMapComponent";
 import styles from "./styles.module.scss";
-
-// Custom icons for the markers
-const startIcon = L.icon({
-  iconUrl: startMarkerImg,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
-
-const endIcon = L.icon({
-  iconUrl: endMarkerImg,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
-
-const middleIcon = L.icon({
-  iconUrl: middleMarkerImg,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
-
-const ModesofTransportCard = ({
-  id,
-  img_src,
-  title,
-  icon,
-  selected,
-  onSelect,
-}) => {
-  return (
-    <ButtonComponent
-      className={`${styles.contentButton} ${selected ? styles.selected : ""}`}
-      onClick={() => onSelect(id)}
-    >
-      <div key={id} className={styles.content}>
-        {icon ? icon : <img src={img_src} alt="icon" className={styles.icon} />}
-
-        <h3 className={styles.transportTitle}>{title}</h3>
-      </div>
-    </ButtonComponent>
-  );
-};
 
 const Transport = () => {
   const {
@@ -110,36 +55,6 @@ const Transport = () => {
       calculateDistance(showModal?.transportType);
     }
   }, [newMarkerPosition]);
-
-  const LocationMarker = ({ mode }) => {
-    console.log({ modeInfo: mode });
-    useMapEvents({
-      click(e) {
-        if (isAddingMarker) {
-          setMarkerPositions((prev) => ({
-            ...prev,
-            [mode]: e.latlng,
-          }));
-          sessionStorage.setItem(
-            `newMarkerPosition_${mode}`,
-            JSON.stringify(e.latlng)
-          );
-          setNewMarkerPosition(e.latlng);
-
-          addToSelectedTransport(modesOfTransport[mode].id);
-          setSelectedOuterMode(modesOfTransport[mode].id);
-          toggleModeSelection(modesOfTransport[mode]);
-          setIsAddingMarker(false);
-        }
-      },
-    });
-
-    return markerPositions[mode] ? (
-      <Marker position={markerPositions[mode]} icon={middleIcon}>
-        <Popup>{`${mode} Marker`}</Popup>
-      </Marker>
-    ) : null;
-  };
 
   // const totalDistance = sessionStorage.getItem('distanceData');
 
@@ -339,7 +254,7 @@ const Transport = () => {
       <div className={styles.transportCard}>
         {Object.values(modesOfTransport).map((item) => {
           return (
-            <ModesofTransportCard
+            <ModesOfTransportCard
               id={item?.id}
               img_src={item?.img_src}
               title={item?.title}
@@ -408,38 +323,21 @@ const Transport = () => {
                     />
                   </div>
 
-                  <div className={styles.distanceContainer}>
-                    <MapContainer
-                      center={[19.03642, 72.85947]}
-                      zoom={13}
-                      style={{ height: "100%", width: "100%", zIndex: 2 }}
-                    >
-                      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                  <TransportMapComponent 
+                    startPoint={startPoint}
+                    endPoint={endPoint}
+                    showModal={showModal}
+                    markerPositions={markerPositions}
+                    isAddingMarker={isAddingMarker}
+                    setIsAddingMarker={setIsAddingMarker}
+                    setMarkerPositions={setMarkerPositions}
+                    setNewMarkerPosition={setNewMarkerPosition}
+                    addToSelectedTransport={addToSelectedTransport}
+                    modesOfTransport={modesOfTransport}
+                    setSelectedOuterMode={setSelectedOuterMode}
+                    toggleModeSelection={toggleModeSelection}
+                  />
 
-                      <Marker position={startPoint} icon={startIcon}>
-                        <Popup>Start Point</Popup>
-                      </Marker>
-
-                      {Object.entries(markerPositions).map(
-                        ([mode, position]) => (
-                          <Marker
-                            key={mode}
-                            position={position}
-                            icon={middleIcon}
-                          >
-                            <Popup>{`${mode} Marker`}</Popup>
-                          </Marker>
-                        )
-                      )}
-
-                      {/* New marker */}
-                      <LocationMarker mode={showModal?.transportType} />
-
-                      <Marker position={endPoint} icon={endIcon}>
-                        <Popup>End Point</Popup>
-                      </Marker>
-                    </MapContainer>
-                  </div>
                   {remainingDistance !== null && (
                     <p className={styles.remainingDistance}>
                       Remaining Distance: {remainingDistance.toFixed(2)} km
