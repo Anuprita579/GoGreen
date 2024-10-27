@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-//useContext
-import { useLoginState } from '../utils/LoginStateContext';
 //Common Components
 import ButtonComponent from '../commonComponents/ButtonComponent';
-import ModalComponent from '../commonComponents/ModalComponent';
 //MUI ICONS
 import CloseIcon from '@mui/icons-material/Close';
 //Imports
-import Signin from '../pages/CustomizePathway/Signin';
 import styles from "./styles.module.scss"
 
 const Menu = ({onClose}) => {
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
   const [prevPath, setPrevPath] = useState(location.pathname);
-  console.log("Location pathname : ", location.pathname); 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpen = () => {
-    setIsModalOpen(true);
-  }
-  const handleClose = () => setIsModalOpen(false);
-  const queryParams = {
-    mobileNo: sessionStorage.getItem('mobileNo')
-  };
+  console.log("Location pathname : ", location.pathname);
 
   useEffect(() => {
     if (currentPath !== location.pathname) {
@@ -34,7 +22,6 @@ const Menu = ({onClose}) => {
   }, [location]);
 
   const handleCloseMenu = () => {
-    // setDisplayMenu(false);
     onClose();
   }
   return (

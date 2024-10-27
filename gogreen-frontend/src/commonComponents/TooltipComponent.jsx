@@ -35,9 +35,8 @@ const TooltipComponent = ({
           className={className}
           style={style}
           disabled={disabled}
-        >
-          {children}
-        </ButtonComponent>
+          children={children}
+        />
       </span>
     </Tooltip>
   );

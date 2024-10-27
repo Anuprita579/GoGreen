@@ -95,9 +95,7 @@ const ModalComponent = ({ buttonContent, children, buttonClassName, open, close,
 
   return (
     < >
-      <ButtonComponent  onClick={onOpen} className={buttonClassName}>
-        {buttonContent}
-      </ButtonComponent>
+      <ButtonComponent  onClick={onOpen} className={buttonClassName} children={buttonContent} />
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
