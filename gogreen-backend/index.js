@@ -18,7 +18,7 @@ const app = express();
 // }));
 
 app.use((req, res, next) => {
-    const allowedOrigins = ['https://go-green-frontend.vercel.app', 'http://localhost:3001'];
+    const allowedOrigins = ['https://go-green-frontend.vercel.app', 'https://gogreen-app.vercel.app/', 'http://localhost:3001'];
     const origin = req.headers.origin;
     
     if (allowedOrigins.includes(origin)) {
