@@ -17,7 +17,8 @@ import Education from "./pages/Education/index.jsx";
 import CustomizePathway from "./pages/CustomizePathway/index.jsx";
 import Bicycle from "./pages/Bicycle/index.jsx";
 import About from "./pages/About/index.jsx";
-import FAQ from "./pages/FAQ/index.jsx"
+import FAQ from "./pages/FAQ/index.jsx";
+import NeonCursor from './components/NeonCursor.jsx';
 import './fonts/OpenSauceSans-Regular.ttf'
 import "./theme.scss";
 
@@ -25,6 +26,7 @@ const AppContent = () => {
   return (
     <>
       <HeaderLayout />
+      <NeonCursor />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />

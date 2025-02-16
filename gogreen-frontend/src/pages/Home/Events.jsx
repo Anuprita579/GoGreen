@@ -9,46 +9,46 @@ export const events = [
     {
         id: "001",
         eventType: "upcoming event",
-        date: "August 15, 2024",
-        title: "Tree Plantation Drive - Mumbai",
-        content: "Join us for an interactive symposium where academia meets industry. Keynote speakers from leading corporates and top universities will discuss the future of work-integrated learning and the evolving job market.",
+        date: "March 15, 2025",
+        title: "Tree Plantation Drive - Bangalore",
+        content: "Join us in restoring greenery and combating climate change! This drive aims to plant trees across Mumbai, promoting biodiversity, reducing carbon footprints, and creating a healthier environment for future generations. Volunteers will participate in planting saplings and learn about urban afforestation.",
         image_src: (EventsImage),
-        location: "Mumbai, India",
+        location: "Bangalore, India",
         fee: "Free",
         goals: [
-            { goalId: "000001", goal_desc: "Gain insights into emerging trends" },
-            { goalId: "000002", goal_desc: "Network with industry leaders" },
-            { goalId: "000003", goal_desc: "Discover new opportunities for collaboration." },
+            { goalId: "000001", goal_desc: "Increase green cover and improve air quality." },
+            { goalId: "000002", goal_desc: "Educate participants on the importance of afforestation." },
+            { goalId: "000003", goal_desc: "Encourage community involvement in environmental conservation." },
         ]
     },
     {
         id: "002",
         eventType: "upcoming event",
-        date: "October 5-7, 2024",
+        date: "May 5-7, 2025",
         title: "Sustainable Campaign - Delhi",
-        content: "A three-day intensive bootcamp focusing on the latest digital skills, including data analytics, digital marketing, and coding. Led by industry experts, this hands-on training will equip you with the skills needed to excel in the digital economy.",
-        image_src: EventsImage,
+        content: "A three-day campaign dedicated to promoting sustainable living practices. This event will feature workshops on waste management, renewable energy, and eco-friendly alternatives. Participants will engage in hands-on activities and gain insights into how small changes can make a big impact on the environment.",
+        image_src: "https://www.theenvironment.in/wp-content/uploads/2024/06/MD-Jindal-Stainless-Mr-Abhyuday-Jindal-participates-in-the-plastic-waste-collection-drive.jpeg",
         location: "Delhi, India",
         fee: "Free",
         goals: [
-            { goalId: "000001", goal_desc: "Acquire in-demand digital skills" },
-            { goalId: "000002", goal_desc: "Engage in practical learning experiences" },
-            { goalId: "000003", goal_desc: "Boost your employability in the tech-driven job market." },
+            { goalId: "000001", goal_desc: "Raise awareness about sustainable living practices." },
+            { goalId: "000002", goal_desc: "Empower individuals with practical eco-friendly solutions." },
+            { goalId: "000003", goal_desc: "Promote community-driven initiatives for a greener future." },
         ]
     },
     {
         id: "003",
         eventType: "upcoming event",
-        date: "August 20, 2024",
-        title: "Tree Plantation Drive - Banglore",
-        content: "A webinar focusing on the benefits and implementation of work-integrated learning. Experts will share their insights on how this approach bridges the gap between education and employment.",
-        image_src: EventsImage,
-        location: "Online (via Google Meet)",
+        date: "March 20, 2025",
+        title: "Beach Cleaning Drive - Mumbai",
+        content: "Join us in making Mumbai’s beaches cleaner and greener! This event aims to raise awareness about marine pollution and encourage responsible waste disposal. Volunteers will help in removing plastic waste, educating visitors on sustainable practices, and contributing to a healthier environment.",
+        image_src: "https://thecsrjournal.in/wp-content/uploads/2024/06/Kalpataru-beach-clean-up-drive-Prabhadevi.jpg",
+        location: "Marine Drive, CSMT",
         fee: "Free",
         goals: [
-            { goalId: "000001", goal_desc: "Understand the value of work-integrated learning" },
-            { goalId: "000002", goal_desc: "Learn best practices" },
-            { goalId: "000003", goal_desc: "Discover how this model can enhance your career prospects." },
+            { goalId: "000001", goal_desc: "Reduce plastic and waste pollution along the shoreline." },
+            { goalId: "000002", goal_desc: "Educate the community on the importance of ocean conservation." },
+            { goalId: "000003", goal_desc: "Encourage responsible waste management and eco-friendly habits." },
         ]
     },
 ];
@@ -62,11 +62,11 @@ export const EventsCard = ({ id, image_src, publisher, date, title, content, new
                     <h6>{publisher} - {date}</h6>
                     <h3>{title}</h3>
                     <p>{content}</p>
-                    <Link to={news_link} target='_blank' rel='noopener noreferrer'>
+                    {/* <Link to={news_link} target='_blank' rel='noopener noreferrer'>
                         <h5>
                             Read More
                         </h5>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
 

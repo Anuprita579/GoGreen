@@ -323,3 +323,33 @@ a {
         }
     }
 }
+
+.neonCursorContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    .cusorMain{
+        width: 10px;
+        height: 10px;
+        background-color: rgb(50, 255, 100);
+        border-radius: 50%;
+        position: absolute;
+    }
+    .cursorTrail{
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgb(23, 236, 101); 
+        border-radius: 50%;
+        position: absolute;
+    }
+    .cursorGlow{
+        width: 40px;
+        height: 40px;
+        background-color: rgba(50, 255, 100, 0.4);
+        border-radius: 50%;
+        position: absolute;
+        filter: blur(10px);
+    }
+}
