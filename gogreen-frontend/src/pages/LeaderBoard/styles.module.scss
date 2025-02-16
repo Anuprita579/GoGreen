@@ -19,78 +19,91 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .carbonCalculatedCard{
-        background-image: linear-gradient(to right, #00BFA5, #004D40);;
+    .carbonCalulatedBox{
+        display: flex;
         border-radius: calc(($screen-ratio)*0.5);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f3f3f3;
         padding: calc(($screen-ratio)*2) calc(($screen-ratio)*8);
         margin: calc(($screen-ratio)*5);
         max-width: fit-content;
-        display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        .caption{
-            font-weight:  $font-weight-semibold;
-            text-transform: capitalize;
-            color: #FFD580;
+        .leaderBoardImage{
+            height: calc($screen-ratio * 18);
         }
-        .discountEligible{
-            font-weight:  $font-weight-semibold;
-            text-transform: capitalize;
-            color: #FFD580;
-            padding: calc(($screen-ratio)*2);
-            letter-spacing: 1px;
-            background-color:#00BFA5;
-            .discountNumber{
-                font-weight: $font-weight-bold;
-                color: $text-color-white;
-
+        .carbonCalculatedCard{
+            max-width: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .caption{
+                font-weight:  $font-weight-semibold;
+                font-size: calc($screen-ratio*2);
+                text-transform: capitalize;
+                color: #59E5A6;
             }
-        }
-        .carbonItem{
-            padding: calc(($screen-ratio)*0.75);
-            .modeName{
-                padding: calc(($screen-ratio)*0.5) calc(($screen-ratio)*2) calc(($screen-ratio)*0.5) calc(($screen-ratio)*2);
-                background-color: #B2FFFC;
+            .discountEligible{
+                font-weight:  $font-weight-semibold;
+                text-transform: capitalize;
                 color: $text-color-dark;
-                width: fit-content;
-                border-radius: calc(($screen-ratio)*0.5);
-            }
-            p{
-                font-weight: $font-weight-bold;
-                color:  #FFD580;
-                .subtitle{
-                    font-weight: $font-weight-semibold;
-                    color:  $text-color-white;
-                    letter-spacing: 1px;
-                }
-                .units{
-                    font-weight: $font-weight-medium;
-                    color: gray;
-                }
-            }
-            
-        }
-        .totalCarbon{
-            text-align: center;
-            .totalCarbonTitle{
-                font-weight: $font-weight-bold;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                color: #B2FFFC;
-            }
-            .totalCarbonContent{
-                font-weight: $font-weight-bold;
-                color:  #FFD580;
-                span{
-                    font-weight: $font-weight-medium;
-                    color: gray;
-                }
-            }
-        }
+                padding: calc(($screen-ratio)*2);
+                letter-spacing: 1px;
+                background-color: #59E5A6;
+                .discountNumber{
+                    font-weight: $font-weight-bold;
+                    color: $text-color-white;
     
-    }    
+                }
+            }
+            .carbonItem{
+                padding: calc(($screen-ratio)*0.75);
+                .modeName{
+                    padding: calc(($screen-ratio)*0.5) calc(($screen-ratio)*2) calc(($screen-ratio)*0.5) calc(($screen-ratio)*2);
+                    background-color:  #FFD580;
+                    border: 2px solid black;
+                    color: $text-color-dark;
+                    width: fit-content;
+                    border-radius: calc(($screen-ratio)*0.5);
+                }
+                p{
+                    font-weight: $font-weight-bold;
+                    color:  #E2A732;
+                    .subtitle{
+                        font-weight: $font-weight-semibold;
+                        color:  $text-color-dark;
+                        letter-spacing: 1px;
+                    }
+                    .units{
+                        font-weight: $font-weight-medium;
+                        color: gray;
+                    }
+                }
+                
+            }
+            .totalCarbon{
+                text-align: center;
+                .totalCarbonTitle{
+                    font-weight: $font-weight-bold;
+                    border-bottom: 1px solid brown;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    color: brown;
+                }
+                .totalCarbonContent{
+                    font-weight: $font-weight-bold;
+                    color: #E2A732;
+                    span{
+                        font-weight: $font-weight-medium;
+                        color: gray;
+                    }
+                }
+            }
+        
+        }  
+    }
+      
 }
 .leaderboardBox{
     width: 100%;
@@ -125,14 +138,14 @@ a {
             }
             .rankUsername{
                 text-transform: capitalize;
-                color: $text-color-white;
+                color: $text-color-dark;
                 font-weight: $font-weight-medium;
             }
             .carbonFootprintText{
                 color: gray;
                 .carbonFootprintValue{
                     font-weight: $font-weight-bold;
-                    color:  #FFD580;
+                    color:  #E2A732;
                 }
 
             }
