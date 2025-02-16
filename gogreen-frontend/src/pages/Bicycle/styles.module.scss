@@ -27,16 +27,15 @@ a {
 }
 
 .bicycleCard{
-    border: 1px solid #ccc; 
-    width: calc(($screen-ratio)*25);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f3f3;
+    width: calc(($screen-ratio)*20);
     display: flex;
     flex-direction: column;
-    border-radius: calc(($screen-ratio)*1);
     .bicycleLogo{
         width: 100%;
         height: calc(($screen-ratio)*15);
-        border-top-left-radius: calc(($screen-ratio)*1);
-        border-top-right-radius: calc(($screen-ratio)*1);
+        max-height: calc($screen-ratio*15);
     }
     .bicycleBottomContent{
         padding: calc(($screen-ratio)*1);
@@ -54,6 +53,7 @@ a {
         .bicycleDesc{
             font-size: x-small;
             font-style: italic;
+            color: #998E8E;
         }
         .bicycleButton{
             background-color: $background-color-primary;

@@ -6,6 +6,7 @@ import { ItemCard } from '../Store/StorePage';
 import Bill from './Bill';
 import styles from "./styles.module.scss"
 import { Link } from 'react-router-dom';
+import EmptyCart from '../../assets/emptyCart.png';
 
 const CartBox = () => {
     const cartItems = useSelector(store => store.cart.items);
@@ -16,7 +17,7 @@ const CartBox = () => {
     }
     if (cartItems.length === 0) return (
       <div className={styles.emptyCartContainer}>
-        <img src='https://img.freepik.com/free-vector/product-hunt-concept-illustration_114360-1722.jpg?t=st=1726562635~exp=1726566235~hmac=eda20e1e7a42b453d51a637e32301897bcac9e019722befacc2c68e689525fd5&w=826' alt='emptycart'/>
+        <img src={EmptyCart} alt='emptycart' className={styles.emptyCart}/>
         <div className={styles.leftContainer}>
         <h1>The Cart is Empty</h1>
         <Link to='/store'>
